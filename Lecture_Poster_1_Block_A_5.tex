@@ -1,0 +1,53 @@
+%----------------------------------------------------------------------------------------
+%  Gene Network Relationships
+%------------------------------------------------
+\begin{alertblock}{A.5: Gene Network Subsets}
+	\vspace{6pt}
+	\begin{figure}[H]
+		\begin{minipage}[c]{0.3\linewidth}
+		  \includegraphics[scale=0.6]{networkList_1.png}
+		\end{minipage}%
+		\begin{minipage}[c]{0.3\linewidth}
+		  \includegraphics[scale=0.6]{networkList_2.png}
+		\end{minipage}
+	\begin{minipage}[c]{0.3\linewidth}
+		 \includegraphics[scale=0.6]{networkList_3.png}
+	\end{minipage}
+		\caption{Subset of Network Interactions for SSH, SMO and PTCH1 from \href{www.genecards.org}{GeneCards}}
+	\end{figure}
+	\vspace{6pt}
+	\begin{itemize}
+		\item Observation 1: Subset SSH Network
+		\item Observation 2: Subset SMO Network
+		\item Observation 3: Subset PTCH1 Network
+	\end{itemize}
+\vspace{6pt}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{p{0.1\linewidth}p{0.2\linewidth}p{0.4\linewidth}p{0.1\linewidth}}
+		\hline
+		Gene  & Operation & Molecular Species & Comment\\ 
+		\hline
+		SSH & Activates & GLI2 SMO AKT1 MYF5 MYOD1 PTCH1 \\
+		SSH & Inactivates & CP PTCH1 \\
+		SSH & Is activated by & HHAT BOC CDO1 DISP1 \\
+		SSH & Is inactivated by & HHIP EXTL1 BMP2 \\
+		\hline
+		\hline
+		SMO & Activates & ARRB1 ARRB2 CXCL1 GNAI1 GNAI2 GNB1 GNB2 GNB3 GNG2 GNG3 GNGT1 STK36 GNG12 FYN SRC TIAM1 GLI2 \\
+	    SMO & Inactivates & SUFU \\ 
+		SMO & Is activated by & PTCH2 GRK2 SHH CSNK1A1 \\
+		SMO & Is inactivated by &  PTCH1 CP \\ 
+		\hline
+		\hline
+		PTCH1 & Activates & CCNB1 \\ 
+		PTCH1 & Inactivates & SMO \\
+		PTCH1 & Is activated by & DHH IHH GLI1 SHH \\
+		PTCH1 & Is inactivated by & SHH CASP3 GLI3 \\ 
+	\hline
+\end{tabular}
+\caption{Relationship Type for Each Molecular Species obtained from \href{www.genecards.org}{GeneCards} and \href{https://pharos.nih.gov/idg/index}{Pharos}}
+\end{table}
+\vspace{6pt}
+\href{http://www.genecards.org}{For More Information on this Network}
+\end{alertblock}
