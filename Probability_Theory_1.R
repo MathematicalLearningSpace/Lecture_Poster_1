@@ -66,6 +66,24 @@ row.names(Data.1.CDF.Categories.1.df)<-c("x1","x2","x3")
 colnames(Data.1.CDF.Categories.1.df)<-c("MLE","Method Of Moments")
 Table.2<-xtable(Data.1.CDF.Categories.1.df)
 
+Figure.1<-plot(experimental.data.1, type="l", 
+               lty=1,col="black", 
+               ylab="Simulated Value", 
+               xlab="Temporal Position")
+lines(experimental.data.2, lty=2,col="green")
+lines(experimental.data.3, lty=3,col="blue")
+rug(experimental.data.1, side=4, col="black")
+rug(experimental.data.2, side=4, col="green")
+rug(experimental.data.3, side=4, col="blue")
+legend("bottomleft",
+       c("Type 1",
+         "Type 2",
+         "Type 3"),
+       inset = .01,
+       col=c("black","green","blue","red"),
+       lwd=2,
+       cex=0.5)
+
 #-----------------------------------Function Library------------------------------------------------------------------------
 empMoments.mutation<-function (x) 
 {
