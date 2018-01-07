@@ -1,0 +1,220 @@
+\documentclass[preprint, 12pt]{elsarticle}
+\usepackage{chemfig}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+\usepackage{pgfplots}
+\pgfplotsset{
+	compat=1.3,
+}
+\pgfplotscreateplotcyclelist{line styles}{
+	black,solid\\
+	blue,dashed\\
+	red,dotted\\
+	orange,dashdotted\\
+}
+
+\newcommand*\GnuplotDefs{
+	% set number of samples
+	set samples 50;
+	%
+	%%% from <https://en.wikipedia.org/wiki/Normal_distribution>
+	% cumulative distribution function (CDF) of normal distribution
+	cdfn(x,mu,sd) = 0.5 * ( 1 + erf( (x-mu)/sd/sqrt(2)) );
+	% probability density function (PDF) of normal distribution
+	pdfn(x,mu,sd) = 1/(sd*sqrt(2*pi)) * exp( -(x-mu)^2 / (2*sd^2) );
+	% PDF of a truncated normal distribution
+	tpdfn(x,mu,sd,a,b) = pdfn(x,mu,sd) / ( cdfn(b,mu,sd) - cdfn(a,mu,sd) );
+}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{tkz-berge}
+\usetikzlibrary{automata}
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{calendar,shadings}
+\renewcommand*{\familydefault}{\sfdefault}
+\colorlet{winter}{blue}
+\colorlet{spring}{green!60!black}
+\colorlet{summer}{orange}
+\colorlet{fall}{red}
+\newcount\mycount
+
+\newcommand\shapeLarge{50mm}
+\newcommand\shapeMedium{25mm}
+\newcommand\shapeSmall{5mm}
+
+\newcommand*{\xMin}{0}%
+\newcommand*{\xMax}{6}%
+\newcommand*{\yMin}{0}%
+\newcommand*{\yMax}{6}%
+\newcommand*{\zMax}{6}%
+\newcommand*{\zMin}{0}%
+
+\definecolor{colorwaveA}{RGB}{98,145,224}
+\definecolor{colorwaveB}{RGB}{250,250,50}
+\definecolor{colorwaveC}{RGB}{25,125,25}
+\definecolor{colorwaveD}{RGB}{100,100,100}
+\definecolor{colorwaveE}{RGB}{80,100,1}
+\definecolor{colorwaveF}{RGB}{60,1,1}
+\definecolor{colorwaveG}{RGB}{25,1,100}
+\definecolor{colorwaveH}{RGB}{1,90,1}
+\definecolor{colorwaveI}{RGB}{1,100,1}
+\definecolor{colorwaveJ}{RGB}{1,1,1}
+
+
+\tikzset{%
+	shapeTriangle/.style={draw,shape=regular polygon,fill=colorwaveA,circular drop shadow,regular polygon sides=3,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeTriangle3/.style={shapeTriangle,fill=colorwaveD,circular drop shadow,shape border rotate=45},
+	shapeTriangle4/.style={shapeTriangle,fill=colorwaveA,circular drop shadow,shape border rotate=90},
+	shapeTriangle5/.style={shapeTriangle,fill=colorwaveB,shape border rotate=135},
+	shapeTriangle6/.style={shapeTriangle,fill=colorwaveC,shape border rotate=180},
+	shapeTriangle7/.style={shapeTriangle,fill=colorwaveE,shape border rotate=225},
+	shapeTriangle8/.style={shapeTriangle,fill=colorwaveF,shape border rotate=270},
+	shapeTriangle9/.style={shapeTriangle,fill=colorwaveG,shape border rotate=315},
+}
+
+\tikzset{%
+	shapeUgaritic/.style={draw,shape=regular polygon,fill=colorwaveD,circular drop shadow,regular polygon sides=3,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+}
+
+\tikzset{%
+	shapeSquare/.style={draw,shape=regular polygon,fill=colorwaveC,circular drop shadow,regular polygon sides=4,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeSquare2/.style={shapeSquare,shape border rotate=45},
+}
+
+\tikzset{%
+	shapeHexagon/.style={draw,shape=regular polygon,fill=colorwaveA,circular drop shadow,regular polygon sides=6,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeHexagon2/.style={shapeHexagon,shape border rotate=90},
+}
+
+\tikzset{%
+	shapeOctagon/.style={draw,shape=regular polygon,fill=colorwaveB,circular drop shadow,regular polygon sides=8,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeOctagon2/.style={shapeHexagon,shape border rotate=45},
+}
+\tikzset{%
+	shapeEllipse/.style={draw,shape=ellipse,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeEllipse2/.style={shapeEllipse,shape border rotate=90},
+}
+
+\tikzset{%
+	closedFigure/.style={draw=\draw[->,rounded corners=0.2cm,shorten >=2pt]
+		(1.5,0.5)-- ++(0,-1)-- ++(1,0)-- ++(0,2)-- ++(-1,0)-- ++(0,2)-- ++(1,0)--
+		++(0,1)-- ++(-1,0)-- ++(0,-1)-- ++(-2,0)-- ++(0,3)-- ++(2,0)-- ++(0,-1)--
+		++(1,0)-- ++(0,1)-- ++(1,0)-- ++(0,-1)-- ++(1,0)-- ++(0,-3)-- ++(-2,0)--
+		++(1,0)-- ++(0,-3)-- ++(1,0)-- ++(0,-1)-- ++(-6,0)-- ++(0,3)-- ++(2,0)--
+		++(0,-1)-- ++(1,0)}
+}
+
+\tikzstyle{start}=[circle, draw=none,,minimum size=\shapeMedium, fill=blue, circular drop shadow,text centered, anchor=north, text=white]
+\tikzstyle{finish}=[circle, draw=none,,minimum size=\shapeMedium, fill=blue,circular drop shadow,text centered, anchor=north, text=white]
+\tikzstyle{finish}=[rectangle, draw=none, ,minimum size=\shapeMedium,fill=blue,circular drop shadow,text centered, anchor=north, text=white]
+
+\usepackage[noadjust]{cite}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{color}
+\usepackage{parskip}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{tkz-berge}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{amsrefs}
+\usepackage{mathtools, amssymb}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tabularx,ragged2e}
+\usepackage[framemethod=tikz]{mdframed}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section] % definitions are numbered according to sections
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{example}{Example}[section]
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\renewcommand{\rmdefault}{ptm} 
+
+\graphicspath{{figures/}}
+
+\begin{document}
+	
+Here is a list of R packages:
+	
+\begin{enumerate} \itemsep -2pt
+	\item  R Language \cite{key1}
+	\item KEGGGraph 1 \cite{key2}
+	\item KEGGGraph 2 \cite{key3}
+	\item deTestSet  \cite{key4}
+	\item deSolve \cite{key5}
+	\item Reactive transport Modeling \cite{key6}
+	\item Ecological Modeling \cite{key7}
+	\item RootSolve \cite{key8}
+	\item PearsonDS  \cite{key9}
+	\item igraph  \cite{key10}
+\end{enumerate}
+
+
+\bibliographystyle{plain}
+\begin{thebibliography}{00}
+		
+\bibitem[1]{key1}R Core Team (2015). 
+\newblock R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria.
+\newblock URL https://www.R-project.org/.
+
+\bibitem[2]{key2} Jitao David Zhang and Stefan Wiemann (2009)
+\newblock  \emph{KEGGgraph: a graph approach to KEGG PATHWAY in R and Bioconductor}.
+\newblock Bioinformatics, 25(11):1470--1471
+
+\bibitem[3]{key3} Jitao David Zhang (2015). 
+\newblock KEGGgraph: Application Examples
+\newblock R package version 1.28.0.
+
+\bibitem[4]{key4} Karline Soetaert, Jeff Cash and Francesca Mazzia (2016). 
+\newblock deTestSet: Testset for Differential Equations. R package version 1.1.3.
+\newblock http://CRAN.R-project.org/package=deTestSet
+
+\bibitem[5]{key5}Karline Soetaert, Thomas Petzoldt, R. Woodrow Setzer (2010). 
+\newblock Solving Differential Equations in R: Package deSolve. 
+\newblock Journal of Statistical Software, 33(9), 1--25. URL http://www.jstatsoft.org/v33/i09/ DOI 10.18637/jss.v033.i09
+
+\bibitem[6]{key6}Soetaert, Karline and Meysman, Filip, (2012).
+\newblock Reactive transport in aquatic ecosystems: Rapid model prototyping in the open source software R
+\newblock Environmental Modelling and Software, 32, 49-60.
+
+\bibitem[7]{key7}Soetaert K. and P.M.J. Herman (2009).  
+\newblock A Practical Guide to Ecological Modelling. 
+\newblock Using R as a Simulation Platform.  Springer, 372 pp.
+
+\bibitem[8]{key8}Soetaert K. (2009).  
+\newblock rootSolve: Nonlinear root finding, equilibrium and steady-state analysis of ordinary differential equations.  
+\newblock R-package version 1.6.
+
+\bibitem[9]{key9}Martin Becker and Stefan Klößner (2016). 
+\newblock PearsonDS: Pearson Distribution System. 
+\newblock R package version 0.98. http://CRAN.R-project.org/package=PearsonDS
+
+\bibitem[10]{key10}Csardi G, Nepusz T (2006).
+\newblock The igraph software package for complex network research,
+\newblock  InterJournal, Complex Systems 1695. 2006. http://igraph.org
+
+		
+\end{thebibliography}
+	
+\end{document}
+
+
+
+
+
+
+
+
+
