@@ -1,0 +1,229 @@
+\documentclass[preprint, 12pt]{elsarticle}
+\usepackage{chemfig}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+\usepackage{pgfplots}
+\pgfplotsset{
+	compat=1.3,
+}
+\pgfplotscreateplotcyclelist{line styles}{
+	black,solid\\
+	blue,dashed\\
+	red,dotted\\
+	orange,dashdotted\\
+}
+
+\newcommand*\GnuplotDefs{
+	% set number of samples
+	set samples 50;
+	%
+	%%% from <https://en.wikipedia.org/wiki/Normal_distribution>
+	% cumulative distribution function (CDF) of normal distribution
+	cdfn(x,mu,sd) = 0.5 * ( 1 + erf( (x-mu)/sd/sqrt(2)) );
+	% probability density function (PDF) of normal distribution
+	pdfn(x,mu,sd) = 1/(sd*sqrt(2*pi)) * exp( -(x-mu)^2 / (2*sd^2) );
+	% PDF of a truncated normal distribution
+	tpdfn(x,mu,sd,a,b) = pdfn(x,mu,sd) / ( cdfn(b,mu,sd) - cdfn(a,mu,sd) );
+}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{tkz-berge}
+\usetikzlibrary{automata}
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{calendar,shadings}
+\renewcommand*{\familydefault}{\sfdefault}
+\colorlet{winter}{blue}
+\colorlet{spring}{green!60!black}
+\colorlet{summer}{orange}
+\colorlet{fall}{red}
+\newcount\mycount
+
+\newcommand\shapeLarge{50mm}
+\newcommand\shapeMedium{25mm}
+\newcommand\shapeSmall{5mm}
+
+\newcommand*{\xMin}{0}%
+\newcommand*{\xMax}{6}%
+\newcommand*{\yMin}{0}%
+\newcommand*{\yMax}{6}%
+\newcommand*{\zMax}{6}%
+\newcommand*{\zMin}{0}%
+
+\definecolor{colorwaveA}{RGB}{98,145,224}
+\definecolor{colorwaveB}{RGB}{250,250,50}
+\definecolor{colorwaveC}{RGB}{25,125,25}
+\definecolor{colorwaveD}{RGB}{100,100,100}
+\definecolor{colorwaveE}{RGB}{80,100,1}
+\definecolor{colorwaveF}{RGB}{60,1,1}
+\definecolor{colorwaveG}{RGB}{25,1,100}
+\definecolor{colorwaveH}{RGB}{1,90,1}
+\definecolor{colorwaveI}{RGB}{1,100,1}
+\definecolor{colorwaveJ}{RGB}{1,1,1}
+
+
+\tikzset{%
+	shapeTriangle/.style={draw,shape=regular polygon,fill=colorwaveA,circular drop shadow,regular polygon sides=3,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeTriangle3/.style={shapeTriangle,fill=colorwaveD,circular drop shadow,shape border rotate=45},
+	shapeTriangle4/.style={shapeTriangle,fill=colorwaveA,circular drop shadow,shape border rotate=90},
+	shapeTriangle5/.style={shapeTriangle,fill=colorwaveB,shape border rotate=135},
+	shapeTriangle6/.style={shapeTriangle,fill=colorwaveC,shape border rotate=180},
+	shapeTriangle7/.style={shapeTriangle,fill=colorwaveE,shape border rotate=225},
+	shapeTriangle8/.style={shapeTriangle,fill=colorwaveF,shape border rotate=270},
+	shapeTriangle9/.style={shapeTriangle,fill=colorwaveG,shape border rotate=315},
+}
+
+\tikzset{%
+	shapeUgaritic/.style={draw,shape=regular polygon,fill=colorwaveD,circular drop shadow,regular polygon sides=3,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+}
+
+\tikzset{%
+	shapeSquare/.style={draw,shape=regular polygon,fill=colorwaveC,circular drop shadow,regular polygon sides=4,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeSquare2/.style={shapeSquare,shape border rotate=45},
+}
+
+\tikzset{%
+	shapeHexagon/.style={draw,shape=regular polygon,fill=colorwaveA,circular drop shadow,regular polygon sides=6,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeHexagon2/.style={shapeHexagon,shape border rotate=90},
+}
+
+\tikzset{%
+	shapeOctagon/.style={draw,shape=regular polygon,fill=colorwaveB,circular drop shadow,regular polygon sides=8,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeOctagon2/.style={shapeHexagon,shape border rotate=45},
+}
+\tikzset{%
+	shapeEllipse/.style={draw,shape=ellipse,minimum size=\shapeSmall,inner sep=0pt,outer sep=0pt},
+	shapeEllipse2/.style={shapeEllipse,shape border rotate=90},
+}
+
+\tikzset{%
+	closedFigure/.style={draw=\draw[->,rounded corners=0.2cm,shorten >=2pt]
+		(1.5,0.5)-- ++(0,-1)-- ++(1,0)-- ++(0,2)-- ++(-1,0)-- ++(0,2)-- ++(1,0)--
+		++(0,1)-- ++(-1,0)-- ++(0,-1)-- ++(-2,0)-- ++(0,3)-- ++(2,0)-- ++(0,-1)--
+		++(1,0)-- ++(0,1)-- ++(1,0)-- ++(0,-1)-- ++(1,0)-- ++(0,-3)-- ++(-2,0)--
+		++(1,0)-- ++(0,-3)-- ++(1,0)-- ++(0,-1)-- ++(-6,0)-- ++(0,3)-- ++(2,0)--
+		++(0,-1)-- ++(1,0)}
+}
+
+\tikzstyle{start}=[circle, draw=none,,minimum size=\shapeMedium, fill=blue, circular drop shadow,text centered, anchor=north, text=white]
+\tikzstyle{finish}=[circle, draw=none,,minimum size=\shapeMedium, fill=blue,circular drop shadow,text centered, anchor=north, text=white]
+\tikzstyle{finish}=[rectangle, draw=none, ,minimum size=\shapeMedium,fill=blue,circular drop shadow,text centered, anchor=north, text=white]
+
+\usepackage[noadjust]{cite}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{color}
+\usepackage{parskip}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{tkz-berge}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{amsrefs}
+\usepackage{mathtools, amssymb}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tabularx,ragged2e}
+\usepackage[framemethod=tikz]{mdframed}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section] % definitions are numbered according to sections
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{example}{Example}[section]
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\renewcommand{\rmdefault}{ptm} 
+
+\graphicspath{{figures/}}
+
+\begin{document}
+	
+If I hadn't an absolute faith in the harmony of creation, I wouldn't have tried for thirty years to express it in a mathematical formula. It is only man's consciousness of what he does with his mind that elevates him above the animals, and enables him to become aware of himself and his relationship to the universe. -Einstein \cite{key1}
+
+Table 1 is the table of species. \cite{key2}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{rll}
+		\hline
+		Equation & Molecular Species & Reaction Description\\ 
+		\hline
+		1 & $x_{1,Cyclin}$  & Cyclin \\ 
+		2 & $x_{2,MPF}$  & Maturation Promotion factor\\ 
+		3 & $x_{3,Cyclin.Protease}$  & Cyclin.Protease \\ 
+		4 & $x_{4,TP53}$ & TP53 \\ 
+		5 & $x_{5,MDM2}$  & Mdm2 \\ 
+		6 & $x_{6,MDM2.p53}$  & Mdm2 with p53 \\ 
+		7 & $x_{7,MDM2.mRNA}$  & Mdm2 messenger mRNA \\ 
+		\hline
+	\end{tabular}
+	\caption{Molecular Species Description}
+\end{table}
+
+Q(t) is the system of equations given by:
+	
+\begin{align}
+	Q(t)=\begin{cases}
+	\frac{dx_1}{dt}<-k1-k4*x1-\frac{(k2*x1*x3)}{(k3+x1)} \\
+	\frac{dx_2}{dt}<-(k5*(1-x2)/(k6+(1-x2)) - (k7*x2)/k8*x2) \\
+	\frac{dx_3}{dt}<-(k9*(1-x3))/(k10+(1-x3)) - (k11*x3)/(k12+x3) 
+	\end{cases}
+	\label{EquationSystem1}
+	\end{align}
+
+Table 2 is the table of parameters:
+
+ \begin{table}[H]
+	\centering
+	\begin{tabular}{rlllll}
+		\hline
+		Parameter & Description & Chemical Reaction & Rate & Interval &  Comment\\
+		k1 & data & data & data & data & data \\
+		k2 & data & data & data & data & data \\
+		k3 & data & data & data & data & data \\
+		k4 & data & data & data & data & data \\
+		k5 & data & data & data & data & data \\
+		k6 & data & data & data & data & data \\
+		k7 & data & data & data & data & data \\
+		k8 & data & data & data & data & data \\
+		k9 & data & data & data & data & data \\
+		k10 & data & data & data & data & data \\
+		k11 & data & data & data & data & data \\
+		k12 & data & data & data & data & data \\
+		\hline
+		\hline
+	\end{tabular}
+	\caption{Description of the parameters.}
+	\label{tab:Table3}
+\end{table}
+
+\bibliographystyle{plain}
+\begin{thebibliography}{00}
+		
+\bibitem[1]{key1} William Hermanns (1983). 
+\newblock Einstein and the Poet: In Search of the Cosmic Man
+\newblock Branden Books.
+
+\bibitem[2]{key2}Alam MJ, Kumar S, Singh V, Singh RKB (2015) 
+\newblock Bifurcation in Cell Cycle Dynamics Regulated by p53. 
+\newblock PLOS ONE 10(6): e0129620. https://doi.org/10.1371/journal.pone.0129620
+		
+\end{thebibliography}
+	
+\end{document}
+
+
+
+
+
+
+
+
+
