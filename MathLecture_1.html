@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<title>Math Lecture:1</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="css/fullcalendar.css"/>
+<link type="text/css" rel="stylesheet" href="css/fullcalendar.print.min.css"/>
+<link type="text/css" rel="stylesheet" href="css/jquery-ui.css"/>
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/fullcalendar.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<style>
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  margin: 40px;
+  background-image: url(images/backgroundMain.jpg);
+}
+img {
+  max-width: 100%;
+}
+h1,
+p {
+  margin: 0 0 1em 0;
+  color:lavendar;
+}
+.wrapper {
+  max-width: 940px;
+  margin: 0 20px;
+ /* display: grid;*/
+  grid-gap: 10px;
+}
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper {
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: minmax(150px, auto);
+}
+.panel {
+  /* needed for the flex layout*/
+  margin-left: 5px;
+  margin-right: 5px;
+  flex: 1 1 200px;
+}
+.tall-panel {
+  grid-row-end: span 2;
+}
+.header,
+.footer {
+  margin-left: 5px;
+  margin-right: 5px;
+  flex: 0 1 100%;
+  grid-column: 1 / -1;
+}
+.wrapper > * {
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+  margin-bottom: 10px;
+}
+@supports (display: grid) {
+  .wrapper > * {
+    margin: 0;
+  }
+}
+</style>
+<body>
+<div class="wrapper">
+  <header class="header"><h1>Explore The Mathematical Learning Space</h1></header>
+<script>
+</script>
+</body>
+</html>
