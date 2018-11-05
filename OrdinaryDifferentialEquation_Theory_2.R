@@ -6,7 +6,7 @@ library(xtable)
 library(CHNOSZ)
 library(changepoint)
 
-#-------------Solution of Delayed Differential Equation System-------------
+#------Solution of Delayed Differential Equation System for Classroom-------------
 y.init<-0.1
 times <- seq(from = 0, to = 100, by = 0.1) 
 solution.1.mg.test<- dede(y = y.init, 
@@ -29,13 +29,13 @@ solution.4.mg.test<- dede(y = y.init,
                           func = function.mg.test, 
                           parms = c(0.2,6,0.1), 
                           tau = 10)
-#------------------------------------------------------Changepoint Analysis-----------------------------------------
+#----------------------Changepoint Analysis-----------------------------------------
 y<-c(solution.1.mg.test[,-1],solution.2.mg.test[,-1])
 ansmean=cpt.mean(y)
 ansvar=cpt.var(y)
 ansmeanvar=cpt.meanvar(y)
-#------------------------------------------------------Tables--------------------------------------------------------
-#------------------------------------------------------Figures------------------------------------------------------
+#----------------------Tables for Classroom--------------------------------------------------------
+#----------------------Figures for Classroom------------------------------------------------------
 Figure.1<-plot(solution.1.mg.test, 
                lwd = 2, 
                main = "MG Solution Trajectories", 
@@ -67,7 +67,7 @@ par(mfrow = c(2,1))
 Figure.6<-plot(ansmean,cpt.col='blue')
 Figure.7<-plot(ansvar)
 Figure.8<-plot(ansmeanvar,cpt.width=3)
-#------------------------------------------------------Function Library---------------------------------------------
+#--------------------------------Function Library for Classroom---------------------------------------------
 
 #---------------------------------Example of Mackey-Glass Equation--------------------------------------------------
 #-------------Leon Glass and Michael Mackey (2010) Mackey-Glass equation. Scholarpedia, 5(3):6908.
