@@ -1,3 +1,4 @@
+#--------------------R API References--------------------------------------------
 library(deSolve)
 library(ReacTran)
 library(rootSolve)
@@ -9,7 +10,6 @@ library(corrplot)
 library(plot3D)
 library(scatterplot3d)
 library(rgl)
-
 #---------------Ordinary Differential Equation----------------------------------
 #-------------- Three Variable Specification------------------------------------
 
@@ -43,9 +43,7 @@ parms <- c(a1 = 0.0001,
            a8= 0.5)
 ## vector of timesteps
 sequence <- seq(0, 10, 0.1)
-
-#--------------------External signal with rectangle impulse-------------
-#
+#--------------------External signal with rectangle impulse for noise generation-------------
 signal <- data.frame(times = sequence,
                      import = rep(0, length(sequence)))
 interval.impulse.time<-50
@@ -54,21 +52,16 @@ signal$import[signal$times >= interval.impulse.time & signal$times <= interval.i
 
 sigimp <- approxfun(signal$times, signal$import, rule = 2)
 #
-#------------------------------------------------Start values for steady state
+#----------------------Start values for steady state
 xstart <- c(x1 = 1, x2 = 1, x3 = 1)
-
-
 #---------------------------------------Estimation-----------------------------------------------------
 BCC.system.solution.1 <- ode(y = xstart, times = sequence,
                               func = BCC.model.1, 
                               parms = parms, 
                               input = sigimp)
 
-#---------------------------------------Qualitative Analysis-------------------------------------------
-
-
-
-#---------------------------------------Tables---------------------------------------------------------
+#------------------------Qualitative Analysis in the Classroom-------------------------------------------
+#------------------------Example of Classroom Tables---------------------------------------------------------
 
 parameter.table.df<-t(as.data.frame(parms))
 parameter.table.df<-cbind(parameter.table.df, t(as.data.frame(xstart)))
@@ -84,7 +77,7 @@ colnames(distribution.moments.1.df)<-c("Equation","Variable","Moment 1", "Moment
 
 Table.2<-xtable(distribution.moments.1.df)
 
-#---------------------------------------Figures--------------------------------------------------------
+#-----------------------Examples of Classroom Figures--------------------------------------------------------
 Figure.1<-plot(BCC.system.solution.1[,2], type="l", 
                 lty=1,col="black", 
                 ylab="Simulated Value", 
@@ -124,8 +117,4 @@ Figure.4<-plot3d(BCC.system.solution.1[,2],
 
 
 rgl.snapshot("BCC_Model_1.png")
-
-
-
-
 #--------------------------------------Function Library-----------------------------------------------
