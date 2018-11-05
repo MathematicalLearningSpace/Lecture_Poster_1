@@ -10,7 +10,7 @@ library(corrplot)
 library(plot3D)
 library(scatterplot3d)
 library(rgl)
-#---------------Ordinary Differential Equation----------------------------------
+#---------------Reusable Ordinary Differential Equation Model------------------
 #-------------- Three Variable Specification------------------------------------
 
 BCC.model.1 <- function(t, x, parms, input)  {
@@ -66,17 +66,14 @@ BCC.system.solution.1 <- ode(y = xstart, times = sequence,
 parameter.table.df<-t(as.data.frame(parms))
 parameter.table.df<-cbind(parameter.table.df, t(as.data.frame(xstart)))
 row.names(parameter.table.df)<-c("Parameter Value 1")
-
 Table.1<-xtable(parameter.table.df)
-
+#-------------Example of Empirical Moment Estimation from Function Library---------------------
 distribution.moments.1.df<-data.frame()
 distribution.moments.1.df<-rbind(c("ES_1","X1",empMoments.mutation(BCC.system.solution.1[,2])),
                                  c("ES_1","X2",empMoments.mutation(BCC.system.solution.1[,3])),
                                  c("ES_1","X3",empMoments.mutation(BCC.system.solution.1[,4])))
 colnames(distribution.moments.1.df)<-c("Equation","Variable","Moment 1", "Moment 2","Moment 3","Moment 4","theta")
-
 Table.2<-xtable(distribution.moments.1.df)
-
 #-----------------------Examples of Classroom Figures--------------------------------------------------------
 Figure.1<-plot(BCC.system.solution.1[,2], type="l", 
                 lty=1,col="black", 
@@ -95,10 +92,8 @@ legend("bottomleft",
        col=c("black","green","blue"),
        lwd=2,
        cex=0.5)
-
 Figure.2<-hist(BCC.system.solution.1, mfrow = c(2, 3))
 mtext(outer = TRUE, side = 3, "Species Histograms", cex = 1.5)
-
 cc <- colors()
 Figure.3<-scatterplot3d(BCC.system.solution.1[,2], 
               BCC.system.solution.1[,3], 
@@ -106,8 +101,6 @@ Figure.3<-scatterplot3d(BCC.system.solution.1[,2],
               col.grid = "lightblue", main = "Species Trajectories", pch = 20,angle=120,
               xlab = "x(t)", 
               ylab = "y(t)", zlab = "z(t)")
-
-
 rgl.viewpoint(0, 20)
 Figure.4<-plot3d(BCC.system.solution.1[,2], 
        BCC.system.solution.1[,3], 
