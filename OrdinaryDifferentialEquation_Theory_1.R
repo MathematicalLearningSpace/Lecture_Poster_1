@@ -10,10 +10,8 @@ library(plot3D)
 library(scatterplot3d)
 library(rgl)
 
-#---------------------------------------Ordinary Differential Equation----------------------------------
-
-
-#---------------------------------------Specification--------------------------------------------------
+#---------------Ordinary Differential Equation----------------------------------
+#-------------- Three Variable Specification------------------------------------
 
 BCC.model.1 <- function(t, x, parms, input)  {
   with(as.list(c(parms, x)), {
@@ -34,7 +32,7 @@ BCC.model.2 <- function(t, x, parms)  {
     list(res)
   })
 }
-#------------------------------------- Parameter Values
+#----------------Parameter Value Examples-------------------------------
 parms <- c(a1 = 0.0001, 
            a2 = 0.1, 
            a3 = 0.0, 
@@ -46,7 +44,7 @@ parms <- c(a1 = 0.0001,
 ## vector of timesteps
 sequence <- seq(0, 10, 0.1)
 
-#------------------------------------------------External signal with rectangle impulse
+#--------------------External signal with rectangle impulse-------------
 #
 signal <- data.frame(times = sequence,
                      import = rep(0, length(sequence)))
