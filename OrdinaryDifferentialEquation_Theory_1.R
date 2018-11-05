@@ -1,11 +1,14 @@
 #--------------------R API References--------------------------------------------
+#-------------------------------------Ordinary Differential Equations-----------
 library(deSolve)
 library(ReacTran)
 library(rootSolve)
 library(fda)
 library(phaseR)
+#---------------------------TeX Formatting----------------------------------
 library(xtable)
 library(tseriesChaos)
+#----------------------------Scientific  Visualization-----------------------
 library(corrplot)
 library(plot3D)
 library(scatterplot3d)
