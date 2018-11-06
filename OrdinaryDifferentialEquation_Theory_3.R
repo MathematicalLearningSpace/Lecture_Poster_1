@@ -1,3 +1,4 @@
+#-----------------RPI 
 library(deSolve)
 library(RecTran)
 library(rootSolve)
@@ -10,8 +11,7 @@ library(Sim.DiffProc)
 library(fptdApprox)
 library(rpgm)
 library(yuima)
-
-#Biconductor libraries go here for preprocessing the gene and protein interaction networks
+#--------------------Bioconductor libraries go here for preprocessing the gene and protein interaction networks
 #
 library(Biostrings)
 library(seqinr)
@@ -19,7 +19,7 @@ library(igraph)
 library(Matrix)
 library(rgl)
 #
-#Combinatorics
+#-------------------Combinatorics
 #
 library(combinat)
 library(GeomComb)
