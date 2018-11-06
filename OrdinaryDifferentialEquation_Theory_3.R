@@ -1,4 +1,4 @@
-#-----------------R API 
+#-----------------R API --------------------------------------------------------
 library(deSolve)
 library(RecTran)
 library(rootSolve)
@@ -11,27 +11,20 @@ library(Sim.DiffProc)
 library(fptdApprox)
 library(rpgm)
 library(yuima)
-#--------------------Bioconductor libraries
-#--------------------preprocessing the gene and protein interaction networks
-#
+#--------------------Bioconductor libraries---------------------------------------
+#--------------------preprocessing the gene and protein interaction networks------
 library(Biostrings)
 library(seqinr)
 library(igraph)
 library(Matrix)
 library(rgl)
-#
 #-------------------Combinatorics------------------------------------------
-#
 library(combinat)
 library(GeomComb)
-#
 #-------------------Admin and presentation---------------------------------
-#
 library(ggplot2)
 library(xtable)
-#
 #---------------------------------------------------------Data------------------------------------------------------------------
-#
 Pearson.N<-100
 #--------------------------------------------------------Brownian motion------------------------------------------------------
 set.seed(1234)
@@ -42,7 +35,7 @@ X.2 <- BB(M =Pearson.N)
 X.3 <- GBM(M = Pearson.N)
 #-------------------------------------------------------Arithmetic Brownian motion--------------------------------------------
 X.4<- ABM(M = Pearson.N)
-#---------------------------------------------------------Models and Expression-------------------------------------------------------------
+#-------------------------------------------------------Models and Expression-------------------------------------------------------------
 #f(t,w(t)) = int(exp(w(t) - 0.5*t) * dw(s)) with t in [0,1]
 f <- expression( exp(w-0.5*t) )
 mod1 <- st.int(expr=f,
@@ -51,7 +44,6 @@ mod1 <- st.int(expr=f,
                lower=0,
                upper=1)
 summary(mod1)
-
 #---------------------------------------------------------Parameter Values------------------------------------
 a1<-1; a2<-1; a3<-1; d1<-1; d2<-1; d3<-1
 parameters.1<-c(a1,a2,a3)
@@ -80,28 +72,21 @@ M3<-10^3
 #--------------------------------------------------------Models------------------------------------------------------
 x0<-c(0,-1,0.5)
 y<-c(0,-2,0.5)
-
 bridge.model.1<- bridgesde3d(x0=c(0,-1,0.5),
                     y=c(0,-2,0.5),
                     drift=fx,
                     diffusion=gx,
                     M=M2)
-#------------------------------------Marginal density of X(t-t0)|X(t0) = 0, X(T) = 0 at time t = 0.75-----------------
+#-----------------------------Marginal density of X(t-t0)|X(t0) = 0, X(T) = 0 at time t = 0.75-----------------
 s=0.75
 bridge.denM.1 <- dsde3d(bridge.model.1,pdf="M",at =s)
 #--------------------------------------------------Joint density------------------------------------------------------ 
 bridge.denJ.1 <- dsde3d(bridge.model.1,pdf="J",at=0.75)
-
-
-
 parameters.df<-data.frame()
 parameters.df<-cbind(parameters.1,parameters.2,x0,y0)
-
 #--------------------------------------------Tables-------------------------------------------------------------------
-
 Table.1<-xtable(parameters.df)
 #--------------------------------------------Figures-----------------------------------------------------------------
-
 Figure.1<-plot(X.1,plot.type="single")
 lines(as.vector(time(X.2)),rowMeans(X.2),col="red")
 lines(as.vector(time(X.3)),rowMeans(X.3),col="green")
@@ -123,9 +108,7 @@ legend("topleft",
        inset = .01,col=c(2,4),lwd=2,cex=0.8)
 
 Figure.3<-plot3D(mod3d.1,display = "persp",main="No-Boundary")
-
 Figure.4<-plot3D(bridge.model.1,display = "persp",main="3D Bridge SDE's")
-
 Figure.5<- plot(ts.union(bridge.model.1$X[,1],
                          bridge.model.1$Y[,1],
                          bridge.model.1$Z[,1]),
