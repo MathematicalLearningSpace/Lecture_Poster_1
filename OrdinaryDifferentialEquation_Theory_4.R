@@ -20,11 +20,8 @@ library(wavelets)
 library(waveslim)
 library(readr)
 
-#---------------------------------------Data--------------------------------------------------------------------------------------------------
-
-Gene.Study<-c("LD","ATRp","p53","p53p","Mdm2c","Mdm2cp",
-"Mdm2n","Aktp","PIP3","PTEN","DDB2","p21tot",
-"p21CE","CycEtot","E2F1","Rbp","Bax","CytoC",
+#---------------------------------------Sample Gene List--------------------------------------------------------------------------------------------------
+Gene.Study<-c("LD","ATRp","p53","p53p","Mdm2c","Mdm2cp","Mdm2n","Aktp","PIP3","PTEN","DDB2","p21tot","p21CE","CycEtot","E2F1","Rbp","Bax","CytoC",
 "Apaf1","Apops","Casp9","Casp3")
 
 Table.Parameter.p21.df <- as.data.frame(t(read.csv("Parameter_Table_P21.txt", sep="")))
@@ -36,19 +33,8 @@ times <- seq(0, 10^2, by = 0.1)
 #-------------------------------------Li H1, Zhang XP, Liu F. (2013). Coordination between p21 and DDB2 in the cellular response to UV radiation PLoS One. 
 #-------------------------------------8(11):e80111. doi: 10.1371/journal.pone.0080111. eCollection 2013.-------------------------------------
 #-------------------------------------https://www.ncbi.nlm.nih.gov/pubmed/24260342-----------------------------------------------------------
-
-ATR<-0.1
-Akt<-0.1
-PIP2<-0.1
-p21<-0.1
-CycE<-0.1
-kdmdm2n<-0.1
-RE<-0.1
-Rb<-0.1
-
-alpha.1<-4
-alpha.2<-2
-alpha.3<-7
+ATR<-0.1;Akt<-0.1;PIP2<-0.1;p21<-0.1;CycE<-0.1;kdmdm2n<-0.1;RE<-0.1;Rb<-0.1
+alpha.1<-4;alpha.2<-2;alpha.3<-7
 
 variables.initial.test.5 <- c(LD=5,ATRp=0.1,p53=0.1,p53p=0.1,Mdm2c=0.1,Mdm2cp=0.1,Mdm2n=0.1,Aktp=0.1,PIP3=0.1,
                               PTEN=0.1,DDB2=0.1,p21tot=0.1,p21CE=0.1,CycEtot=0.1,E2F1=0.1,Rbp=0.1,
@@ -72,7 +58,6 @@ parameters.test <- c(krepair<-0.01,
                      kaccasp3<-0.1,jcasp9<-0.5, kdecasp3<-0.07,CytoCtot<-5.0,Casp9tot<-3.0, Casp3tot<-3.0)
 
 parameter.test.df<-as.data.frame(parameters.test)
-
 rownames(parameter.test.df)<-c("EQ1:krepair",
                                "EQ2:kacatr0","EQ2:kacatr","EQ2:jacatr","EQ2:kdeatr","EQ2:jdeatr","EQ2:jd",
                                "EQ3:jatr","EQ2:ATRtot",   
@@ -94,6 +79,8 @@ rownames(parameter.test.df)<-c("EQ1:krepair",
                                "EQ13:kaccasp90","EQ13:kaccasp9","EQ13:jcasp3","EQ13:kdecasp9","EQ13:kaccasp30", 
                                "EQ13:kaccasp3","EQ13:jcasp9", "EQ13:kdecasp3","EQ13:CytoCtot","EQ13:Casp9tot", "EQ13:Casp3tot")
 
+
+#-------------------------------------------------Classroom Model A-----------------------------------------------------------
 system.equation.model.test<-function(times, 
                                      variables.intitial.test, 
                                      parameters.test)
@@ -203,7 +190,6 @@ rownames(System.Analysis.Artifacts.df)<-c("p53","Mdm2cp")
 colnames(System.Analysis.Artifacts.df)<-c("Hs","Hrs","He","Hal","ht","Entropy")
 
 #------------------------------------------Classification-------------------------------------------------------------
-
 path.classification.df<-data.frame()
 path.classification.df<-rbind(c(classify.orbit(times,system.equation.model.test.solution.1.df$p53,
                                                "p53",
@@ -214,15 +200,11 @@ rownames(path.classification.df)<-c("p53")
 Table.1<-xtable(parameters.test.df)
 Table.2<-xtable(system.1.summary)
 Table.3<-xtable(System.Analysis.Artifacts.df)
-
 #--------------------------------------Figures-------------------------------------------------------------------------
-
 Figure.1<-plot(seq(0,10,0.1),f(seq(0,10,0.1),1,4),lty=1,col="black")
 lines(f(seq(0,10,0.1),0.5,4),lty=2,col="red")
 lines(f(seq(0,10,0.1),1.5,3),lty=3,col="blue")
 lines(f(seq(0,10,0.1),1.5,3),lty=4,col="green")
-
-
 Figure.2<-plot(system.equation.model.test.solution.1.df[,2:7])
 Figure.3<-plot(times,system.equation.model.test.solution.1.df$p53p)
 Figure.3.caption<-c("Temporal evolution of the levels of DNA damage, ATRp, p53p, 
@@ -234,7 +216,7 @@ mtext(outer = TRUE, side = 3, "Species Histograms", cex = 1.5)
 require(car)
 Figure.5<-scatterplot.matrix(system.equation.model.test.solution.1[,10:13])
 
-#-------------------------------------Function Library------------------------------------------------------------------
+#-------------------------------------Function Library Examples For Classroom-------------------------------------------------------
 H<-function(x)
 {
   result<-0
