@@ -28,21 +28,20 @@ Table.Parameter.p21.df <- as.data.frame(t(read.csv("Parameter_Table_P21.txt", se
 View(Table.Parameter.p21.df)
 #---------------------------------------Temporal Resolution-----------------------------------------------------------------------------------
 times <- seq(0, 10^2, by = 0.1)
+#-------------------------------------Classroom Scientific Article Example----------------------------------------------------------
 #-------------------------------------DNA Damage Repair Example Adapted from-------------------------------------------------------------------------------- 
 #-------------------------------------Journal Article:---------------------------------------------------------------------------------------
-#-------------------------------------Li H1, Zhang XP, Liu F. (2013). Coordination between p21 and DDB2 in the cellular response to UV radiation PLoS One. 
+#-------------------------------------Li H1, Zhang XP, Liu F. (2013). Coordination between p21 and DDB2 
+#-------------------------------------in the cellular response to UV radiation PLoS One. 
 #-------------------------------------8(11):e80111. doi: 10.1371/journal.pone.0080111. eCollection 2013.-------------------------------------
 #-------------------------------------https://www.ncbi.nlm.nih.gov/pubmed/24260342-----------------------------------------------------------
 ATR<-0.1;Akt<-0.1;PIP2<-0.1;p21<-0.1;CycE<-0.1;kdmdm2n<-0.1;RE<-0.1;Rb<-0.1
 alpha.1<-4;alpha.2<-2;alpha.3<-7
-
 variables.initial.test.5 <- c(LD=5,ATRp=0.1,p53=0.1,p53p=0.1,Mdm2c=0.1,Mdm2cp=0.1,Mdm2n=0.1,Aktp=0.1,PIP3=0.1,
                               PTEN=0.1,DDB2=0.1,p21tot=0.1,p21CE=0.1,CycEtot=0.1,E2F1=0.1,Rbp=0.1,
                               Bax=0.1,CytoC=0.1,Apaf1=0.1,Apops=0.1,Casp9=0.1,Casp3=0.1)
-
 variables.initial.test.20 <- c(LD=20,ATRp=0,p53=0,p53p=0,Mdm2c=0,Mdm2cp=0,Mdm2n=0,Aktp=0,PIP3=0,
                                PTEN=0,DDB2=0,p21tot=0,p21CE=0,CycEtot=0,E2F1=0,Rbp=0,Bax=0,CytoC=0,Apaf1=0,Apops=0,Casp9=0,Casp3=0)
-
 parameters.test <- c(krepair<-0.01, 
                      kacatr0<-0.001,kacatr<-2.0,jacatr<-1.0,kdeatr<-1.5,jdeatr<-2.5,jd<-2.0,jatr<-1.0,ATRtot<-5.0,   
                      ksp53<-0.04,kdp530<-0.03,kdp53<-0.2,jdp53<-0.1,kdp53p<-0.01,jdp53p<-0.1,kacp530<-0.2,kdep53<-0.1,   
@@ -56,7 +55,6 @@ parameters.test <- c(krepair<-0.01,
                      kaccytoc0<-0.01,kaccytoc<-1.0,kdecytoc<-0.1,ksapaf10<-0.001,ksapaf1<-0.6,jsapaf1<-0.6,kdapaf1<-0.1,  
                      kacapops<-5.0,kdeapops<-0.5,kaccasp90<-0.001,kaccasp9<-3.0,jcasp3<-0.5,kdecasp9<-0.05,kaccasp30<-0.001, 
                      kaccasp3<-0.1,jcasp9<-0.5, kdecasp3<-0.07,CytoCtot<-5.0,Casp9tot<-3.0, Casp3tot<-3.0)
-
 parameter.test.df<-as.data.frame(parameters.test)
 rownames(parameter.test.df)<-c("EQ1:krepair",
                                "EQ2:kacatr0","EQ2:kacatr","EQ2:jacatr","EQ2:kdeatr","EQ2:jdeatr","EQ2:jd",
@@ -78,8 +76,6 @@ rownames(parameter.test.df)<-c("EQ1:krepair",
                                "EQ12:kacapops","EQ12:kdeapops",
                                "EQ13:kaccasp90","EQ13:kaccasp9","EQ13:jcasp3","EQ13:kdecasp9","EQ13:kaccasp30", 
                                "EQ13:kaccasp3","EQ13:jcasp9", "EQ13:kdecasp3","EQ13:CytoCtot","EQ13:Casp9tot", "EQ13:Casp3tot")
-
-
 #-------------------------------------------------Classroom Model A-----------------------------------------------------------
 system.equation.model.test<-function(times, 
                                      variables.intitial.test, 
