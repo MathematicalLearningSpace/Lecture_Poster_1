@@ -1,8 +1,6 @@
-library(NMOF)
-library(xtable)
-library(recommenderlab)
+#-----------------------------------------------R API ------------------------------
+library(NMOF); library(xtable); library(recommenderlab)
 #--------------------------------------------Data-------------------------------------------------------------------------------
-
 #--------------------------------------------Correlation and Rating Matrix-------------------------------------------------------
 n <- 100
 Obs<-100
@@ -16,16 +14,13 @@ diag(C) <- 1
 x <- matrix(rnorm(n * 2L), n, 2L) %*% chol(C)
 data <- list(x = x, n = n, nmin = 40L)
 #--------------------------------------------Objective Function--------------------------------------------------------------------
-
 Objective.Function <- function(xc, data)
   -abs(cor(data$x[xc, ])[1L, 2L] - cor(data$x[!xc, ])[1L, 2L])
 x0 <- runif(n) > 0.5
 Objective.Function(x0, data)
 Objective.Function(neighbour(x0, data), data)
 #--------------------------------------------Local Search-------------------------------------------------------------------------
-
 x0 == neighbour(x0, data)
-
 algo <- list(nS = 3000L,
              neighbour = neighbour,
              x0 = x0,
@@ -52,7 +47,6 @@ names(getModel(recommend))
 recommend.topN<-getModel(recommend)$topN
 recommend.bestN.10<- bestN(recommend.predict, n = 10)
 recommend.predict<-predict(recommend, r,n=5)
-
 #-----------------------------------Evalutation of Filtering Methods------------------------------------------------------------
 
 scheme <- evaluationScheme(r, method="split", train=0.9, given=3, goodRating=4)
@@ -73,8 +67,7 @@ matrix.cf.avg<-avg(results)
 
 Table.1<-xtable(Evalutation.recommender.df)
 Table.2<-xtable(matrix.cf)
-#-------------------------------------------Figures------------------------------------------------------------------------------
-
+#-------------------------------------------Figures for Presentation in the Classroom------------------------------------------------------------------------------
 Figure.1<-par(mfrow = c(1,3), bty = "n")
 plot(data$x,
      xlim = c(-3,3), ylim = c(-3,3),
@@ -101,6 +94,8 @@ legend(x = "topright",legend = c("LS", "TA"),
 Figure.6<- plot(results, annotate=TRUE)
 Figure.7<- plot(results, "prec/rec", annotate=TRUE)
 Figure.8<-hist(matrix.rating)
+
+#---------------------------------------------------------------
 par(mfrow = c(1,2))
 image(r, main = "Raw Ratings") 
 image(r_m, main = "Normalized Ratings")
