@@ -5,11 +5,7 @@ Data.Captions<-c("The number of bins in the data is 20",
                  "The number of steps is a sequence from 1 to 5",
                  "The sampling frequency is 10 to the power of 3",
                  "The sequence t is from 1 to the number of observations e^7")
-data.bins <- 20
-data.steps <- c(1:5)
-data.sf <- 10^3
-N<-exp(7)
-t <- 1:N
+data.bins <- 20; data.steps <- c(1:5); data.sf <- 10^3; N<-exp(7); t <- 1:N
 #-------------Temporal Data Generation for Cubic Drift and Quadratic Diffusion Polynomials----------------
 Temporal.Sequence.Caption<-c("Several temporal sequences are generated.",
                              "Sequence 1 has coefficients for both the drift and diffusion polynomials",
@@ -19,7 +15,6 @@ set.seed(1111)
 temporal.sequence.1 <- timeseries1D(N=N, sf=1, dt=0.01)
 # drift D^1 = -x and constant diffusion D^2 = 1
 temporal.sequence.2 <- timeseries1D(N=N, d11=-1, d20=1, sf=data.sf)
-
 #------------------------------------Test of Two Conditions-------------------------------------------
 temporal.sequence.1.Property.1<-verifyMarkovProperty(temporal.sequence.1, verbose = TRUE)
 wilcox.test(temporal.sequence.1[2:length(temporal.sequence.1)],diff(temporal.sequence.1),paired = TRUE, alternative = "less")
