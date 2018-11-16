@@ -1,24 +1,12 @@
-library(markovchain)
-library(HMM)
-library(adaptMCMC)
-library(mcmc)
-library(MCMCpack)
-library(combinat)
-library(coda)
-library(rbenchmark)
-library(stringi)
-library(stringr)
-library(Matrix)
-library(corrplot)
-library(xtable)
-library(coda)
-
+#------------------------------------R API --------------------------------------------------------------
+library(markovchain);library(HMM);library(adaptMCMC);library(mcmc);library(MCMCpack)
+library(combinat);library(coda);library(rbenchmark);library(stringi);library(stringr)
+library(Matrix);library(corrplot);library(xtable); library(coda)
 #----------------------------------------------------------Data-----------------------------------------------------------------
 libraries.R<-c('markovchain','HMM','adaptMCMC','mcmc','MCMCpack','combinat',
                'coda','rbenchmark','stringi','stringr','Matrix',
                "corrplot","xtable","coda")
-#----------------------------------------------------------Project Data---------------------------------------------------------
-
+#-----------Project Data: File to Be Generated in the Classroom by Students---------------------------------------------------------
 project.description.file <- file("Project_Description.txt", "r", 
                                  blocking = FALSE)
 project.note.file<-file("Project_Notes.txt", "r", 
@@ -213,16 +201,15 @@ mm.estimate.probable.path<-viterbi(Model.1.markov.model,sequence.observations)
 sequence.path.probabilties.df<-data.frame()
 sequence.path.probabilities.df<-cbind(mm.estimate.probable.path)
 
-#----------------------------------------------------------Model Diagnostics------------------------------------------------------------------
+#----------Model Diagnostics for Students Development in the Classroom------------------------------------------------------------------
 
 #---------------------------------------------------------Tables----------------------------------------------------------------
-
 Table.1<-xtable(sequence.State.probabilities.df)
 Table.2<-xtable(sequence.path.probabilities.df)
 Table.3<-xtable(sequence.probabilties.df)
 Table.4<-xtable(sequence.simulation.df)
 Table.5<-print(mc.estimate.BSP.3$estimate)
-#---------------------------------------------------------Figures---------------------------------------------------------------
+#-------------------------      Figures for Classroom Presentation---------------------------------------------------------------
 Figure.1<-corrplot(multi.ci.MLE$upperEndpointMatrix)
 
 Figure.2<-plot(sequence.posterior[1,],lty=1,col=1)
@@ -234,7 +221,7 @@ legend("topright", legend=c("A","B","C","D")
        , bty = "n",lwd=2, 
        cex=0.75, col=1:4, text.col=1:4, lty=1:4)
 
-#Save Figures
+#---------------Save Figures---------------------------
 Figure.1.Anotation<-c('')
 writePNG(project.Figures,Figure.1.Anotation,asp=1.25)
 
