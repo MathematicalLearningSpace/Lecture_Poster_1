@@ -1,10 +1,5 @@
-library(DiffusionRimp)
-library(Langevin)
-library(xtable)
-library(igraph)
-library(costat)
-library(HMM)
-library(markovchain)
+#----------------------------------------R API ----------------------------------------------------------
+library(DiffusionRimp);library(Langevin);library(xtable);library(igraph);library(costat);library(HMM);library(markovchain)
 #-------------------------------------Data----------------------------------------------------------------
 Data.Captions<-c("The number of bins in the data is 20",
                  "The number of steps is a sequence from 1 to 5",
@@ -17,10 +12,9 @@ N<-exp(7)
 t <- 1:N
 #-------------Temporal Data Generation for Cubic Drift and Quadratic Diffusion Polynomials----------------
 Temporal.Sequence.Caption<-c("Several temporal sequences are generated.",
-                             "Sequence 1 has all the coefficients zero for both the drift and diffusion polynomials",
-                             "Sequence 2 has alpha_1=-1 for the drift polynomial and 
-                              beta_0=1 for the diffusion polynomial")
-
+                             "Sequence 1 has coefficients for both the drift and diffusion polynomials",
+                             "Sequence 2 has alpha_1=-1 for drift polynomial and 
+                              beta_0=1 for diffusion polynomial")
 set.seed(1111)
 temporal.sequence.1 <- timeseries1D(N=N, sf=1, dt=0.01)
 # drift D^1 = -x and constant diffusion D^2 = 1
@@ -54,8 +48,8 @@ temporal.sequence.1.Property.3.df<-rbind(c(temporal.sequence.1.Property.2A))
 #--------------------Model Estimation of Drift and Diffusion Vectors-----------------------------------
 
 Model.Estimation.Caption<-c("Three different models are estimated based on both 1D and 2D temporal sequences",
-                            "Model 1 fits a Langevin model to Temporal Sequence 1 with bins=40, steps=1:3 and a sampling frequency of 10^3",
-                            "Model 2 fits a Langevin model to Temporal Sequence 2 with bins=40, steps=1:3")
+                            "Model 1 fits Langevin model to Temporal Sequence 1 with bins=40, steps=1:3 and sampling frequency of 10^3",
+                            "Model 2 fits Langevin model to Temporal Sequence 2 with bins=40, steps=1:3")
 
 model.estimation.1D.1<-Langevin1D(temporal.sequence.1, data.bins, data.steps, data.sf, reqThreads=2)
 model.estimation.1D.2<-Langevin1D(temporal.sequence.2, data.bins, data.steps)
@@ -68,9 +62,9 @@ print(model.estimation.1D.1, digits = max(3, getOption("digits") - 3))
 #------------------------------Estimate Model Coefficients-----------------------------------
 
 Model.Estimation..Coefficients.Caption<-c("The drift coefficients for Model 2 are estimated by linear regression 
-                                          from the mean bin from the estimation of Model 2",
+                                          from mean bin from estimation of Model 2",
                                           "The diffusion coefficients for Model 2 are estimated by linear regression 
-                                          from the mean bin from the estimation of Model 2",
+                                          from mean bin from estimation of Model 2",
                                           "Temporal Sequence 4 is generated based on both estimated drift and diffusion coefficient models")
 
 model.estimation.1D.2.drift <- coef(lm(model.estimation.1D.2$D1 ~ model.estimation.1D.2$mean_bin + I(model.estimation.1D.2$mean_bin^2) + 
@@ -99,15 +93,15 @@ Model.estimation.parameters.df<-rbind(c(model.estimation.1D.2.drift,model.estima
 
 #---------------------------------------Tables-------------------------------------------------------------
 
-Table.1.Caption<-c("Table 1 shows the values of the estimated coefficients fore each of the models",
+Table.1.Caption<-c("Table 1 shows values of the estimated coefficients fore each of the models",
                    "fit a cubic function to the estimated drift coefficient and a quadratic function to the diffusion coefficient")
 Table.1<-xtable(Model.estimation.parameters.df)
 
-Table.2.Caption<-c("Table 2 shows the values of statistic (the chi - square statistic)",
+Table.2.Caption<-c("Table 2 shows values of statistic (the chi - square statistic)",
                    "dof (degrees of freedom)",
                    "corresponding p value")
 Table.2<-xtable(temporal.sequence.1.Property.1.df)
-Table.3.Caption<-c("Table 3 shows the value statistic (the chi - square statistic)",
+Table.3.Caption<-c("Table 3 shows value statistic (the chi - square statistic)",
                    "dof (degrees of freedom)",
                    "corresponding p value")
 Table.3<-xtable(temporal.sequence.1.Property.2.df)
