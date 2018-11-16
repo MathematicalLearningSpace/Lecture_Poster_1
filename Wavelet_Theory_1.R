@@ -1,12 +1,6 @@
-library(wmtsa)
-library(wavelets)
-library(wavethresh)
-library(waveslim)
-library(wavemulcor)
-library(PearsonDS)
-library(xtable)
-
-
+#---------------------------------------R API ---------------------------------------------
+library(wmtsa);library(wavelets);library(wavethresh);library(waveslim);library(wavemulcor)
+library(PearsonDS);library(xtable)
 #---------------------------------------Wavelet Theory-------------------------------------
 
 #---------------------------------------Data----------------------------------------------
@@ -93,14 +87,11 @@ distribution.table.df<-cbind(pearson.MLE.dist,
                              pearson.MOM.dist)
 Table.2<-xtable(distribution.table.df)
 
-#--------------------------------------MultiResolution Decomposition--------------------
-
-Figure.1<-plot(wavMRD(x.modwt, 
-                       level = c(1:6)),col=c(1:7))
+#-----------------MultiResolution Decomposition for Classroom Presentation--------------------
+Figure.1<-plot(wavMRD(x.modwt, level = c(1:6)),col=c(1:7))
 abline(v = 100, lty = 2)
 abline(v = 250, lty = 3, col="Orange")
 abline(v = 400, lty = 2)
-
 
 par(mfrow = c(2, 2))
 Figure.2<-plotdist(x.modwt$data$d1, histo = TRUE, demp = TRUE)
