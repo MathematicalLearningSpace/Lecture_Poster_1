@@ -16,42 +16,41 @@ Gene.ROI<-c('MYc', 'Miz1','p15','CKS1','Skp2','p27','CyclinD1','CDK4','CDK2','RB
 
 model.1 <- function(t, x, parms)  {
   with(as.list(c(parms, x)), {
-    
+    #---------------------------Group 1-------------------------------------------
     dx1 <-a11*x1 + a12*x1*x2 + runif(1,0,1)
     dx2 <-a21*x2 + a22*x2*x3      
     dx3 <-a31*x3 + a32*x3*x4
-    
+    #--------------------------Group 2--------------------------------------------
     dx4<-a41*x4 + a42*x4*x5
     dx5<-a51*x5 + a52*x5*x6
     dx6<-a61*x6 + a62*x6*x7
-    
+    #--------------------------Group 3--------------------------------------------
     dx7<-a71*x7 + a72*x7*x8
     dx8<-a81*x8 + a82*x8*x9
     dx9<-a91*x9 + a92*x9*x10
-    
+    #--------------------------Group 4-------------------------------------------
     dx10<-a101*x10 + a102*x10*x11
     dx11<-a111*x11 + a112*x11*x12
     dx12<-a121*x12 
-    
     res <- c(dx1, dx2, dx3, dx4,dx5,dx6,dx7,dx8, dx9, dx10, dx11, dx12)
     list(res)
   })
 }
 model.2 <- function(t, x, parms)  {
   with(as.list(c(x)), {
-    
+    #---------------------Group 1 ------------------------------------
     dx1 <-parms[1]*x1 + parms[2]*x1*x2 + runif(1,0,1)
     dx2 <-parms[3]*x2 + parms[4]*x2*x3      
     dx3 <-parms[5]*x3 + parms[6]*x3*x4
-    
+    #--------------------Group 2 -------------------------------------
     dx4<-parms[7]*x4 + parms[8]*x4*x5
     dx5<-parms[9]*x5 + parms[10]*x5*x6
     dx6<-parms[11]*x6 + parms[12]*x6*x7
-    
+    #--------------------Group 3-------------------------------------
     dx7<-parms[13]*x7 + parms[14]*x7*x8
     dx8<-parms[15]*x8 + parms[16]*x8*x9
     dx9<-parms[17]*x9 + parms[18]*x9*x10
-    
+    #--------------------Group  4 -----------------------------------
     dx10<-parms[19]*x10 + parms[20]*x10*x11
     dx11<-parms[21]*x11 + parms[22]*x11*x12
     dx12<-parms[23]*x12 
@@ -86,8 +85,7 @@ for(j in 1:length(parms))
 Table.Parameters.df<-data.frame()
 Table.Parameters.df<-cbind(parms,parms.sim.unif,parms.sim.norm,parms.sim.gamma)
 colnames(Table.Parameters.df)<-c("Point","Uniform",'Normal',"Gamma")
-
-## vector of timesteps
+#---------------------vector of timesteps
 sequence <- seq(0, 10, 0.1)
 #---------------------Start values for steady state-----------------------------------
 xstart <- c(x1 = 0.5, x2 = 1, x3 =0.5,x4=1,x5=1,
@@ -103,7 +101,7 @@ system.solution.2<- ode(y = xstart, times = sequence,
 Table.1<-xtable(z.df$Title)
 Table.2<-xtable(Table.Parameters.df)
 Table.2
-#----------------------------Figures---------------------------------------------------
+#-------------Figures for Classroom Presentation and Discussion------------------------
 par(mfcol = c(1, 2))
 Figure.1<-plot(system.solution.1[,2], type="l", 
                lty=1,col="black", ylim=c(0,10),
@@ -111,14 +109,12 @@ Figure.1<-plot(system.solution.1[,2], type="l",
                xlab="Time")
 for(i in 3:nrow(system.solution.1))
 {
-lines(system.solution.1[,i], lty=i)
+    lines(system.solution.1[,i], lty=i)
 }
 legend("topright",
        c("x1","x2","x3","x4","x5","x6",
          "x7","x8","x9","x10","x11","x12"),
-       inset = .01,
-       lwd=2,
-       cex=0.5)
+       inset = .01,lwd=2,cex=0.5)
 
 Figure.2<-plot(system.solution.2[,2], type="l", 
                lty=1,col="black", ylim=c(0,10),
@@ -131,9 +127,7 @@ for(i in 3:nrow(system.solution.2))
 legend("topright",
        c("x1","x2","x3","x4","x5","x6",
          "x7","x8","x9","x10","x11","x12"),
-       inset = .01,
-       lwd=2,
-       cex=0.5)
+       inset = .01,lwd=2,cex=0.5)
 
 par(mfcol = c(1, 1))
 Figure.2<-hist(system.solution.1, mfrow = c(3, 3))
@@ -155,7 +149,6 @@ Figure.5<-plot3d(system.solution.2[,2],
                  system.solution.2[,4], 
                  pch = 1, cex = 1, xlab = "x1(t)", 
                  ylab = "x2(t)", zlab = "x3(t)")
-
 #----------------------------LinkOut References------------------------------------------------
 References.1<-c("MYC drives overexpression of telomerase RNA (hTR/TERC) in prostate cancer")
 #---------------------------Function Library-------------------------------------------
