@@ -1,14 +1,7 @@
-library(xtable)
-library(deSolve)
-library(igraph)
-library(Matrix)
-library(visNetwork)
-library(corrplot)
-library(plot3D)
-library(scatterplot3d)
+#----------------------------------R API --------------------------------------------------
+library(xtable); library(deSolve); library(igraph); library(Matrix); library(visNetwork);library(corrplot);library(plot3D);library(scatterplot3d)
 library(rgl)
 #------------------------------------Data--------------------------------------------------
-
 parms.names<-c("forward transition rate",
                "backward transition rate",
                "attachment rate",
@@ -20,7 +13,6 @@ parms<-c(l.0=1,g.0=0.5,a.1=0.2,b.1=0.2,
          l.4=1.25,g.4=0.5,a.5=0.2,b.5=0.2,
          l.5=1.25,g.5=0.5,a.6=0.2,b.6=0.2,
          l.6=1.25,g.6=0.5)
-
 param.functionals<-function(l,g,t)
 {
   parm.l<-NULL
@@ -44,7 +36,6 @@ param.functionals<-function(l,g,t)
   return(parms.periodic)
 }
 
-
 #--------------------Nonlinear Tridiagonal mRNA translation Ribosome Model----------------------------
 
 Ribosome.model.1 <- function(t, x, parms, input)  {
@@ -62,7 +53,6 @@ Ribosome.model.1 <- function(t, x, parms, input)  {
 }
 
 #------------------Periodic function for x2------------------------------------------
-
 Ribosome.model.2 <- function(t, x, parms, input)  {
   with(as.list(c(parms, x)), {
     import <- input(t)
@@ -79,17 +69,13 @@ Ribosome.model.2 <- function(t, x, parms, input)  {
 #----------------External signal with rectangle impulse and periodic function-----------------------
 #
 sequence <- seq(0, 10, 0.1)
-signal <- data.frame(times = sequence,
-                     import = rep(0, length(sequence)))
-
+signal <- data.frame(times = sequence,import = rep(0, length(sequence)))
 signal.2<-2^(-1)+2^(-1)*sin((2^3)*pi*sequence/length(sequence))
-signal.2.df <- data.frame(times = sequence,
-                     import = signal.2)
+signal.2.df <- data.frame(times = sequence,import = signal.2)
 interval.impulse.time<-50
 interval.impulse.value<-0.5
 signal$import[signal$times >= interval.impulse.time & signal$times <= interval.impulse.time+1] <-interval.impulse.value 
 sigimp <- approxfun(signal$times, signal$import, rule = 2)
-
 sigimp.2 <- approxfun(signal.2.df$times, signal.2.df$import, rule = 1)
 
 #-----------------Specification of the Spline functional for the Periodic function----------
@@ -128,7 +114,6 @@ parms.df<-as.data.frame(parms)
 
 Rate.output<-(parms[25]+parms[23])*Ribosome.system.solution.1[,7] -(parms[22]+parms[24])*(1-Ribosome.system.solution.1[,7])
 #------------------------------------Tables-----------------------------------------------
-
 parameter.table.df<-t(as.data.frame(parms))
 parameter.table.df<-cbind(parameter.table.df, t(as.data.frame(xstart)))
 row.names(parameter.table.df)<-c("Parameter Value 1")
@@ -145,7 +130,7 @@ colnames(distribution.moments.1.df)<-c("Equation","Variable","Moment 1", "Moment
 
 Table.2<-xtable(distribution.moments.1.df)
 
-#---------------------------------------Figures--------------------------------------------------------
+#--------------------------Figures for Classroom Presentation--------------------------------------------------------
 
 Figure.1<-plot(periodic.function.1)
 Figure.1A<-plot(periodic.function.2)
