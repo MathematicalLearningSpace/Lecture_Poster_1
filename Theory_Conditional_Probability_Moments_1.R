@@ -1,15 +1,7 @@
-library(Matrix)
-library(igraph)
-library(rbenchmark)
-library(xtable)
-library(stringi)
-library(PearsonDS)
-library(h2o)
-library(darch)
-library(deepnet)
-library(caret)
+#-----------------------------R API ---------------------------------------------
+library(Matrix);library(igraph);library(rbenchmark);library(xtable);library(stringi)
+library(PearsonDS);library(h2o);library(darch);library(deepnet);library(caret)
 #---------------------------------------------Data----------------------------------------------------------------------
-
 filesToProcess <- dir(pattern = "file.*\\.txt$")
 listOfFiles <- lapply(filesToProcess, function(x) read.table(x, header = TRUE))
 #--------------------------------------------Choose the Pearson Data-----------------------------------------
@@ -41,8 +33,6 @@ experimental.data.2.test<-window(error.pearson.3.2, start=401)
 y.actual<-experimental.data.1^2
 y.actual.train<-experimental.data.1.train^2
 y.actual.test<-experimental.data.1.test^2
-
-
 y.estimate<-experimental.data.1^2+experimental.data.2
 y.estimate.train<-experimental.data.1.train^2+experimental.data.2.train
 y.estimate.test<-experimental.data.1.train^2+experimental.data.2.train
@@ -99,7 +89,6 @@ model.darch.1<- darch(matrix.X, Y,
                 darch.retainData = T,
                 darch.numEpochs = 20 )
 #----------------------------------Grid Search-----------------------------------------------------
-
 tc <- trainControl(method = "boot", number = 2, allowParallel = F,verboseIter = T)
 parameters <- data.frame(parameter = c("layers", "bp.learnRate", "darch.unitFunction"),
                          class = c("character", "numeric", "character"),
@@ -149,10 +138,9 @@ colnames(Model.Statistics.Prediction.df)<-c("NeuralNetwork.1","SAE.1","DARCH.1")
 rownames(Model.Statistics.Prediction.df)<-c("RMS")
 
 #-----------------------------Tables--------------------------------------------------------------------
-
 Table.1<-xtable(Model.Statistics.Prediction.df)
 Table.2<-xtable(Model.Statistics.Classification.df)
-#----------------------------Figures--------------------------------------------------------------------
+#-------------Figures for Classroom Presentation--------------------------------------------------------
 
 Figure.1<-plot(model.NN.1$e,lty=1,col=1)
 title(main='')
@@ -163,15 +151,12 @@ legend("topright", legend=c("NN.e","SAE.e")
        cex=0.75, col=cols, text.col=cols, lty=1:2)
 
 Figure.2<-plot(model.darch.1)
-
 Figure.3<-plot(model.darch.1, "class")
 Figure.4<-plot(model.darch.1, "time")
 Figure.5<-plot(model.darch.1, "momentum")
 Figure.6<-plot(model.darch.1, "net")
 
-
-#--------------------------------------------Function Library---------------------------------------------------------
-
+#--------Function Library for Student Modification in the Classroom---------------------------------------------------------
 Metric.RMS <- function(x.actual, x.predict) {
   res <- (mean((x.actual-x.predict)^2))^(1/2)
   return(res)
