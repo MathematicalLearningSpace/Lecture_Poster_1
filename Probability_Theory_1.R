@@ -1,11 +1,8 @@
-library(PearsonDS)
-library(fitdistrplus)
-library(xtable)
-
+#-----------------------------------R API -----------------------------------------------------------
+library(PearsonDS); library(fitdistrplus); library(xtable)
 #-------------------------------------Probability Theory: Pearson Distributions----------------------------------------------
 pearson.N<-512
 #-------------------------------------Moment Parameters for the Distributions-------------------------------------------------
-
 p0pars <- list(mean=1, sd=1)
 pIpars <- list(a=1, b=1, location=1, scale=1) 
 pIIpars <- list(a=1, location=1, scale=1) 
@@ -16,7 +13,6 @@ pVIpars <- list(a=1, b=1, location=1, scale=1)
 pVIIpars <- list(df=10, location=1, scale=1)
 
 #-------------------------------------Generate Random variables from the Distributions----------------------------------------
-
 error.pearson.0<-rpearson0(pearson.N,params=p0pars)
 error.pearson.1<-rpearsonI(pearson.N,params=pIpars)
 error.pearson.2<-rpearsonII(pearson.N,params=pIIpars)
@@ -26,7 +22,7 @@ error.pearson.5<-rpearsonV(pearson.N,params=pVpars)
 error.pearson.6<-rpearsonVI(pearson.N,params=pVIpars)
 error.pearson.7<-rpearsonVII(pearson.N,params=pVIIpars)
 
-#------------------------------------Artificial Data Generation and Windows----------------------------------------------------
+#----------------Artificial Data Generation and Windows for Data Segmentation----------------------------------------------------
 sample.pct<-1
 K<-sample.pct*pearson.N
 experimental.data.1<-window(error.pearson.1, end=256)
@@ -42,7 +38,7 @@ distribution.moments.1.df<-rbind(c("X1","1",empMoments.mutation(experimental.dat
 colnames(distribution.moments.1.df)<-c("Variable","Type", "Moment 1", "Moment 2","Moment 3","Moment 4","Theta")
 Table.1<-xtable(distribution.moments.1.df)
 
-#------------------------------------Fit Pearson Family of Distributions
+#------------------------------------Fit Pearson Family of Distributions-------------------------------------------------------
 pearson.MLE.1 <- pearsonFitML(experimental.data.1)
 pearson.MLE.2 <- pearsonFitML(experimental.data.2)
 pearson.MLE.3 <- pearsonFitML(experimental.data.3)
@@ -65,7 +61,7 @@ Data.1.CDF.Categories.1.df<-cbind(pearson.MLE.dist,
 row.names(Data.1.CDF.Categories.1.df)<-c("x1","x2","x3")
 colnames(Data.1.CDF.Categories.1.df)<-c("MLE","Method Of Moments")
 Table.2<-xtable(Data.1.CDF.Categories.1.df)
-
+#-------------------------------------Figures for Presentation in the Classroom --------------------------------------
 Figure.1<-plot(experimental.data.1, type="l", 
                lty=1,col="black", 
                ylab="Simulated Value", 
@@ -83,8 +79,7 @@ legend("bottomleft",
        col=c("black","green","blue","red"),
        lwd=2,
        cex=0.5)
-
-#-----------------------------------Function Library------------------------------------------------------------------------
+#-----------------------------------Function Library for Classroom Modification------------------------------------------------------------------------
 empMoments.mutation<-function (x) 
 {
   n <- length(x)
