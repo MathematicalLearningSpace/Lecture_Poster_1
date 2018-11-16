@@ -1,15 +1,6 @@
-library(wmtsa)
-library(wavelets)
-library(wavethresh)
-library(waveslim)
-library(wavemulcor)
-library(PearsonDS)
-library(xtable)
-library(psych)
-library(adwave)
-library(biwavelet)
-
-
+#--------------------------------R API ---------------------------------------------------
+library(wmtsa);library(wavelets);library(wavethresh);library(waveslim);library(wavemulcor)
+library(PearsonDS);library(xtable);library(psych);library(adwave);library(biwavelet)
 #---------------------------------------Wavelet Theory-------------------------------------
 
 #---------------------------------------Data----------------------------------------------
@@ -29,8 +20,6 @@ experimental.data.3<-window(error.pearson.3.3, end=256)
 experimental.data.1<-cbind(1:256, experimental.data.1)
 experimental.data.2<-cbind(1:256, experimental.data.2)
 experimental.data.3<-cbind(1:256, experimental.data.3)
-
-
 #---------------------------------------Compute wavelet spectra-----------------------
 wt.t1 <- wt(experimental.data.1)
 wt.t2 <- wt(experimental.data.2)
@@ -42,10 +31,7 @@ w.arr[2, , ] <- wt.t2$wave
 w.arr[3, , ] <- wt.t3$wave
 
 #--------------------------------------Multiresolution Decomposition------------------
-
 z.decomposition.1<-wavMRDSum(as.vector(experimental.data.1), levels=3:6)
-
-
 #----------------------------------------Partial wavelet coherence of 1 and 2---------
 pwtc.1.2 <- pwtc(experimental.data.1,
                  experimental.data.2, 
@@ -70,8 +56,7 @@ index.dissimilarity.df<-cbind(dissimilarity.index)
 colnames(index.dissimilarity.df)<-c("Index")
 Table.1<-xtable(index.dissimilarity.df)
 
-#----------------------------------Figures-----------------------------------------------
-
+#--------------------Figures for Classroom Presentation-----------------------------------
 Figure.1<-plot(experimental.data.1, type="l", lty=1, 
                col="black",
                xlab="Observations",
