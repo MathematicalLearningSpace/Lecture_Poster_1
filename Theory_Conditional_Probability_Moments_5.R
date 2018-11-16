@@ -1,24 +1,12 @@
-library(dnet)
-library(dcGor)
-library(ggm)
-library(abn)
-library(catnet)
-library(GADAG)
-library(gRbase)
-library(HEMDAG)
-library(pcalg)
-library(unifDAG)
-library(igraph)
-library(xtable)
-library(MXM)
-library(hash)
-
+#--------------------------------R API ------------------------------------------------------------------------
+library(dnet);library(dcGor);library(ggm);library(abn);library(catnet);library(GADAG)
+library(gRbase);library(HEMDAG);library(pcalg);library(unifDAG);library(igraph);library(xtable)
+library(MXM);library(hash)
 #-------------------------------------------------Data and Parameters------------------------------------------
 DAG.model.random <- rdag(50, 4, 0.2)
 DAG.model.random.X <- DAG.model.random$x
 DAG.model.random.G<- DAG.model.random$G 
 #-------------------------------------------------Topological Sorting------------------------------------------
-
 DAG.model.random.G[DAG.model.random.G== 2] <- 1
 DAG.model.random.G[DAG.model.random.G== 3] <- 0
 topological_sort(DAG.model.random.G)
@@ -60,7 +48,6 @@ DAG.model.Test.Independence.df<-rbind(c(DAG.model.Test.Independence.Fisher$stat,
 colnames(DAG.model.Test.Independence.df)<-c("Statistic","P Value")
 rownames(DAG.model.Test.Independence.df)<-c("Fisher","Spearman","Fisher Permutation")
 
-
 DAG.model.algorithm.SES.Fisher<-SES(target, 
                                     dataset, 
                                     max_k = 3, 
@@ -94,7 +81,6 @@ DAG.optimal.results<-GADAG_Run(X=test.data$X,
                                           max.eval=DAG.model.maximum.evaluation))
 
 DAG.optimal.results.best<-DAG.optimal.results$G.best
-
 #-------------------------------------Analysis of Genetic Algorithm----------------------------------------------------
 plot.evol<-TRUE
 plot.graph<-TRUE
@@ -120,7 +106,6 @@ DAG.model.path.mmpc <- mmpc.path(target,
                                  robust = FALSE, ncores = 1)
 
 #--------------------------------------Regularisation Analysis---------------------------------------------------
-
 DAG.model.regularisation.ridge.1 <- ridge.reg(target, dataset, lambda = 0, B = 1, newdata = NULL)
 DAG.model.regularisation.ridge.2 <- ridge.reg(target, dataset, lambda = 0.5, B = 1, newdata = NULL)
 DAG.model.regularisation.ridge.3 <- ridge.reg(target, dataset, lambda = 0.5, B = 100, newdata = NULL) 
@@ -133,22 +118,19 @@ colnames(DAG.model.regularisation.df)<-c("Beta-1","Beta-2")
 rownames(DAG.model.regularisation.df)<-c("Ridge-1","Ridge-2","Ridge-3")
 
 #------------------------------------------------Tables-------------------------------------------------------
-
 Table.1<-xtable(DAG.optimal.results.df)
 Table.2<-xtable(DAG.model.Test.Independence.df)
 Table.3<-xtable(DAG.model.regularisation.df)
 
-#------------------------------------------------Figures------------------------------------------------------
+#------------------------Figures for Presentation in Classroom------------------------------------------------------
 
 Figure.1<-plotnetwork(DAG.model.random.G) 
 par(mfrow = c(2,2), mar = c(0.5,1,0.5,0.5))
 Figure.2<-plot(DAG.model.algorithm.SES.Fisher, mode = "all")
 Figure.3<-plot(DAG.model.algorithm.MMPC.Fisher,mode="all")
 
-#------------------------------------------------References----------------------------------------------------
-
+#-----------------References for Student Completion in Classroom----------------------------------------------------
 Reference.1<-c("",
                "",
                "")
-
 #------------------------------------------------Function Library----------------------------------------------
