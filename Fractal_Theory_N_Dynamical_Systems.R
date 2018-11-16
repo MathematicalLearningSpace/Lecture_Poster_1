@@ -1,13 +1,6 @@
-library(SpectralMap)
-library(PearsonDS)
-library(moonsun)
-library(magicaxis)
-library(astro)
-library(astrodatR)
-library(cosmoFns)
-library(astrolibR)
-library(sphereplot)
-library(stellaR)
+#---------------------------------------------------R API --------------------------------------------------------
+library(SpectralMap); library(PearsonDS);library(moonsun);library(magicaxis);library(astro);library(astrodatR);library(cosmoFns)
+library(astrolibR);library(sphereplot);library(stellaR)
 #-------------------------------------------------------Generate Two Datasets---------------------------------------
 pearson.N <- 100
 #-------------------------------------------------------Attractor  I------------------------------------------------
@@ -16,7 +9,6 @@ k.2<-2^2
 #-------------------------------------------------------Attractor II------------------------------------------------
 k.1<-2^3+2^2 + 2^1
 k.2<-2^3
-
 #-------------------------------------------------------Noise Specification-----------------------------------------
 pIIpars.1 <- list(a=2, location=1, scale=2) 
 pIIpars.2 <- list(a=2, location=1, scale=4) 
@@ -46,23 +38,18 @@ Y.3<-data.frame(Y1.3,Y2.3)
 Data.1<-list(X,Y.1)
 Data.2<-list(X,Y.2)
 Data.3<-list(X,Y.3)
-
 #------------------------------------------------------Create the spectral map from X to Y
 par(mfrow = c(2,2))
 example2.1<-SpectralMap(Data.1, epsilon=0.1, range=1:2, Plot2D=TRUE, Plot3D=FALSE)
 example2.2<-SpectralMap(Data.2, epsilon=0.1, range=1:2, Plot2D=TRUE, Plot3D=FALSE)
 example2.3<-SpectralMap(Data.3, epsilon=0.1, range=1:2, Plot2D=TRUE, Plot3D=FALSE)
-
-
-#-------------------------------------------------------Tables-------------------------------------------------------
-
-
-#-------------------------------------------------------Figures------------------------------------------------------
-
+#------------------------Tables-------------------------------------------------------
+#------------------------Figures for Classroom Presentation------------------------------------------------------
 par(mfrow = c(2,2))
+
 Figure.1<-plot(r.1, type="l")
-plot(r.2, type="l")
-plot(r.3, type="l")
+Figure.1A<-plot(r.2, type="l")
+Figure.1B<-plot(r.3, type="l")
 
 Figure.2<-plot(X)
 Figure.3<-plot(Y.1)
