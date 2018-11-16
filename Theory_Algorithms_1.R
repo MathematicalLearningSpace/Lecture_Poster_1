@@ -64,8 +64,9 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
   hmax <- abs(0.1 * (tfinal - t0))
   t <- t0;tout <- t;y <- y0;yout <- t(y);s1 <- f(t, y)
   r <- max(abs(s1/max(abs(y), threshold))) + realmin
+  #---------------------Step Size -----------------------------------------------
   h <- tdir * stepSize * rtol^(1/3)/r
-  #--------------------------Main iteration Loop---------------------------------------
+  #---------------------Main iteration Loop---------------------------------------
   while (t != tfinal) {
     hmin <- 16 * eps * abs(t)
     if (abs(h) > hmax) {
@@ -79,9 +80,11 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
     #---------------------Weight Examples ---------------------------------------------
     s2 <- f(t + h/2, y + h/2 * s1)
     s3 <- f(t + 3 * h/4, y + 3 * h/4 * s2)
+    #---------------------Update ------------------------------------------------------
     tnew <- t + h
     ynew <- y + h * (2 * s1 + 3 * s2 + 4 * s3)/9
     s4 <- f(tnew, ynew)
+    #--------------------Evaluate-------------------------------------------------------
     e <- h * (-5 * s1 + 6 * s2 + 8 * s3 - 9 * s4)/72
     err <- max(abs(e/max(max(abs(y), abs(ynew)), threshold))) + realmin
     #-----------------------------Check the Error---------------------------------------
