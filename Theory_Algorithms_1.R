@@ -40,12 +40,10 @@ Figure.2<-matplot(solution.2$t, solution.2$y, type = "l", lty = 1, lwd = c(2, 1,
                   main = "Three-Objects")
 grid()
 
-#------Function Library pracma for student modification in class R Studio-----------------------------
-
+#------Function from pracma Library for student modification in class with R Studio-----------------------------
 ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 1e-06) 
 {
-  stopifnot(is.numeric(y0), is.numeric(t0), length(t0) == 1, 
-            is.numeric(tfinal), length(tfinal) == 1)
+  stopifnot(is.numeric(y0), is.numeric(t0), length(t0) == 1, is.numeric(tfinal), length(tfinal) == 1)
   #-----------------Validation----------------------------------------------------
   if (is.vector(y0)) {
     y0 <- as.matrix(y0)
@@ -64,13 +62,10 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
   tdir <- sign(tfinal - t0)
   threshold <- atol/rtol
   hmax <- abs(0.1 * (tfinal - t0))
-  t <- t0
-  tout <- t
-  y <- y0
-  yout <- t(y)
-  s1 <- f(t, y)
+  t <- t0;tout <- t;y <- y0;yout <- t(y);s1 <- f(t, y)
   r <- max(abs(s1/max(abs(y), threshold))) + realmin
   h <- tdir * stepSize * rtol^(1/3)/r
+  #--------------------------Main iteration Loop---------------------------------------
   while (t != tfinal) {
     hmin <- 16 * eps * abs(t)
     if (abs(h) > hmax) {
@@ -81,14 +76,14 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
     }
     if (1.1 * abs(h) >= abs(tfinal - t)) 
       h <- tfinal - t
+    #---------------------Weight Examples ---------------------------------------------
     s2 <- f(t + h/2, y + h/2 * s1)
     s3 <- f(t + 3 * h/4, y + 3 * h/4 * s2)
     tnew <- t + h
     ynew <- y + h * (2 * s1 + 3 * s2 + 4 * s3)/9
     s4 <- f(tnew, ynew)
     e <- h * (-5 * s1 + 6 * s2 + 8 * s3 - 9 * s4)/72
-    err <- max(abs(e/max(max(abs(y), abs(ynew)), threshold))) + 
-      realmin
+    err <- max(abs(e/max(max(abs(y), abs(ynew)), threshold))) + realmin
     #-----------------------------Check the Error---------------------------------------
     if (err <= rtol) {
       t <- tnew
@@ -97,14 +92,14 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
       yout <- rbind(yout, t(y))
       s1 <- s4
     }
-    
+    #---------------------------------------------------------------------------
     h <- h * min(5, stepSize * (rtol/err)^(1/3))
     if (abs(h) <= hmin) {
       warning("Step size too small.")
       t <- tfinal
     }
   }
-  
+  #--------------------Basic Return math objects pattern------------------------
   return(list(t = c(tout), 
               y = yout,
               step=stepSize,
