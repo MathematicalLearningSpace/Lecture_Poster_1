@@ -1,32 +1,18 @@
-library(readr)
-library(xtable)
-library(deSolve)
-library(ReacTran)
-library(rootSolve)
-library(fda)
-library(phaseR)
-library(xtable)
-library(tseriesChaos)
-library(corrplot)
-library(plot3D)
-library(scatterplot3d)
-library(tm)
-library(topicmodels)
-library(wordcloud)
-library(rgl)
-library(mRMRe)
+#----------------------------------R API ----------------------------------------------
+library(readr);library(xtable);library(deSolve);library(ReacTran);library(rootSolve);library(fda);library(phaseR)
+library(xtable);library(tseriesChaos);library(corrplot);library(plot3D);library(scatterplot3d)
+library(tm);library(topicmodels);library(wordcloud);library(rgl);library(mRMRe)
 #----------------------------Data---------------------------------------------------
 
 article.files <- list.files(patt='publications_*.*csv$')
 article.files
 print(article.files[1])
-#publications_MYC.csv
+#------------------------------publications_MYC.csv Example For Classroom ---------------------------------
 z.df<-data.frame()
 z.df<-read_csv(article.files[1])
 View(z.df)
 print(z.df$Title)
-#---------------------------ODE Model for MYC-----------------------------------------
-
+#--------------ODE Model Pattern for MYC without Equation and Parameter Specification for Classroom--------------------
 Gene.ROI<-c('MYc', 'Miz1','p15','CKS1','Skp2','p27','CyclinD1','CDK4','CDK2','RB', 'E2F')
 
 model.1 <- function(t, x, parms)  {
