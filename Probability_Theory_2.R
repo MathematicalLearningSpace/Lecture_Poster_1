@@ -1,11 +1,6 @@
-library(PearsonDS)
-library(copula)
-library(VineCopula)
-library(vines)
-library(xtable)
-
+#------------------------------------R API ----------------------------------------------------------------
+library(PearsonDS); library(copula);library(VineCopula);library(vines);library(xtable)
 #------------------------------------Data Generation-------------------------------------------------------
-
 copula.families<-c("0 = independence copula",
 "1 = Gaussian copula",
 "2 = Student t copula (t-copula)" ,
@@ -49,7 +44,7 @@ copula.families<-c("0 = independence copula",
 
 #------------------------------------Data--------------------------------------------------------------------------
 
-##-----------------------------------simulate from a bivariate Student-t copula-------------------------------------
+##-----------------------------------Simulate from a bivariate Student-t copula-------------------------------------
 data.N<-100
 experimental.data.distribution.t<- BiCop(family = 2, par = -0.7, par2 = 4)
 # ----------------------------------rotated Tawn T2 copula with parameters------------------------------------------
@@ -57,13 +52,10 @@ copulaFromFamilyIndex(224, -2, 0.5)
 experimental.data.1<- BiCopSim(data.N, experimental.data.distribution.t)
 experimental.data.2<- matrix(runif(5 * 100), ncol = 5, nrow = 100)
 colnames(experimental.data.2) <- c("A", "B", "C", "D", "E")
-
 #----------------------------------- Compute the empirical Kendall's taus----------------------------------------
 M.1<-TauMatrix(experimental.data.1)
 M.2<-TauMatrix(experimental.data.2)
-
 #------------------------------------Compute conditional distributions--------------------------------------------
-
 hist(experimental.data.1[, 1])
 hist(experimental.data.1[, 2]) 
 
@@ -71,9 +63,7 @@ hist(experimental.data.1[, 2])
 experimental.data.3 <- BiCopCondSim(data.N, cond.val = 0.5, cond.var = 1, experimental.data.distribution.t)
 # simulate (U1 | U2 = 0.5)
 experimental.data.4 <- BiCopCondSim(data.N, cond.val = 0.5, cond.var = 2, experimental.data.distribution.t)
-
 #----------------------------------------Fit the Model---------------------------------------------------------
-
 fit <- BiCopSelect(experimental.data.1[, 1], experimental.data.1[, 2])
 summary(fit)
 #round(BiCopPDF(experimental.data.1[, 1], experimental.data.1[, 2], fit), 3)
@@ -86,28 +76,19 @@ model.pdf.df<-cbind(fit$familyname,
                     fit$emptau,
                     fit$beta)
 colnames(model.pdf.df)<-c("Family","Parameter","LogLik","AIC","P value","Tau","beta")
-
-
 #-----------------------------------Tables-----------------------------------------------------------------
-
 Table.1<-xtable(model.pdf.df)
 
-#-----------------------------------Figures---------------------------------------------------------------
-Figure.1<-matplot(experimental.data.1, type="l", log = "y",
-        main = "",xlab = "")
-
-Figure.2<-matplot(experimental.data.2, type="l", log = "y",
-                  main = "",xlab = "")
-
+#-------------Figures for Classroom Presentation---------------------------------------------------------------
+Figure.1<-matplot(experimental.data.1, type="l", log = "y",main = "",xlab = "")
+Figure.2<-matplot(experimental.data.2, type="l", log = "y",main = "",xlab = "")
 Figure.3<-hist(experimental.data.3)
 Figure.4<-hist(experimental.data.4)
-
 Figure.5<-plot(experimental.data.distribution.t)  
 Figure.6<-contour(experimental.data.distribution.t) 
 Figure.7<-contour(experimental.data.distribution.t, margins = "unif") 
 
 #-----------------------------------Function Library-------------------------------------------------------
-
 selectCopula <- function (vine, j, i, x, y) {
   data <- cbind(x, y)
   fit <- fitCopula(normalCopula(), data, method = "itau")
