@@ -1,7 +1,5 @@
-library(xtable)
-library(bayou)
-library(Matrix)
-library(BCE)
+#------------------------------------R API --------------------------------------------------------
+library(xtable);library(bayou);library(Matrix); library(BCE)
 #---------------------------------------Data--------------------------------------------------------
 Measurements<-c(0,0.25,0.5,0.75,1,1.25,1.5,1.75,2)
 Species.seq.1<-sample(Measurements,6)
@@ -75,21 +73,15 @@ Summary.model.4 <-summary(model.4)
 Summary.model.5 <-summary(model.5)
 Summary.model.6 <-summary(model.6)
 
-#----------------------------------Analysis------------------------------------------------------------
-
+#----------Analysis to be completed by Students in the Classroom-----------------------------------
 Analysis.1.df<-data.frame()
 Analysis.1.df<-rbind(c("")
                      )
 colnames(Analysis.1.df)<-c("")
 rownames(Analysis.1.df)<-c("")
-
-
 #---------------------------------------Tables------------------------------------------------------
-
 Table.1<-xtable(Analysis.1.df)
-
-# --------------------------------------Figures----------------------------------------------------
-
+# --------------Figures for Classroom Presentation----------------------------------------------------
 Figure.1
 palette(rainbow(12, s = 0.6, v = 0.75))
 mp     <- apply(Species.sequence.group.matrix.df,MARGIN=2,max)
@@ -122,12 +114,11 @@ Figure.8<-pairs(model.2,sample=1,main="Sample 1")
 Figure.9<-pairs(model.3,sample=1,main="Sample 1")
 Figure.10<-pairs(model.4,sample=1,main="Sample 1")
 Figure.11<-pairs(model.6,sample=1,main="Sample 1")
-#--------------------------------------References--------------------------------------------------
+#---------References for Lecture Design and Student Presentation--------------------------------------------------
 
 Reference.1<-c("Van den Meersche, K., K. Soetaert and J.J. Middelburg (2008)",
                "A Bayesian compositional estimator for microbial taxonomy based on biomarkers",
                "Limnology and Oceanography Methods 6, 190-199")
-
 
 #-------------------------------------Function Library---------------------------------------------
 
