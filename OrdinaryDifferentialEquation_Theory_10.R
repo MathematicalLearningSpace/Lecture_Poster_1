@@ -3,15 +3,11 @@ library(deBInfer); library(xtable); library(actuar)
 #--------------------------------------------Data----------------------------------------
 r<-rpois(25,1);s<-rpois(25,1);u<-rpois(25,1);v<-rpoisinvgauss(25,2);w<-rpoisinvgauss(25,4)
 x<-rpois(25,5);y<-rpois(25,1);z<-rpois(25,1)
-
 cnt<-c(r,s,u,v,w,x,y,z)
-
-t<-c(rep(1,25),rep(2,25),rep(3,25),rep(4,25),
-     rep(5,25),rep(6,25),rep(8,25),rep(9,25))
+t<-c(rep(1,25),rep(2,25),rep(3,25),rep(4,25),rep(5,25),rep(6,25),rep(8,25),rep(9,25))
 
 group.X.df<-as.data.frame(cbind(t,cnt))
 #--------------------------------------------Parameters----------------------------------
-
 x1 <- debinfer_par(name = "x1", var.type = "de", fixed = FALSE, value = 2, 
                    prior = "gamma", 
                    hypers = list(shape = 5, rate = 1), prop.var = c(3,4), 
@@ -167,13 +163,11 @@ X <- debinfer_par(name = "X", var.type = "init", fixed = TRUE, value = Pop.initi
 Y <- debinfer_par(name = "Y", var.type = "init", fixed = TRUE, value = 0) 
 Z <- debinfer_par(name = "Z", var.type = "init", fixed = TRUE, value = 0)
 
-#----------------------------------MCMC Inference---------------------------------------
-
+#------------------------Markov Chain Monte Carlo Inference---------------------------------------
 mcmc.pars <- setup_debinfer(x1, x2, x3, x4, x5, x6,x7,x8,x9,x10, 
                             X, Y, Z)
 mcmc.pars.2 <- setup_debinfer(x1, x2, x3, x4, x5, x6,x7,x8,x9,x10, 
                             R,S,T,U,V,W,X, Y, Z)
-
 iter <- 50
 mcmc.model <- de_mcmc(N = iter, data = group.X.df, 
                     de.model = group.X.dede, obs.model = group.X.obs.model, all.params = mcmc.pars, 
@@ -188,7 +182,6 @@ mcmc.model.2 <- de_mcmc(N = iter, data = group.X.df,
                     cnt = 50, plot = FALSE, sizestep = 0.1, solver = "dede", verbose.mcmc = FALSE)
 
 mcmc.model.2.summary<-summary(mcmc.model.2)
-
 #----------------------------------Simulation--------------------------------------------
 burnin <- 10
 mcmc.model.post_traj <- post_sim(mcmc.model, n = 10, 
@@ -197,22 +190,17 @@ mcmc.model.post_traj <- post_sim(mcmc.model, n = 10,
 mcmc.model.post_traj.2 <- post_sim(mcmc.model.2, n = 10, 
                       times = seq(0,10,by = 0.1), 
                       burnin = burnin, output = "all", prob = 0.95)
-
 mcmc.model.post_traj$HDI$X
-
 #----------------------------------------Tables--------------------------------------
 Table.1<-xtable(mcmc.model.summary$statistics)
 Table.2<-xtable(mcmc.model.2.summary$statistics)
 Table.3<-xtable(head(mcmc.model.post_traj$HDI$X))
 #----------------------------------------Figures for the Classroom------------------------------------
-
 Figure.1<-plot(group.X.df, xlab = "Time (days)", ylab = "Test Data", xlim = c(0,10))
 par(mfrow = c(3,4)) 
 Figure.2<-plot(mcmc.model, ask = FALSE, auto.layout = FALSE)
-
 pairs(mcmc.model, burnin = burnin, scatter = TRUE, trend = TRUE)
 Figure.3<-post_prior_densplot(mcmc.model, burnin = burnin)
-
 par(mfrow = c(2,3), mgp = c(2.2, 0.8, 0))
 ylabel = expression(paste(Pr,"(", theta,"|", "Y", ")")) 
 
@@ -226,14 +214,17 @@ Figure.5<-post_prior_densplot(mcmc.model, param = "x2",
                               xlab = expression(theta), ylab = ylabel, show.obs = FALSE, 
                               xlim = c(-0.1,1.1),main = "x2")
 legend("topright", legend = c("Posterior","Prior"), lty = 1, col = c("black", "red"))
+
 Figure.6<-post_prior_densplot(mcmc.model, param = "x3",
                               xlab = expression(theta), ylab = ylabel, show.obs = FALSE, xlim = c(0,3), 
                               main = "x3") 
 legend("topright", legend = c("Posterior","Prior"), lty = 1, col = c("black", "red"))
+
 Figure.7<-post_prior_densplot(mcmc.model, param = "x4",
                               xlab = expression(theta), ylab = ylabel, show.obs = FALSE, xlim = c(0,6), 
                               main = "x4") 
 legend("topright", legend = c("Posterior","Prior"), lty = 1, col = c("black", "red"))
+
 Figure.8<-post_prior_densplot(mcmc.model, param = "x5",
                               xlab = expression(theta), ylab = ylabel, show.obs = FALSE, xlim = c(0,50), 
                               ylim = c(0,0.2), main = "x5")
@@ -242,17 +233,21 @@ Figure.9<-post_prior_densplot(dede_rev, param = "x6",
                               xlab = expression(theta), ylab = ylabel, show.obs = FALSE, xlim = c(1.5,10.5), 
                               main = "x6")
 legend("topright", legend = c("Posterior","Prior"), lty = 1, col = c("black", "red"))
+
 Figure.10<-post_prior_densplot(mcmc.model, param = "x7",
                               xlab = expression(theta), ylab = ylabel, show.obs = FALSE, xlim = c(1.5,10.5), 
                               main = "x7")
 legend("topright", legend = c("Posterior","Prior"), lty = 1, col = c("black", "red"))
+
 Figure.11<-post_prior_densplot(mcmc.model, param = "x8",
                               xlab = expression(theta), ylab = ylabel, show.obs = FALSE, xlim = c(1.5,10.5), 
                               main = "x8")
+
 Figure.12<-post_prior_densplot(dede_rev, param = "x9",
                               xlab = expression(theta), ylab = ylabel, show.obs = FALSE, xlim = c(1.5,10.5), 
                               main = "x9")
 legend("topright", legend = c("Posterior","Prior"), lty = 1, col = c("black", "red"))
+
 Figure.13<-post_prior_densplot(mcmc.model, param = "x10",
                               xlab = expression(theta), ylab = ylabel, show.obs = FALSE, xlim = c(1.5,10.5), 
                               main = "x10")
