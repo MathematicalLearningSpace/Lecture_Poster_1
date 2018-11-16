@@ -1,5 +1,5 @@
-library(pracma)
-library(xtable)
+#-------------------------------------R API ------------------------------------------------------------------
+library(pracma); library(xtable)
 #--------------------------------------------Data-------------------------------------------------------------
 
 parm.1<-c(1,-1)
@@ -27,7 +27,7 @@ colnames(model.solution.df)<-c("Step Size","h","Threshold")
 
 Table.1<-xtable(model.solution.df)
 
-#--------------------------------------------Figures----------------------------------------------------------
+#--------------------------------------------Figures for Classroom Presentation----------------------------------------------------------
 
 Figure.1<-matplot(solution.1$t, solution.1$y, type = "l", lty = 1, lwd = c(2, 1),
         col = c("darkred", "darkblue"),
@@ -40,11 +40,13 @@ Figure.2<-matplot(solution.2$t, solution.2$y, type = "l", lty = 1, lwd = c(2, 1,
                   main = "Three-Objects")
 grid()
 
-#--------------------------------------------Function Library-------------------------------------------------
+#------Function Library pracma for student modification in class R Studio-----------------------------
+
 ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 1e-06) 
 {
   stopifnot(is.numeric(y0), is.numeric(t0), length(t0) == 1, 
             is.numeric(tfinal), length(tfinal) == 1)
+  #-----------------Validation----------------------------------------------------
   if (is.vector(y0)) {
     y0 <- as.matrix(y0)
   }
@@ -52,6 +54,7 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
     if (ncol(y0) != 1) 
       stop("Argument 'y0' must be a vector or single column matrix.")
   }
+  #------------------------------------------------------------
   fun <- match.fun(f)
   f <- function(t, y) fun(t, y, ...)
   if (length(f(t0, y0)) != length(y0)) 
@@ -86,7 +89,7 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
     e <- h * (-5 * s1 + 6 * s2 + 8 * s3 - 9 * s4)/72
     err <- max(abs(e/max(max(abs(y), abs(ynew)), threshold))) + 
       realmin
-    #Check the Error
+    #-----------------------------Check the Error---------------------------------------
     if (err <= rtol) {
       t <- tnew
       y <- ynew
@@ -101,6 +104,7 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
       t <- tfinal
     }
   }
+  
   return(list(t = c(tout), 
               y = yout,
               step=stepSize,
