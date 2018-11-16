@@ -9,14 +9,10 @@ pIIIpars <- list(shape=1, location=1, scale=1)
 error.pearson.3<-rpearsonIII(pearson.N,params=pIIIpars)
 experimental.data.1<-window(error.pearson.3, end=256)
 #---------------------------------------Transforms---------------------------------------
-
 x.dwt <- wavDWT(as.ts(experimental.data.1), n.levels = 8)
 x.modwt <- wavMODWT( as.ts(experimental.data.1), n.levels = 8)
-x.cwt.1 <- wavCWT( as.ts(experimental.data.1), 
-                   wavelet="gaussian2")
-
+x.cwt.1 <- wavCWT( as.ts(experimental.data.1), wavelet="gaussian2")
 #---------------------------------------Tables------------------------------------------
-
 wavelet.statistics.df<-data.frame()
 wavelet.statistics.moments.df<-data.frame()
 wavelet.statistics.moments.df<-rbind(c(empMoments(x.modwt$data$d1)),
