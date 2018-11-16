@@ -1,13 +1,7 @@
-library(xtable)
-library(fitdistrplus)
-library(PearsonDS)
-library(lmom)
-library(pracma)
+#--------------------------------R API ------------------------------------
+library(xtable); library(fitdistrplus); library(PearsonDS);library(lmom);library(pracma)
 library(ExtDist)
-
 #-------------------Data--------------------------------------------------
-
-
 #-------------------Geometric Stable Distributions-------------------------
 sequence<-seq(1,100,1)
 Algorithm.1.GS.1<-Algorithm.1.GS(sequence,100,0.25)
@@ -44,8 +38,7 @@ colnames(Moments.Algorithms.df)<-c("Index Rho","Moment 1","Moment 2","Moment 3",
 
 #-------------------Tables------------------------------------------------
 Table.1<-xtable(Moments.Algorithms.df)
-
-#------------------Figures------------------------------------------------
+#------Figures for Presentation in the Classroom------------------------------------------------
 
 Figure.1<-plot(Algorithm.1.GS.1, type="l", 
                lty=1,col="black", 
@@ -139,14 +132,12 @@ legend("bottomleft",
        lwd=2,lty=1:4,
        cex=0.5)
 
-#-----------------Reference-----------------------------------------------
-
+#------Reference Pattern for Classroom Presentation-----------------------------------------------
 Reference.1<-c("Tomasz J. Kozubowski",
                "Computer simulation of geometric stable distributions",
                "Journal of Computational and Applied Mathematics 116 (2000) 221-229")
 
 #---------------Function Library-----------------------------------------
-
 Algorithm.1.GS<-function(x,N, rho)
 {
   y<-NULL
@@ -159,13 +150,11 @@ Algorithm.1.GS<-function(x,N, rho)
 
 sequence<-runif(100)
 test.Algorithm.1.GS<-Algorithm.1.GS(sequence,100,0.5)
+test.Algorithm.1.GS
 
 Algorithm.2.GS.strict<-function(N,alpha,lambda,tau)
 {
-  y<-NULL
-  Z<-NULL
-  W<-NULL
-  U<-NULL
+  y<-NULL;Z<-NULL;W<-NULL; U<-NULL
   if(abs(tau)<= min(1,(2/alpha)-1))
      {
   p<-(1+tau)/2
@@ -200,14 +189,11 @@ Algorithm.2.GS.strict<-function(N,alpha,lambda,tau)
 }
 
 test.Algorithm.2.GS.strict<-Algorithm.2.GS.strict(100,0.5,0.5,0.5)
-
+test.Algorithm.2.GS.strict
 
 Algorithm.3.GS.Mittag_Leffler<-function(N,alpha,lambda,rho)
 {
-  y<-NULL
-  Z<-NULL
-  V<-NULL
-  W<-NULL
+  y<-NULL;Z<-NULL;V<-NULL;W<-NULL
   #Z<-quaexp(runif(N), c(0,1))
   Z<-rExp(N, scale=1)
   V<-runif(N)
@@ -220,7 +206,7 @@ Algorithm.3.GS.Mittag_Leffler<-function(N,alpha,lambda,rho)
 }
 
 test.Algorithm.3.GS.Mittag_Leffler<-Algorithm.3.GS.Mittag_Leffler(100,0.5,0.5,0.5)
-
+test.Algorithm.3.GS.Mittag_Leffler
 
 Algorithm.4.GS.beta<-function(N,alpha,beta)
 {
@@ -245,6 +231,8 @@ Algorithm.4.GS.beta<-function(N,alpha,beta)
 }
 
 test.Algorithm.4.GS.beta<-Algorithm.4.GS.beta(100,0.75,0.5)
+test.Algorithm.4.GS.beta
+#--------------------------------Function Library for Classroom Modification by Students-----------
 
 empMoments.mutation<-function (x) 
 {
