@@ -1,19 +1,7 @@
-library(wmtsa)
-library(wavelets)
-library(wavethresh)
-library(waveslim)
-library(wavemulcor)
-library(PearsonDS)
-library(xtable)
-library(psych)
-library(adwave)
-library(biwavelet)
-library(BootWPTOS)
-library(liftLRD)
-library(mwaved)
-library(mvLSW)
-library(unbalhaar)
-
+#------------------------------------------R API -------------------------------------------
+library(wmtsa);library(wavelets);library(wavethresh);library(waveslim);library(wavemulcor)
+library(PearsonDS);library(xtable);library(psych);library(adwave);library(biwavelet);library(BootWPTOS)
+library(liftLRD);library(mwaved);library(mvLSW);library(unbalhaar)
 #---------------------------------------Wavelet Theory-------------------------------------
 
 #---------------------------------------Data----------------------------------------------
@@ -30,31 +18,20 @@ y.1 <- splus2R::signalSeries(cusps.1(x), x)
 y.2 <- splus2R::signalSeries(cusps.2(x), x)
 y.3<- makeHeaviSine(pearson.N)
 #---------------------------------------Transforms---------------------------------------
-
-
 x.cwt.1 <- wavCWT( as.ts(experimental.data.1), wavelet="gaussian1")
 x.cwt.2 <- wavCWT( as.ts(experimental.data.1), wavelet="gaussian2")
 x.cwt.3 <- wavCWT( as.ts(experimental.data.1), wavelet="Haar")
 x.cwt.4 <- wavCWT( as.ts(experimental.data.1), wavelet="morlet")
-
-
 #-------------------------------------Trees----------------------------------------------
-
 W.tree.1 <- wavCWTTree(x.cwt.1)
 W.tree.2 <- wavCWTTree(x.cwt.2)
 W.tree.3 <- wavCWTTree(x.cwt.3)
 W.tree.4 <- wavCWTTree(x.cwt.4)
-
-
 #-----------------------------------Holder Exponent---------------------------------------
-
 holder.1 <- holderSpectrum(W.tree.1)
 holder.2 <- holderSpectrum(W.tree.2)
 holder.3 <- holderSpectrum(W.tree.3)
 holder.4 <- holderSpectrum(W.tree.4)
-
-
-
 #------------------------------------Tables----------------------------------------------
 
 distribution.moments.df<-data.frame()
@@ -71,15 +48,7 @@ distribution.Holder.df<-rbind(c(empMoments(holder.1$exponent)),
                                 c(empMoments(holder.4$exponent)))
 colnames(distribution.Holder.df)<-c("mean","variance","skewness","kurtosis")
 Table.2<-xtable(distribution.Holder.df)
-
-
-
-
-
-
-
-#----------------------------------Figures-----------------------------------------------
-
+#-----------------Figures for Classroom Presentation-----------------------------------------------
 Figure.1<-plot(W.tree.1$`3`$extrema, type="l", lty=1, 
                  col="black",
                  xlab="Observations",
@@ -109,11 +78,7 @@ plot(W.tree.3, xlab="(c)")
 plot(W.tree.4, xlab="(d)")
 par(op)
 
-Figure.2<-densityBy(as.data.frame(as.data.frame(y.1)),
-                             xlab="CUSP Expression 1", 
-                             ylab="Simulated",col="green")
-
-
+Figure.2<-densityBy(as.data.frame(as.data.frame(y.1)),xlab="CUSP Expression 1", ylab="Simulated",col="green")
 Figure.3<-plot(holder.1$exponent, type="l",
                  ylim=c(-4,1),
                  lty=1,
