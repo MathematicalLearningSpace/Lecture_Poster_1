@@ -3,7 +3,6 @@ library(readr);library(xtable);library(deSolve);library(ReacTran);library(rootSo
 library(xtable);library(tseriesChaos);library(corrplot);library(plot3D);library(scatterplot3d)
 library(tm);library(topicmodels);library(wordcloud);library(rgl);library(mRMRe)
 #----------------------------Data---------------------------------------------------
-
 article.files <- list.files(patt='publications_*.*csv$')
 article.files
 print(article.files[1])
@@ -12,7 +11,7 @@ z.df<-data.frame()
 z.df<-read_csv(article.files[1])
 View(z.df)
 print(z.df$Title)
-#--------------ODE Model Pattern for MYC without Equation and Parameter Specification for Classroom--------------------
+#--------ODE Model Pattern for MYC without Equation and Parameter Specification To be Completed in Classroom-----------------
 Gene.ROI<-c('MYc', 'Miz1','p15','CKS1','Skp2','p27','CyclinD1','CDK4','CDK2','RB', 'E2F')
 
 model.1 <- function(t, x, parms)  {
@@ -90,7 +89,6 @@ colnames(Table.Parameters.df)<-c("Point","Uniform",'Normal',"Gamma")
 
 ## vector of timesteps
 sequence <- seq(0, 10, 0.1)
-
 #---------------------Start values for steady state-----------------------------------
 xstart <- c(x1 = 0.5, x2 = 1, x3 =0.5,x4=1,x5=1,
             x6=1,x7=1,x8=0.5,x9=1,x10=1,x11=1,x12=1)
@@ -101,13 +99,10 @@ system.solution.1 <- ode(y = xstart, times = sequence,
 system.solution.2<- ode(y = xstart, times = sequence,
                             func = model.2, 
                             parms = parms.sim.unif)
-
 #---------------------------Tables----------------------------------------------------
-
 Table.1<-xtable(z.df$Title)
 Table.2<-xtable(Table.Parameters.df)
 Table.2
-
 #----------------------------Figures---------------------------------------------------
 par(mfcol = c(1, 2))
 Figure.1<-plot(system.solution.1[,2], type="l", 
@@ -154,8 +149,6 @@ Figure.4<-scatterplot3d(system.solution.1[,2],
                         col.grid = "lightblue", main = "Species Trajectories", pch = 20,angle=120,
                         xlab = "x1(t)", 
                         ylab = "x2(t)", zlab = "x3(t)")
-
-
 rgl.viewpoint(0, 20)
 Figure.5<-plot3d(system.solution.2[,2], 
                  system.solution.2[,3], 
@@ -163,12 +156,8 @@ Figure.5<-plot3d(system.solution.2[,2],
                  pch = 1, cex = 1, xlab = "x1(t)", 
                  ylab = "x2(t)", zlab = "x3(t)")
 
-
 #----------------------------LinkOut References------------------------------------------------
-
 References.1<-c("MYC drives overexpression of telomerase RNA (hTR/TERC) in prostate cancer")
-
-
 #---------------------------Function Library-------------------------------------------
 
 
