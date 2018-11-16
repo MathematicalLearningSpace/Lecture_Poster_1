@@ -24,16 +24,11 @@ temporal.sequence.2 <- timeseries1D(N=N,
                                     sf=data.sf)
 
 #------------------------------------Test of Two Conditions-------------------------------------------
-
 temporal.sequence.1.Property.1<-verifyMarkovProperty(temporal.sequence.1, verbose = TRUE)
 wilcox.test(temporal.sequence.1[2:length(temporal.sequence.1)],diff(temporal.sequence.1),paired = TRUE, alternative = "less")
-
 temporal.sequence.1.Property.2<-assessStationarity(temporal.sequence.1, 1, verbose = TRUE)
-
 temporal.sequence.1.Property.2.xews <- ewspec(temporal.sequence.1[1:2^6], smooth.dev=var)$S
 temporal.sequence.1.Property.2A<-TOSts(temporal.sequence.1.Property.2.xews)
-
-
 temporal.sequence.1.Property.1.df<-data.frame()
 temporal.sequence.1.Property.1.df<-rbind(c(temporal.sequence.1.Property.1$statistic,
                                            temporal.sequence.1.Property.1$dof,
@@ -93,8 +88,8 @@ Model.estimation.parameters.df<-rbind(c(model.estimation.1D.2.drift,model.estima
 
 #---------------------------------------Tables-------------------------------------------------------------
 
-Table.1.Caption<-c("Table 1 shows values of the estimated coefficients fore each of the models",
-                   "fit a cubic function to the estimated drift coefficient and a quadratic function to the diffusion coefficient")
+Table.1.Caption<-c("Table 1 shows values of the estimated coefficients for each of models",
+                   "fit a cubic function to the estimated drift coefficient and a quadratic function to diffusion coefficient")
 Table.1<-xtable(Model.estimation.parameters.df)
 
 Table.2.Caption<-c("Table 2 shows values of statistic (the chi - square statistic)",
