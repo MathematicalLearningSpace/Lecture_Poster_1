@@ -1,15 +1,8 @@
-library(deBInfer)
-library(xtable)
-library(actuar)
+#----------------------------------R API ------------------------------------------------
+library(deBInfer); library(xtable); library(actuar)
 #--------------------------------------------Data----------------------------------------
-r<-rpois(25,1)
-s<-rpois(25,1)
-u<-rpois(25,1)
-v<-rpoisinvgauss(25,2)
-w<-rpoisinvgauss(25,4)
-x<-rpois(25,5)
-y<-rpois(25,1)
-z<-rpois(25,1)
+r<-rpois(25,1);s<-rpois(25,1);u<-rpois(25,1);v<-rpoisinvgauss(25,2);w<-rpoisinvgauss(25,4)
+x<-rpois(25,5);y<-rpois(25,1);z<-rpois(25,1)
 
 cnt<-c(r,s,u,v,w,x,y,z)
 
@@ -59,8 +52,7 @@ x10 <- debinfer_par(name = "x10", var.type = "de", fixed = FALSE, value = 3,
                    prior = "unif", 
                    hypers = list(min = 2, max = 10), prop.var = 0.05, 
                    samp.type = "rw")
-#-------------------------------------------Equation Specifications---------------------
-
+#------------------------------Delayed Differential Equation Specifications---------------------
 group.X.dede<-function(t,y,p){
   
   x1 <- p["x1"] 
@@ -135,7 +127,7 @@ group.X.dede.2<-function(t,y,p){
   dy9 <- x9*y[9]
   dy10 <- x10*y[10]
   #
-  #Inequalites based on context and value
+  #----------------------------------------------Inequalites based on context and value
   #
   if(y[1]<0) 
     dy1<-0 
@@ -212,7 +204,7 @@ mcmc.model.post_traj$HDI$X
 Table.1<-xtable(mcmc.model.summary$statistics)
 Table.2<-xtable(mcmc.model.2.summary$statistics)
 Table.3<-xtable(head(mcmc.model.post_traj$HDI$X))
-#----------------------------------------Figures------------------------------------
+#----------------------------------------Figures for the Classroom------------------------------------
 
 Figure.1<-plot(group.X.df, xlab = "Time (days)", ylab = "Test Data", xlim = c(0,10))
 par(mfrow = c(3,4)) 
