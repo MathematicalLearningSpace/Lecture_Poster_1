@@ -1,20 +1,9 @@
-library(moonsun)
-library(magicaxis)
-library(astro)
-library(astrodatR)
-library(cosmoFns)
-library(astrolibR)
-library(sphereplot)
-
-library(stellaR)
-library(PearsonDS)
-library(readr)
-library(HistogramTools)
-library(DescTools)
+library(moonsun);library(magicaxis);library(astro);library(astrodatR);library(cosmoFns);library(astrolibR);library(sphereplot)
+library(stellaR);library(PearsonDS);library(readr);library(HistogramTools);library(DescTools)
 #----------------------------------HYG star database archive Data-----------------------------------------
 data(starcat)
 data(bright)
-
+#------------------Read the Data Set in the Classroom for Student Mathematical Notes---------------------
 hygdata.v3 <- read_csv("HYG-Database-master/hygdata_v3.csv")
 View(hygdata.v3)
 
@@ -54,10 +43,10 @@ ephem.mercury <- mercury(jd(2017,1,1,length = 365))
 ephem.venus <- venus(jd(2017,1,1,length = 365))
 ephem.mars<-mars(jd(2017,1,1,length = 365))
 
-#--------------------------------Tables--------------------------------------------------
+#------------------Tables to Be Done By Students--------------------------------------------------
 
 
-#--------------------------------Figures-------------------------------------------------
+#-------------Figures for Presentation in Classroom-------------------------------------------------
 
 par(mfrow=c(1,2))
 Figure.1<-plot(h, xlab="(B-V) Color Index",main="Histogram for All Spectral Types")
@@ -96,11 +85,9 @@ Figure.13<-plot(as.ecc(bright))
 Figure.14<-plot(as.hoc(bright))
 Figure.15<-plot(as.lt(rst(bright)))
 
-#----------------------------Reference-------------------------------------------
+#------------------Reference To be Added by Students-------------------------------------------
 
-
-
-#----------------------------Function Library------------------------------------
+#------------------Function Library To be Added by Students------------------------------------
 
 
 
