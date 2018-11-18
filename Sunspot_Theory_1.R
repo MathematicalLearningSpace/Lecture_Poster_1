@@ -1,32 +1,11 @@
-library(SpectralMap)
-library(PearsonDS)
-library(moonsun)
-library(magicaxis)
-library(astro)
-library(astrodatR)
-library(cosmoFns)
-library(astrolibR)
-library(sphereplot)
-library(stellaR)
-library(TED)
-library(spectral)
-library(BayesSpec)
-library(beyondWhittle)
-library(bootspecdens)
-library(pavo)
-library(ftsspec)
-library(frequencyConnectedness)
-library(EMD)
-library(colorSpec)
-library(bspec)
-library(quantspec)
-library(spectral.methods)
-library(abd)
-library(xtable)
+#------------------------------------------------R API ------------------------------------------------
+library(SpectralMap);library(PearsonDS);library(moonsun);library(magicaxis);library(astro)
+library(astrodatR);library(cosmoFns);library(astrolibR);library(sphereplot);library(stellaR)
+library(TED);library(spectral);library(BayesSpec);library(beyondWhittle);library(bootspecdens)
+library(pavo);library(ftsspec);library(frequencyConnectedness);library(EMD);library(colorSpec)
+library(bspec);library(quantspec);library(spectral.methods);library(abd);library(xtable)
 
-library(TSA)
-library(tsDyn)
-library(DescTools)
+library(TSA);library(tsDyn);library(DescTools)
 #-------------------------------------Generate Data--------------------------------------------------------------------
 
 #--------------------------------------Noisy signal with amplitude modulation-----------------------------------------
@@ -109,12 +88,11 @@ N <- length(mcmc$psd.median)
 pdgrm <- (abs(fft(experimental.data))^2 / (2*pi*length(experimental.data)))[1:N]
 
 #----------------------------------------Tables-----------------------------------------
-
 Table.1<-xtable(data.measures.df)
 Table.2<-xtable(distribution.moments.1.df)
 Table.3<-xtable(stationarity.test.df)
 Table.4<-xtable(nonlinear.test.df)
-#----------------------------------Figures-----------------------------------------------
+#----------------------------------Figures for Classroom Presentation-----------------------------------------------
 
 Figure.A<-plot.ts(sine.data.1, col="blue",lty=1, ylim=c(-5,5))
 lines(sine.data.2,col="green",lty=2)
