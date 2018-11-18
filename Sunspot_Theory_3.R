@@ -1,11 +1,5 @@
-library(xtable)
-library(quantreg)
-library(quantregForest)
-library(readr)
-library(readxl)
-library(nlstools)
-library(car)
-library(MASS)
+#---------------------------------------R API ------------------------------------------------------------
+library(xtable);library(quantreg);library(quantregForest);library(readr);library(readxl);library(nlstools);library(car);library(MASS)
 #------------------------------------Data From Reference 1----------------------------------------------------
 
 NGC4472 <- read.table("NGC4472_profile.dat", header=T) #NGC 4472 elliptical galaxy surface brightness profile Reference.1
@@ -44,7 +38,7 @@ shapiro.test(residuals(NGC4551.fit) / summary(NGC4551.fit)$sigma)
 
 Table.1<-xdata(NGC4472.fit.nls.coef.df)
 
-#----------------------------------Figures----------------------------------------------------
+#-----------------Figures for Presentation in the Classroom----------------------------------------------------
 
 Figure.1<-plot(NGC4472$radius, NGC4472$surf_mag,lty=1,col=1,xlab="r  (arcsec)", 
                ylab=expression(mu ~~ (mag/sq.arcsec)), ylim=c(16,28), 
@@ -78,7 +72,7 @@ Figure.6<-plot(NGC4551.fit$model$`boxCoxVariable(radius)`, NGC4551.fit$model$sur
                cex.lab=1.5, cex.axis=1.5,col=1)
 lines(NGC4551.fit$model$`boxCoxVariable(radius)`, NGC4551.fit$fitted.values,col=2)
 
-#----------------------------------References-------------------------------------------------
+#------------------Additional References to be Added by Students-------------------------------------------------
 Reference.1<-c("Eric D. Feigelson & G. Jogesh Babu",
                "Modern Statistical Methods for Astronomy With R Applications", 
                "Cambridge University Press (2012)") 
