@@ -1,29 +1,14 @@
-#-----------------R API --------------------------------------------------------
-library(deSolve)
-library(RecTran)
-library(rootSolve)
-library(Sim.DiffProc)
-library(bvpSolve)
-library(odeintr)
-library(scaRabee)
-library(yuima)
-library(Sim.DiffProc)
-library(fptdApprox)
-library(rpgm)
-library(yuima)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(deSolve);library(RecTran);library(rootSolve);library(Sim.DiffProc);library(bvpSolve);library(odeintr);library(scaRabee)
+library(yuima);library(Sim.DiffProc);library(fptdApprox);library(rpgm);library(yuima)
 #--------------------Bioconductor libraries---------------------------------------
 #--------------------preprocessing the gene and protein interaction networks------
-library(Biostrings)
-library(seqinr)
-library(igraph)
-library(Matrix)
-library(rgl)
+library(Biostrings);library(seqinr);library(igraph);library(Matrix);library(rgl)
 #-------------------Combinatorics------------------------------------------
-library(combinat)
-library(GeomComb)
+library(combinat);library(GeomComb)
 #-------------------Admin and presentation in the Classroom---------------------------------
-library(ggplot2)
-library(xtable)
+library(ggplot2);library(xtable)
 #---------------------------------------------------------Data------------------------------------------------------------------
 Pearson.N<-100
 #--------------------------------------------------------Brownian motion------------------------------------------------------
