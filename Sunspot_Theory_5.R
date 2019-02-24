@@ -1,12 +1,8 @@
-library(rgl)
-library(xtable)
-library(readr)
-library(spdep)
-library(spatstat)
-library(scatterplot3d)
-library(gstat)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(rgl);library(xtable);library(readr);library(spdep);library(spatstat);library(scatterplot3d);library(gstat)
 #---------------------------------------Data from Reference 1-------------------------------------------------
-
+#---------------------------------------Available in the Classroom Lecture---------------------------------------------
 Shapley.galaxy <- read.table("Shapley_galaxy.dat", header=T)
 
 Shapley.galaxy.Mean<-Shapley.galaxy[Mean(Shapley.galaxy$R.A.)& Mean(Shapley.galaxy$Dec.) ,]
@@ -52,22 +48,17 @@ Shapley.galaxy.Mean.Statistics.MoranNGeary.df<-rbind(c(Shapley.galaxy.Mean.Moran
                                                      c(Shapley.galaxy.Mean.Geary.test$statistic,Shapley.galaxy.Mean.Geary.test$p.value))
 colnames(Shapley.galaxy.Mean.Statistics.MoranNGeary.df)<-c("Statistic","P Value")
 rownames(Shapley.galaxy.Mean.Statistics.MoranNGeary.df)<-c("Moran","Geary")
-
 #-----------------------------------Variogram Analysis------------------------------------------------
-
 Shapley.galaxy.Mean.variog <- variogram(Vel~1, locations=~R.A.+Dec., data=Shapley.galaxy.Mean)
 Shapley.galaxy.Mean.variog.mod1 <- vgm(7e+07, "Gau", 3.0,2e+07)
 Shapley.galaxy.Mean.variog.fit <- fit.variogram(Shapley.galaxy.Mean.variog,Shapley.galaxy.Mean.variog.mod1) 
 Shapley.galaxy.Mean.variog.fit
-
 #-----------------------------------K, L and J functions for the Mean Density Region-------------------
-
 Shapley.galaxy.Mean.K <- Kest(Shapley.galaxy.Mean.ppp, correction='isotropic')
 Shapley.galaxy.Mean.K.bias <- Kest(Shapley.galaxy.Mean.ppp, correction='none')
 Shapley.galaxy.Mean.L <- Lest(Shapley.galaxy.Mean.ppp, correction='isotropic')
 Shapley.galaxy.Mean.L.bias <- Lest(Shapley.galaxy.Mean.ppp, correction='none')
 Shapley.galaxy.Mean.J<-Jest(Shapley.galaxy.Mean.ppp)
-
 #--------------------------------------Tables------------------------------------------------
 
 Table.1<-xtable(Shapley.galaxy.Mean.Statistics.MoranNGeary.df)
@@ -75,14 +66,16 @@ Table.1<-xtable(Shapley.galaxy.Mean.Statistics.MoranNGeary.df)
 #-------------------------------------Figures------------------------------------------------
 Figure.0<-plot(Shapley.galaxy.Mean[,1], Shapley.galaxy.Mean[,2], cex=(scale(Shapley.galaxy.Mean[,4])+1.5)/2, 
      xlab='Right Ascension (degrees)', ylab='Declination (degrees)')
-Figure.0.1<-scatterplot3d(Shapley.galaxy.Mean[,c(1,2,4)], pch=20, cex.symbols=0.7, type='p', angl=40, 
-              zlim=c(0,50000))
+Figure.0.1<-scatterplot3d(Shapley.galaxy.Mean[,c(1,2,4)], pch=20, cex.symbols=0.7, type='p', angl=40, zlim=c(0,50000))
 rgl.snapshot('Figure1.png')
 rgl.close()
+
 Figure.2<-plot.nb(Shapley.galaxy.Mean.nb, Shapley.galaxy.Mean[,1:2])
-Figure.3<-plot(density(Shapley.galaxy.Mean.ppp,0.3), col=topo.colors(20), main='', xlab='R.A.', 
-     ylab='Dec.')
+
+Figure.3<-plot(density(Shapley.galaxy.Mean.ppp,0.3), col=topo.colors(20), main='', xlab='R.A.', ylab='Dec.')
+
 Figure.4<-plot(Shapley.galaxy.Mean.ppp, lwd=2, add=T)
+#-------------------------------Figure Group--------------------------------------------------
 opa <- par(mfrow=c(2,2),mar=c(2,2,2,2))
 Figure.5<-plot.fv(Shapley.galaxy.Mean.K, lwd=2, col='black',  main='', xlab='r (degrees)', legend=F)
 Figure.6<-plot.fv(Shapley.galaxy.Mean.K.bias, add=T, lty=3, lwd=2, col='black', legend=F)
@@ -91,6 +84,7 @@ Figure.7<-plot(Shapley.galaxy.Mean.L$r, (Shapley.galaxy.Mean.L$iso - Shapley.gal
 lines(Shapley.galaxy.Mean.L$r, (Shapley.galaxy.Mean.L$theo - Shapley.galaxy.Mean.L$r), lwd=2, lty=2)
 lines(Shapley.galaxy.Mean.L$r, (Shapley.galaxy.Mean.L.bias$un - Shapley.galaxy.Mean.L$r), lwd=2, lty=3)
 par(opa)
+
 Figure.8<-plot(Shapley.galaxy.Mean.variog,model <- Shapley.galaxy.Mean.variog.fit, col='black', pch=20, 
      xlab='Distance (degree)', ylab="Semivariance (km/s*km/s)", lwd=2)
 #------------------------------------Reference-----------------------------------------------
