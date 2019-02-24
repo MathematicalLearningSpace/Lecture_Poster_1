@@ -1,24 +1,8 @@
-library(xtable)
-library(rnn)
-library(fpp2)
-library(astrodatR)
-library(moonsun)
-library(magicaxis)
-library(astro)
-library(astrodatR)
-library(cosmoFns)
-library(astrolibR)
-library(sphereplot)
-library(stellaR)
-library(PearsonDS)
-library(readr)
-library(HistogramTools)
-library(DescTools)
-library(spatstat)
-library(G2Sd)
-library(plot3D)
-library(rgp)
-library(SPOT)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(xtable);library(rnn);library(fpp2);library(astrodatR);library(moonsun);library(magicaxis);library(astro)
+library(astrodatR);library(cosmoFns);library(astrolibR);library(sphereplot);library(stellaR);library(PearsonDS);library(readr)
+library(HistogramTools);library(DescTools);library(spatstat);library(G2Sd);library(plot3D);library(rgp);library(SPOT)
 #---------------------------------Data------------------------------------------------------------------------
 data("Sun_spot_num")
 Sunspot.1<-sunspot.month
@@ -104,20 +88,16 @@ Table.1<-xtable(Best.functions.df)
 Figure.1<-plot(Sunspot.3,main="",ltp="l",lty=1,col="red")
 lines(Sunspot.2,lty=2,col="green")
 lines(sunspot.pearson.1,lty=3,col="blue")
-legend("topright", legend =c("Annual Mean Sunspot Area","Annual Sunspot","Pearson Type 1"), col =c("red","green","blue"),
-       lty = 1:3, cex = .8, y.intersp = 1)
+legend("topright", legend =c("Annual Mean Sunspot Area","Annual Sunspot","Pearson Type 1"), col =c("red","green","blue"),lty = 1:3, cex = .8, y.intersp = 1)
 
 testpos <- seq(0, 1.98*pi, length=270)
-Figure.2<-PlotPolar(as.numeric(Sunspot.3), 
-                    testpos, type="l", 
-                    main="Annual Mean Sunspot Area", col="blue")
-Figure.3<-plot(y = bestSolution.1(interval.1), 
-               x = interval.1, type = "l", lty = 1, 
-               xlab = "x", ylab = "y") 
+                                
+Figure.2<-PlotPolar(as.numeric(Sunspot.3), testpos, type="l", main="Annual Mean Sunspot Area", col="blue")
+                                
+Figure.3<-plot(y = bestSolution.1(interval.1), x = interval.1, type = "l", lty = 1, xlab = "x", ylab = "y") 
 lines(y = sin(interval.1), x = interval.1, lty = 2)
-Figure.4<-plot(y = bestModel.1(interval.1), 
-               x = interval.1, type = "l", 
-               lty = 1, xlab = "x", ylab = "y") 
+
+Figure.4<-plot(y = bestModel.1(interval.1), x = interval.1, type = "l", lty = 1, xlab = "x", ylab = "y") 
 lines(y = Sunspot.3, x = interval.1, lty = 2)
 
 #----------------------------------References-------------------------------------------------
