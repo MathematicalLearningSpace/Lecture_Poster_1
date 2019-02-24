@@ -1,12 +1,6 @@
-library(stsm)
-library(xtable)
-library(Deriv)
-library(numDeriv)
-library(pracma)
-library(Matrix)
-library(forecast)
-library(PearsonDS)
-
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(stsm);library(xtable);library(Deriv);library(numDeriv);library(pracma);library(Matrix);library(forecast);library(PearsonDS)
 #---------------------------------------------------------Generate Data-------------------------------------------------
 pearson.N <- 100
 pIIpars.1 <- list(a=2, location=1, scale=2) 
