@@ -1,15 +1,10 @@
 #-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
-#-----------------------------R API ------------------------------------------------------------------------
 #-------------------------------------Ordinary Differential Equations-----------
 library(deSolve);library(ReacTran);library(rootSolve);library(fda);library(phaseR)
 #---------------------------TeX Formatting----------------------------------
-library(xtable)
-library(tseriesChaos)
+library(xtable);library(tseriesChaos)
 #----------------------------Scientific  Visualization-----------------------
-library(corrplot)
-library(plot3D)
-library(scatterplot3d)
-library(rgl)
+library(corrplot);library(plot3D);library(scatterplot3d);library(rgl)
 #---------------Reusable Ordinary Differential Equation Model------------------
 #-------------- Three Variable Specification------------------------------------
 
