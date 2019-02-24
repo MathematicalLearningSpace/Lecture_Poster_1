@@ -1,10 +1,4 @@
-library(deSolve)
-library(ReacTran)
-library(rootSolve)
-library(fda)
-library(xtable)
-library(CHNOSZ)
-library(changepoint)
+library(deSolve);library(ReacTran);library(rootSolve);library(fda);library(xtable);library(CHNOSZ);library(changepoint)
 
 #------Solution of Delayed Differential Equation System for Classroom-------------
 y.init<-0.1
