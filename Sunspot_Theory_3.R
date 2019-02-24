@@ -1,11 +1,10 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
 #---------------------------------------R API ------------------------------------------------------------
 library(xtable);library(quantreg);library(quantregForest);library(readr);library(readxl);library(nlstools);library(car);library(MASS)
 #------------------------------------Data From Reference 1----------------------------------------------------
-
 NGC4472 <- read.table("NGC4472_profile.dat", header=T) #NGC 4472 elliptical galaxy surface brightness profile Reference.1
 NGC4406 <- read.table("NGC4406_profile.dat", header=T) #NGC 4406 Reference.1
 NGC4551 <- read.table("NGC4551_profile.dat", header=T) #NGC 4551 Reference.1
-
 #-----------------------------------Model 1 From Reference 1--------------------------------------------------
 
 NGC4472.fit.nls <-  nls(surf_mag ~ -2.5*log10(I.e * 10^(-(0.868*n-0.142)*((radius/r.e)^{1/n}-1))) + 26, 
