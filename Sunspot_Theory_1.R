@@ -1,3 +1,4 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
 #------------------------------------------------R API ------------------------------------------------
 library(SpectralMap);library(PearsonDS);library(moonsun);library(magicaxis);library(astro)
 library(astrodatR);library(cosmoFns);library(astrolibR);library(sphereplot);library(stellaR)
@@ -93,16 +94,16 @@ Table.2<-xtable(distribution.moments.1.df)
 Table.3<-xtable(stationarity.test.df)
 Table.4<-xtable(nonlinear.test.df)
 #----------------------------------Figures for Classroom Presentation-----------------------------------------------
-
-Figure.A<-plot.ts(sine.data.1, col="blue",lty=1, ylim=c(-5,5))
+#-------------------------Figure 1-----------------------------------
+Figure.1<-plot.ts(sine.data.1, col="blue",lty=1, ylim=c(-5,5))
 lines(sine.data.2,col="green",lty=2)
 lines(sine.data.3,col="red",lty=3)
 legend(x="topright", 
        legend=c("Sine 1","Sine 2","Sine3"), 
        lty=c(1,2,3), col=c("blue", "green","red"))
 
-
-Figure.1<-plot.ts(experimental.data, col="blue",lty=1)
+#-----------------------------Figure 2---------------------------------------
+Figure.2<-plot.ts(experimental.data, col="blue",lty=1)
 lines(experimental.data.1,col="green",lty=2)
 lines(experimental.data.train,col="red",lty=3)
 lines(experimental.data.test,col="black",lty=4)
@@ -110,20 +111,21 @@ legend(x="topright",
        legend=c("Sunspot 1","Sunspot Subset","Sunspot Train","Sunspot Test"), 
        lty=c(1,2,3,4), col=c("blue", "green","red","black"))
 
+#---------------------------Figure 3---------------------------------------
 par(mfrow = c(2, 1))
-Figure.2<-plot(x, experimental.data, type = "l", main = "Sunspots",col="blue")
-Figure.2A<-plot(
+Figure.3A<-plot(x, experimental.data, type = "l", main = "Sunspots",col="blue")
+Figure.3B<-plot(
   FT,
   ylab = "Amplitude",
   xlab = "Frequency",
   type = "l",
   main = "Spectrum", ylim=c(0,15), xlim=c(0,0.05),col="green")
-
-Figure.3<-plot(sunspot.noise.test.1)
-
-Figure.4<-plot(model1$nexp_curr, typ="l")
-
-Figure.5<-plot.ts(log(pdgrm[-1]), col="blue", 
+#--------------------------Figure 4---------------------------------------
+Figure.4<-plot(sunspot.noise.test.1)
+#--------------------------Figure 5--------------------------------------
+Figure.5<-plot(model1$nexp_curr, typ="l")
+#--------------------------Figure 6-------------------------------------
+Figure.6<-plot.ts(log(pdgrm[-1]), col="blue", 
         main=paste0("AR Model Sunspot 1 on logarithmic scale for p=", ar.order))
 lines(log(mcmc$psd.median[-1]),lty=2, col="green")
 lines(log(mcmc$psd.p05[-1]),lty=3,col="red")
