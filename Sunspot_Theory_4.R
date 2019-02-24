@@ -1,22 +1,11 @@
-library(moonsun)
-library(magicaxis)
-library(astro)
-library(astrodatR)
-library(cosmoFns)
-library(astrolibR)
-library(sphereplot)
-library(stellaR)
-library(PearsonDS)
-library(readr)
-library(HistogramTools)
-library(DescTools)
-library(spatstat)
-library(G2Sd)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(moonsun);library(magicaxis);library(astro);library(astrodatR);library(cosmoFns);library(astrolibR);library(sphereplot)
+library(stellaR);library(PearsonDS);library(readr);library(HistogramTools);library(DescTools);library(spatstat);library(G2Sd)
 library(plot3D)
 #----------------------------------HYG star database archive Data-----------------------------------------
 data(starcat)
 data(bright)
-
 hygdata.v3 <- read_csv("HYG-Database-master/hygdata_v3.csv")
 stellar.mag.1<-as.data.frame(cbind(c(hygdata.v3$spect),
                                    c(hygdata.v3$x),
@@ -41,11 +30,8 @@ X.stellar.mag<- pp3(as.numeric(stellar.mag.1$x),
                     as.numeric(stellar.mag.1$z), 
                     box.1)
 #---------------------------------Analysis---------------------------------------------------------------
-
 summary(X.stellar.mag)
-
 X.stellar.mag.O<-stellar.mag.1[grep("O",stellar.mag.1$Spectral),]
-
 Mean(as.numeric(X.stellar.mag.O$Magnitude))
 MeanCI(as.numeric(X.stellar.mag.O$Magnitude), sides="left")
 RunsTest(as.numeric(X.stellar.mag.O$Magnitude) > mean(as.numeric(X.stellar.mag.O$Magnitude)))
@@ -91,51 +77,61 @@ X.stellar.mag.O.1.pattern.1<-ppp(X.stellar.mag.O.1$x,X.stellar.mag.O.1$y,window=
 
 #--------------------------------Tables--------------------------------------------------
 
-#--------------------------------Figures-------------------------------------------------
+#------------------Figures for Scientific Visualization-------------------------------------------------
 Figure.1<-plot( (as.numeric(X.stellar.mag.O$Magnitude) < median(as.numeric(X.stellar.mag.O$Magnitude))) - 0.5, 
                 type="s", 
                 ylim=c(-1,1),ylab="X < median(x)-0.5" )
 opa <- par(mfrow=c(2,2),mar=c(2,2,2,2))
+
 Figure.2<-PlotViolin(as.numeric(X.stellar.mag.O$Magnitude), col = "purple",main="A")
+
 Figure.3<-PlotViolin(as.numeric(X.stellar.mag.O$x), col = "green",na.rm=TRUE,main="B")
+
 Figure.4<-PlotViolin(as.numeric(X.stellar.mag.O$y), col = "red",na.rm=TRUE,main="C")
+
 Figure.5<-PlotViolin(as.numeric(X.stellar.mag.O$z), col = "blue",na.rm=TRUE,main="D")
+#---------------------Figure Groups----------------------------------
 par(opa)
 testpos <- seq(0, 1.98*pi, length=270)
+
 Figure.6<-PlotPolar(as.numeric(X.stellar.mag.O$Magnitude), 
           testpos, type="l", 
           main="Stellar Magnitude O Spectral Type", col="blue")
+
 Figure.7<-PolarGrid(ntheta=9, col="grey", lty="solid", lblradians=TRUE)
+#---------------------Figure Groups----------------------------------
 opa <- par(mfrow=c(2,2),mar=c(2,2,2,2))
-hist(X.stellar.mag.O.1$data$x)
-hist(X.stellar.mag.O.1$data$y)
-hist(X.stellar.mag.O.1$data$z)
-hist3D(z=z, border="black")
+Figure.8<-hist(X.stellar.mag.O.1$data$x)
+Figure.9<-hist(X.stellar.mag.O.1$data$y)
+Figure.10<-hist(X.stellar.mag.O.1$data$z)
+Figure.11<-hist3D(z=z, border="black")
+#-----------------------Figure Groups-----------------------------
 par(opa)
 opa <- par(mfrow=c(2,2),mar=c(1,1,1,1))
-plot(X.stellar.mag.O.1, theta=45, phi=45,main="Perspective 1",
+Figure.12<-plot(X.stellar.mag.O.1, theta=45, phi=45,main="Perspective 1",
      type="p",
      box.back=list(col="pink"),
      box.front=list(col="blue", lwd=1),cex=0.75, pch=1)
-plot(X.stellar.mag.O.1, theta=90, phi=45,main="Perspective 2",
+Figure.13<-plot(X.stellar.mag.O.1, theta=90, phi=45,main="Perspective 2",
      type="p",
      box.back=list(col="pink"),
      box.front=list(col="blue", lwd=1),cex=0.25, pch=1)
-plot(X.stellar.mag.O.1, theta=0, phi=90,main="Perspective 3",
+Figure.14<-plot(X.stellar.mag.O.1, theta=0, phi=90,main="Perspective 3",
      type="p",
      box.back=list(col="pink"),
      box.front=list(col="blue", lwd=1),cex=0.25, pch=1)
-plot(X.stellar.mag.O.1, theta=25, phi=15,main="Perspective 4",
+Figure.15<-plot(X.stellar.mag.O.1, theta=25, phi=15,main="Perspective 4",
      type="p",
      box.back=list(col="pink"),
      box.front=list(col="blue", lwd=1),cex=0.25, pch=1)
+#------------------------------Figure Groups------------------------
 par(opa)
 opa <- par(mfrow=c(2,2),mar=c(2,2,2,2))
-plot(X.stellar.mag.O.1.stats$`K function`, col=1,main="K Function")
-plot(X.stellar.mag.O.1.stats$`F function`, col=2,main="F Function")
-plot(X.stellar.mag.O.1.stats$`G function`, col=3,main="G Function")
-plot(X.stellar.mag.O.1.stats$`J function`, col=4,main="J Function")
-par(opa)
+Figure.16<-plot(X.stellar.mag.O.1.stats$`K function`, col=1,main="K Function")
+Figure.17<-plot(X.stellar.mag.O.1.stats$`F function`, col=2,main="F Function")
+Figure.18<-plot(X.stellar.mag.O.1.stats$`G function`, col=3,main="G Function")
+Figure.19<-plot(X.stellar.mag.O.1.stats$`J function`, col=4,main="J Function")
+
 #----------------------------Reference-------------------------------------------
 
 
