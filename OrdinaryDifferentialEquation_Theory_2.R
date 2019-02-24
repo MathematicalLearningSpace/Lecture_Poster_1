@@ -1,5 +1,6 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
 library(deSolve);library(ReacTran);library(rootSolve);library(fda);library(xtable);library(CHNOSZ);library(changepoint)
-
 #------Solution of Delayed Differential Equation System for Classroom-------------
 y.init<-0.1
 times <- seq(from = 0, to = 100, by = 0.1) 
