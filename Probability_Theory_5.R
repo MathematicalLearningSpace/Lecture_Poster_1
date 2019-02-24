@@ -1,3 +1,4 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
 #--------------------------------R API ------------------------------------
 library(xtable); library(fitdistrplus); library(PearsonDS);library(lmom);library(pracma)
 library(ExtDist)
@@ -8,26 +9,22 @@ Algorithm.1.GS.1<-Algorithm.1.GS(sequence,100,0.25)
 Algorithm.1.GS.2<-Algorithm.1.GS(sequence,100,0.5)
 Algorithm.1.GS.3<-Algorithm.1.GS(sequence,100,0.75)
 Algorithm.1.GS.4<-Algorithm.1.GS(sequence,100,0.95)
-
-
+#--------------------------------------------------
 Algorithm.2.GS.strict.1<-Algorithm.2.GS.strict(100,0.25,0.5,1)
 Algorithm.2.GS.strict.2<-Algorithm.2.GS.strict(100,0.5,0.5,1)
 Algorithm.2.GS.strict.3<-Algorithm.2.GS.strict(100,0.75,0.5,1)
 Algorithm.2.GS.strict.4<-Algorithm.2.GS.strict(100,0.95,0.5,1)
-
-
+#-------------------------------------------------
 Algorithm.3.GS.Mittag_Leffler.1<-Algorithm.3.GS.Mittag_Leffler(100,1,0.25,1)
 Algorithm.3.GS.Mittag_Leffler.2<-Algorithm.3.GS.Mittag_Leffler(100,1,0.5,1)
 Algorithm.3.GS.Mittag_Leffler.3<-Algorithm.3.GS.Mittag_Leffler(100,1,0.75,1)
 Algorithm.3.GS.Mittag_Leffler.4<-Algorithm.3.GS.Mittag_Leffler(100,1,0.95,1)
-
-
+#-------------------------------------------------
 Algorithm.4.GS.beta.1<-Algorithm.4.GS.beta(100,1,0.25)
 Algorithm.4.GS.beta.2<-Algorithm.4.GS.beta(100,1,0.5)
 Algorithm.4.GS.beta.3<-Algorithm.4.GS.beta(100,1,0.75)
 Algorithm.4.GS.beta.4<-Algorithm.4.GS.beta(100,1,0.95)
-
-
+#------------------------------------------------
 Moments.Algorithms.df<-data.frame()
 Moments.Algorithms.df<-rbind(c("0.25",empMoments.mutation(Algorithm.4.GS.beta.1)),
                                    c("0.5",empMoments.mutation(Algorithm.4.GS.beta.2)),
@@ -35,11 +32,9 @@ Moments.Algorithms.df<-rbind(c("0.25",empMoments.mutation(Algorithm.4.GS.beta.1)
                                    c("0.95",empMoments.mutation(Algorithm.4.GS.beta.4))
 )
 colnames(Moments.Algorithms.df)<-c("Index Rho","Moment 1","Moment 2","Moment 3","Moment 4","Theta")
-
 #-------------------Tables------------------------------------------------
 Table.1<-xtable(Moments.Algorithms.df)
 #------Figures for Presentation in the Classroom------------------------------------------------
-
 Figure.1<-plot(Algorithm.1.GS.1, type="l", 
                lty=1,col="black", 
                ylab="Simulated Value", 
@@ -62,7 +57,7 @@ legend("bottomleft",
        col=c("black","green","blue","red"),
        lwd=2,lty=1:4,
        cex=0.5)
-
+#-----------------------------Figure 2-------------------------------------
 Figure.2<-plot(Algorithm.2.GS.strict.1, type="l", 
                lty=1,col="black", 
                ylab="Simulated Value", 
@@ -85,7 +80,7 @@ legend("bottomleft",
        col=c("black","green","blue","red"),
        lwd=2,lty=1:4,
        cex=0.5)
-
+#-----------------------Figure 3-----------------------------------
 Figure.3<-plot(Algorithm.3.GS.Mittag_Leffler.1, type="l", 
                lty=1,col="black", 
                ylab="Simulated Value", 
@@ -93,12 +88,10 @@ Figure.3<-plot(Algorithm.3.GS.Mittag_Leffler.1, type="l",
 lines(Algorithm.3.GS.Mittag_Leffler.2, lty=2,col="green")
 lines(Algorithm.3.GS.Mittag_Leffler.3, lty=3,col="blue")
 lines(Algorithm.3.GS.Mittag_Leffler.4, lty=4,col="red")
-
 rug(Algorithm.3.GS.Mittag_Leffler.1, side=4, col="black")
 rug(Algorithm.3.GS.Mittag_Leffler.2, side=4, col="green")
 rug(Algorithm.3.GS.Mittag_Leffler.3, side=4, col="blue")
 rug(Algorithm.3.GS.Mittag_Leffler.4, side=4, col="red")
-
 legend("bottomleft",
        c("lambda=0.25",
          "lambda=0.5",
@@ -108,7 +101,7 @@ legend("bottomleft",
        col=c("black","green","blue","red"),
        lwd=2,lty=1:4,
        cex=0.5)
-
+#-----------------------------Figure 4---------------------------------------
 Figure.4<-plot(Algorithm.4.GS.beta.1, type="l", 
                lty=1,col="black", 
                ylab="Simulated Value", 
@@ -116,12 +109,10 @@ Figure.4<-plot(Algorithm.4.GS.beta.1, type="l",
 lines(Algorithm.4.GS.beta.2, lty=2,col="green")
 lines(Algorithm.4.GS.beta.3, lty=3,col="blue")
 lines(Algorithm.4.GS.beta.4, lty=4,col="red")
-
 rug(Algorithm.4.GS.beta.1, side=4, col="black")
 rug(Algorithm.4.GS.beta.2, side=4, col="green")
 rug(Algorithm.4.GS.beta.3, side=4, col="blue")
 rug(Algorithm.4.GS.beta.4, side=4, col="red")
-
 legend("bottomleft",
        c("beta=0.25",
          "beta=0.5",
