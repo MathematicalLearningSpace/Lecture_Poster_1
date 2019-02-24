@@ -1,11 +1,6 @@
-library(darch)
-library(e1071)
-library(klaR)
-library(ROCR)
-library(caret)
-library(recipes)
-library(deepnet)
-library(Matrix)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(darch);library(e1071);library(klaR);library(ROCR);library(caret);library(recipes);library(deepnet);library(Matrix)
 #---------------------Data------------------------------------------
 u<-runif(100,0,1)
 v<-runif(100,2,3)
