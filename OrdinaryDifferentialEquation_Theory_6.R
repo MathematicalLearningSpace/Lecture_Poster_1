@@ -1,3 +1,4 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
 #----------------------------------------R API ----------------------------------------------------------
 library(DiffusionRimp);library(Langevin);library(xtable);library(igraph);library(costat);library(HMM);library(markovchain)
 #-------------------------------------Data----------------------------------------------------------------
