@@ -1,12 +1,6 @@
-library(xtable)
-library(smfsb)
-library(VGAM)
-library(nlstools)
-library(datasets)
-library(seqRFLP)
-library(stats)
-library(graphics)
-library(org.Hs.eg.db)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(xtable);library(smfsb);library(VGAM);library(nlstools);library(datasets);library(seqRFLP);library(stats);library(graphics);library(org.Hs.eg.db)
 #-------------------------------Data-----------------------------------------
 
 enz<-org.Hs.egENZYME
