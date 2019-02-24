@@ -1,8 +1,6 @@
-
-library(xtable)
-library(Matrix)
-library(combinat)
-library(igraph)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(xtable);library(Matrix);library(combinat);library(igraph)
 
 #------------------Data----------------------------------------------------------------
 n<-100;h<-1;t<-(n+1)*h
