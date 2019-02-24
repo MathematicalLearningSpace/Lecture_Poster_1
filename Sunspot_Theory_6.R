@@ -1,16 +1,7 @@
-library(xtable)
-library(quantreg)
-library(quantregForest)
-library(readr)
-library(readxl)
-library(nlstools)
-library(car)
-library(MASS)
-library(rgl)
-library(jsonlite)
-library(PearsonDS)
-library(spatstat)
-library(splines)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(xtable);library(quantreg);library(quantregForest);library(readr);library(readxl);library(nlstools);library(car);library(MASS)
+library(rgl);library(jsonlite);library(PearsonDS);library(spatstat);library(splines)
 #---------------------------------Data From Reference 1-------------------------------------
 
 Data.6D<-read.table("Data_6D.dat",header=T,fill=T)
@@ -67,21 +58,21 @@ Figure.3<-boxplot(Data.6D[,2:3], varwidth=T, notch=T, xlab=Data.6D.name, ylab="F
                   pars=list(boxwex=0.3,boxlwd=1.5,whisklwd=1.5,staplelwd=1.5,outlwd=1.5,
                             font=2))
 Figure.4<-qqnorm(Data.6D[,4], main='', xlab='Feature.3', ylab='Value', cex.lab=1.3, cex.axis=1.3, pch=20)
+
 par(mfrow=c(2,3))
 histograms(Data.6D[,2:5])
 
+#----------------------------------Figures------------------------------------------------------
 open3d() 
 Figure.6<-plot3d(Data.6D[,2:5])
-
 snapshot3d(file='Figure6.png')
 
-Figure.7<-plot(roc(Data.6D.pattern.2.window.polygon.fit),
-               main="ROC of Model 1: Spatial Trend and Polynomial")
+Figure.7<-plot(roc(Data.6D.pattern.2.window.polygon.fit), main="ROC of Model 1: Spatial Trend and Polynomial")
 lines(roc(Data.6D.pattern.2.window.polygon.fit.1),col="blue")
 lines(roc(Data.6D.pattern.2.window.polygon.fit.2),col="green")
 legend("topright", legend =c("Spatial Trend","B spline","Polynomial"), col =c("black","blue","green"),
        lty = 1:3, cex = .8, y.intersp = 1)
-
+#-----------------------------------Figure Group -------------------------------------------
 par(mfrow=c(2,2))
 Figure.8<-plot(Data.6D.pattern.2.window.polygon.Ki.0,main="predict intensity at all locations")
 Figure.9<-plot(Data.6D.pattern.2.window.polygon.Ki.1,main="intensity function estimated by heavy smoothing")
