@@ -1,15 +1,7 @@
-library(combinat)
-library(permutations)
-library(permute)
-library(xtable)
-library(igraph)
-library(Matrix)
-library(vegan)
-library(zoo)
-library(adegenet)
-library(ActiveDriver)
-library(VennDiagram)
-library(venneuler)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(combinat);library(permutations);library(permute);library(xtable);library(igraph);library(Matrix);library(vegan);library(zoo)
+library(adegenet);library(ActiveDriver);library(VennDiagram);library(venneuler)
 #------------------------------------------------------Data--------------------------------------------------------------
 
 Species.Population.Category.n <- c(100,20,10)
