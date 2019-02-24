@@ -1,10 +1,7 @@
-#--------------------R API References--------------------------------------------
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#-----------------------------R API ------------------------------------------------------------------------
 #-------------------------------------Ordinary Differential Equations-----------
-library(deSolve)
-library(ReacTran)
-library(rootSolve)
-library(fda)
-library(phaseR)
+library(deSolve);library(ReacTran);library(rootSolve);library(fda);library(phaseR)
 #---------------------------TeX Formatting----------------------------------
 library(xtable)
 library(tseriesChaos)
