@@ -1,3 +1,4 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
 #---------------------------------------------------R API --------------------------------------------------------
 library(SpectralMap); library(PearsonDS);library(moonsun);library(magicaxis);library(astro);library(astrodatR);library(cosmoFns)
 library(astrolibR);library(sphereplot);library(stellaR)
