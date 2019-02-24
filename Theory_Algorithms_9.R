@@ -1,26 +1,13 @@
-library(recount)
-library(GenomicRanges)
-library(limma)
-library(edgeR)
-library(DESeq2)
-library(regionReport)
-library(clusterProfiler)
-library(org.Hs.eg.db)
-library(gplots)
-library(derfinder)
-library(rtracklayer)
-library(GenomicFeatures)
-library(bumphunter)
-library(derfinderPlot)
-library(devtools)
-library(xtable)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(recount);library(GenomicRanges);library(limma);library(edgeR);library(DESeq2);library(regionReport);library(clusterProfiler)
+library(org.Hs.eg.db);library(gplots);library(derfinder);library(rtracklayer);library(GenomicFeatures);library(bumphunter)
+library(derfinderPlot);library(devtools);library(xtable);library(Peptides)
 
-library(Peptides)
-
-#---------------------------------------Data-------------------------------------
-source("https://bioconductor.org/biocLite.R")
+#----------------------Data and Programs for Classroom Lecture-------------------------------------
+source("https://bioconductor.org/biocLite.R") # additional functions
 biocLite("TxDb.Hsapiens.UCSC.hg19.knownGene")
-source("https://bioconductor.org/biocLite.R")
+source("https://bioconductor.org/biocLite.R") # additional functions
 biocLite("BSgenome.Hsapiens.UCSC.hg19")
 
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
