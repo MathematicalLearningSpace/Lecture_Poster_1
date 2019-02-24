@@ -30,7 +30,7 @@ S4.matrix.4<-S4.matrix[,4]
 A4.Tetrahedron<-S4[is.even(S4)]
 A4.Tetrahedron.matrix<-as.matrix(A4.Tetrahedron)
 A4.Tetrahedron.matrix.word<-word(A4.Tetrahedron.matrix)
-
+#----------Graph Models for Classroom Discussion, Definitions, Theorems and Topological Metrics---------------
 Coxeter.graph<-make_graph("Coxeter")
 Coxeter.matrix<-as_adjacency_matrix(Coxeter.graph)
 Coxeter.matrix.eigenvalues<-eigen(Coxeter.matrix)
