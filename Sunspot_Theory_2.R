@@ -1,3 +1,5 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
 library(moonsun);library(magicaxis);library(astro);library(astrodatR);library(cosmoFns);library(astrolibR);library(sphereplot)
 library(stellaR);library(PearsonDS);library(readr);library(HistogramTools);library(DescTools)
 #----------------------------------HYG star database archive Data-----------------------------------------
@@ -51,7 +53,7 @@ ephem.mars<-mars(jd(2017,1,1,length = 365))
 par(mfrow=c(1,2))
 Figure.1<-plot(h, xlab="(B-V) Color Index",main="Histogram for All Spectral Types")
 Figure.2<-plot(HistToEcdf(h), main="CDF") 
-
+#---------------------------------Figure 3---------------------------------------------------
 par(mfrow=c(1,1))
 Figure.3<-plot(density(na.omit(hygdata.v3$ci)),col="black", xlim=c(-1,3), main="Smooth Kernel Density Estimation of the Color Index")
 lines(density(na.omit(hygdata.v3$ci),kernel="epanechnikov"), col = "blue")
@@ -62,23 +64,24 @@ lines(density(na.omit(hygdata.v3$ci),kernel="cosine"), col = "purple")
 lines(density(na.omit(hygdata.v3$ci),kernel="optcosine"), col = "yellow")
 legend(1.9,.4, legend = kernels, col = seq(kernels),
        lty = 1, cex = .8, y.intersp = 1)
+#---------------------------Figure------------------------------------------
 par(mfrow=c(1,2))
 Figure.4<-plot(h.B, xlab="Color Index",main="Histogram for B Spectral Types")
 Figure.5<-plot(h.O, xlab="Color Index",main="Histogram for O Spectral Types")
-
+#---------------------------Figure-------------------------------------------
 Figure.6<-plot(angle(mercury(j),venus(j)),lty=1,col=1)
 lines(angle(venus(j),mars(j)),lty=2,col=2)
 lines(angle(mercury(j),mars(j)),lty=3,col=3)
 lines(angle(mercury(j.1),venus(j.1)),lty=4,col=4)
-
+#--------------------------Figure--------------------------------------------
 Figure.7<-plot(angle(sun(j),mercury(j)),lty=1,col=1)
-
+#--------------------------Figure--------------------------------------------
 par(mfrow=c(2,2))
 Figure.8<-track(sun(jd(2017,1,1,length = 365)),col.track = "green", lwd = 1, mag = 5, starcat = starcat, bright = bright)
 Figure.9<-track(ephem.mercury, col.track = "green", lwd = 1, mag = 5, starcat = starcat, bright = bright)
 Figure.10<-track(ephem.venus, col.track = "blue", lwd = 2, mag = 5, starcat = starcat, bright = bright)
 Figure.11<-track(ephem.mars, col.track = "green", lwd = 3, mag = 5, starcat = starcat, bright = bright)
-
+#--------------------------Figure----------------------------------------------
 par(mfrow=c(2,2))
 Figure.12<-plot(bright)
 Figure.13<-plot(as.ecc(bright))
