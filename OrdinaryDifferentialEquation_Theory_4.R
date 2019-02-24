@@ -1,3 +1,4 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
 #----------------------------------R API ----------------------------------------------------------------
 library(pracma);library(xtable);library(deSolve);library(ReacTran);library(rootSolve);library(fda);library(igraph)
 library(boot);library(sampling);library(PearsonDS);library(KEGGgraph);library(keggorthology);library(KEGGREST)
