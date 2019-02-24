@@ -1,8 +1,6 @@
-library(gramEvol)
-library(xtable)
-library(pracma)
-library(stringr)
-library(stringi)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#----------------------------------R API -------------------------------------------------------------------
+library(gramEvol);library(xtable);library(pracma);library(stringr);library(stringi)
 #-------------------------------------Data---------------------------------------
 #categories
 category<-LETTERS[1:10]
