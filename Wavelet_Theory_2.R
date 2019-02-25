@@ -1,3 +1,4 @@
+#----------------R Code To Modify in the Classroom Lecture with Students-------------------
 #------------------------------------------R API -------------------------------------------
 library(wmtsa);library(wavelets);library(wavethresh);library(waveslim);library(wavemulcor)
 library(PearsonDS);library(xtable);library(psych);library(adwave);library(biwavelet);library(BootWPTOS)
