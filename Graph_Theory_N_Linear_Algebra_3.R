@@ -1,25 +1,8 @@
-library(Matrix)
-library(matrixcalc)
-library(microbenchmark)
-library(igraph)
-library(xtable)
-library(Hmisc)
-library(devtools)
-library(XML)
-library(inline)
-library(utils)
-library(png)
-library(qlcMatrix)
-library(qgraph)
-library(rcrossref)
-library(pracma)
-
-library(PearsonDS)
-library(RandomFields)
-
+#-----------------------------------R Code to be Updated in the Classroom Lecture-------------------
+library(Matrix);library(matrixcalc);library(microbenchmark);library(igraph);library(xtable);library(Hmisc);library(devtools);library(XML)
+library(inline);library(utils);library(png);library(qlcMatrix);library(qgraph);library(rcrossref);library(pracma)
+library(PearsonDS);library(RandomFields)
 #------------------------------------------------------Graph Design----------------------------------------------------------
-
-
 g.ABCD<- make_full_graph(4) %du% make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
 g.ABCD <- add_edges(g.ABCD, c(1,6, 
                               1,11, 
@@ -39,7 +22,7 @@ g.4<-add_edges(g.4, c(1,6, 1,11, 6, 11))
 E(g.ABCD)$weight<-runif(ecount(g.ABCD))
 E(g.1)$weight<-runif(ecount(g.1),0,1)
 E(g.2)$weight<-runif(ecount(g.2),0,1)
-E(g.3)$weight<-runif(ecount(g.3),0,1)
+E(g.3)$weight<-runif(ecount(g.3),-3,3)
 E(g.4)$weight<-runif(ecount(g.4),0,1)
 
 
@@ -78,8 +61,6 @@ cle.g.1<-cluster_leading_eigen(g.1)
 cle.g.2<-cluster_leading_eigen(g.2)
 cle.g.3<-cluster_leading_eigen(g.3)
 cle.g.4<-cluster_leading_eigen(g.4)
-
-
 #-------------------------------------------------------------Walking the Graph------------------------------------------------------
 cw.g<-cluster_walktrap(g.ABCD)
 eb.g<-edge_betweenness(g.ABCD)
@@ -106,7 +87,7 @@ par(mfrow = c(1,1), mar = c(0.25,1,0.25,0.25))
 Figure.1<-plot(g.ABCD,vertex.color="Green",
      vertex.size=10,vertex.label.dist=2.5,
      edge.arrow.size=0.5,main="")
-
+#--------------------------------------------Figure Group-------------------------------
 par(mfrow = c(2,2), mar = c(2,2,2,2))
 Figure.2<-plot(diversity(g.ABCD), type="l",ylim=c(0,1), xlab="Node Index",
      main="(A): Node Diversity by Graph Type")
