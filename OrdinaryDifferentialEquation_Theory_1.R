@@ -10,19 +10,24 @@ library(corrplot);library(plot3D);library(scatterplot3d);library(rgl)
 
 BCC.model.1 <- function(t, x, parms, input)  {
   with(as.list(c(parms, x)), {
+    #------stochastic function specification
     import <- input(t)
+    #--------------Equation system 1---------
     dx1 <- a1*x1*x2 + a2*x3 + a3*import
     dx2 <- a4*x2*x1  - a5*x2*x3          
-    dx3 <- a6*x2*x3  - a7*x1*x3-a8*x3            
+    dx3 <- a6*x2*x3  - a7*x1*x3-a8*x3
+    #----------------------------------------
     res <- c(dx1, dx2, dx3)
     list(res)
   })
 }
 BCC.model.2 <- function(t, x, parms)  {
   with(as.list(c(parms, x)), {
+     #--------------Equation system 1---------
     dx1 <- a1*x1*x2 + a2*x3 + a3
     dx2 <- a4*x2*x1  - a5*x2*x3          
-    dx3 <- a6*x2*x3  - a7*x3            
+    dx3 <- a6*x2*x3  - a7*x3
+    #----------------------------------------
     res <- c(dx1, dx2, dx3)
     list(res)
   })
