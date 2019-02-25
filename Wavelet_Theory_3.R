@@ -1,3 +1,4 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
 #--------------------------------R API ---------------------------------------------------
 library(wmtsa);library(wavelets);library(wavethresh);library(waveslim);library(wavemulcor)
 library(PearsonDS);library(xtable);library(psych);library(adwave);library(biwavelet)
@@ -42,7 +43,6 @@ pwtc.1.3 <- pwtc(experimental.data.1,
                  experimental.data.3, 
                  experimental.data.2,
                  nrands = 0)
-
 #----------------------------------------Compute dissimilarity--------------------------
 dissimilarity.index<-c(wdist(wt.t1$wave, wt.t2$wave),wdist(wt.t1$wave, wt.t3$wave))
 w.arr.dis <- wclust(w.arr)
@@ -82,21 +82,32 @@ plot(pwtc.1.3, plot.cb = TRUE,
      main = "Partial wavelet coherence of 1 and 3 | 2")
 
 par(oma = c(0, 0, 0, 1), mar = c(5, 4, 4, 5) + 0.1)
-Figure.3<-plot(wt.t1, 
-                 plot.cb = TRUE, 
-                 plot.phase = TRUE)
-Figure.4<-plot(wt.t2, 
-               plot.cb = TRUE, 
-               plot.phase = TRUE)
-Figure.5<-plot(wt.t3, 
-               plot.cb = TRUE, 
-               plot.phase = TRUE)
+Figure.3<-plot(wt.t1, plot.cb = TRUE, plot.phase = TRUE)
+Figure.4<-plot(wt.t2, plot.cb = TRUE, plot.phase = TRUE)
+Figure.5<-plot(wt.t3, plot.cb = TRUE, plot.phase = TRUE)
 
-Figure.6<-plot(xwt.1.2, plot.cb = TRUE, plot.phase = TRUE,
-                 main = "Plot cross-wavelet and phase difference (arrows)")
+Figure.6<-plot(xwt.1.2, plot.cb = TRUE, plot.phase = TRUE,main = "Plot cross-wavelet and phase difference (arrows)")
+Figure.7<-plot(hclust(w.arr.dis$dist.mat, method = "ward.D"), sub = "", main = "", ylab = "Dissimilarity", hang = -1)
+Figure.8<-ifultools::stackPlot(x=as.vector(experimental.data.1), y=list(experimental.data.1=x, "D3+D4+D5"=z.decomposition.1))
 
-Figure.7<-plot(hclust(w.arr.dis$dist.mat, method = "ward.D"),
-                 sub = "", main = "", ylab = "Dissimilarity", hang = -1)
+#-----------------------------------Function Design Template for Classroom Lectures----------------------
 
-Figure.8<-ifultools::stackPlot(x=as.vector(experimental.data.1),
-                                 y=list(experimental.data.1=x, "D3+D4+D5"=z.decomposition.1))
+f.1<-function(X)
+ {
+  Z<-""
+  a<-1
+  W<-runif(length(X),0,1)
+  for(i in 1:length(X))
+  {  
+	Z<-stringr::str_c(Z,X[i])
+	W[i]<-a*W[i]
+  }
+  output<-list()
+  output$X<-X
+  output$a<-a
+  output$Z<-Z
+  output$W<-W
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
