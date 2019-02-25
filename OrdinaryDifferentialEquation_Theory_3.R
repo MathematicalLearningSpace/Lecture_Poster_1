@@ -103,3 +103,23 @@ Figure.5<- plot(ts.union(bridge.model.1$X[,1],
 Figure.6<-plot(bridge.denM.1, main="Marginal Density")
 Figure.7<-plot(bridge.denJ.1,display="rgl")
 #--------------------------------------------Function Library--------------------------------------------------------
+#-------------Function Template Library for Classroom Presentation and Modification---------------------
+f.1<-function(X)
+ {
+  Z<-""
+  a<-1
+  W<-runif(length(X),0,1)
+  for(i in 1:length(X))
+  {  
+	Z<-stringr::str_c(Z,X[i])
+	W[i]<-a*W[i]
+  }
+  output<-list()
+  output$X<-X
+  output$a<-a
+  output$Z<-Z
+  output$W<-W
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
