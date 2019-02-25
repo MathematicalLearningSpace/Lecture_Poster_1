@@ -27,8 +27,8 @@ algo <- list(nP = 50L,          ### population size
              max = c( 10,  10))
 DE.sol <- DEopt(OF = Objective.Function.1, algo = algo)
 DE.sol.sd<-sd(DE.sol$popF)
-DE.sol$xbest
-DE.sol$OFvalue
+DE.sol.best<-DE.sol$xbest
+DE.sol.OF<-DE.sol$OFvalue
 #------------------------------------B: Genetic Algorithms-------------------------------------------------
 #---------------------------------------String Match-------------------------------------------------------
 size <- 30L 
@@ -76,8 +76,15 @@ Figure.3<-ts.plot(GA.sol$Fmat)
 Figure.4<-ts.plot(GS.sol$values)
 
 #--------------Function Library To Be Modified in the Classroom-----------------------------------------------
-
 f<-function(x)
+{
+  y<-x[2]
+  x<-x[1]
+  a<-2^0;b<-(2^2+2^0);c<-2^3;d<-2^0;
+  z<-a*sin(b*x) + c*cos(d*y)
+}
+
+f.1<-function(x)
 {
   y<-x[2]
   x<-x[1]
