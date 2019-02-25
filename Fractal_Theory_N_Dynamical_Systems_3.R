@@ -1,8 +1,5 @@
-library(fractal)
-library(xtable)
-library(fracdiff)
-library(pracma)
-library(RandomFields)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+library(fractal);library(xtable);library(fracdiff);library(pracma);library(RandomFields)
 
 #-------------------------------------------------Data-----------------------------------------------------------
 N<-8
@@ -42,7 +39,11 @@ b  <- arclength(f, t1, t2)$length
 fParam <- function(w) {
   fct <- function(u) arclength(f, a, u)$length - w
   urt <- uniroot(fct, c(a, 6*pi))
-  urt$root
+  output<-list()
+  output$w<-w
+  output$fct<-fct
+  output$Uniroot<-urt$root
+  return(output)
 }
 
 ts <- linspace(0, 6*pi, 250)
@@ -79,6 +80,7 @@ y <- as.matrix(a*u*sin(u))
 Table.1<-xtable(hurst.transformations.df)
 #------------------------------------------------Figures--------------------------------------------------------
 opar <- par(mfrow=c(2,2), mar=c(2,2,1,1))
+#---------------------------Figure Group-----------------------------------
 Figure.1<-plot(f1(z$x, z$y,1,1.25), type = 'l', col = "black", lwd = 2, lty=1,
      ylim = c(-1, 6), main = "Hilbert curve Transformations")
 lines(f2(z$x, z$y,2,2), col = "red", lwd = 2, lty=2)
@@ -88,12 +90,13 @@ grid()
 legend("bottomright", col = c("black", "red", "green","blue"), 
        lty = 1:4, cex=0.75,
        legend = c("f1","f2", "f3", "f4"))
-
+#---------------------------Figure 2------------------------------------
 Figure.2<-plot(z.2$x, z.2$y, type='l', col="darkblue")
 title("Hexagon Molecule Curve")
+#---------------------------Figure 3-----------------------------------
 Figure.3<-plot(z.3$x, z.3$y, type='l', col="darkblue")
 title("Dragon Curve")
-
+#---------------------------Figure 4-----------------------------------
 Figure.4<-plot(matrix(f(ts), ncol=2), type='l', col="blue", 
      asp=1, xlab="", ylab = "",
      main = "Fermat's Spiral", sub="20 subparts of equal length")
@@ -103,6 +106,7 @@ for (i in seq(0.05, 0.95, by=0.05)) {
   points(fv[1], f(v)[2], col="darkred", pch=20)
 } 
 
+#---------------------------Figure Group--------------------------------------------
 opar <- par(mfrow=c(2,2), mar=c(2,2,1,1))
 Figure.5<-plot(x, y, col = "green", pch = 19, asp = 1)
 xp <- cfit1$xp; yp <- cfit1$yp
@@ -178,4 +182,7 @@ Fractal.Algorithm<-function (n,which = c("hilbert", "dragon", "molecule"))
   ezcontour(f, filled = TRUE)
   ezmesh(f)
   ezmesh(f, col="lightblue", theta = -15, phi = 30)
+  output<-list()
+  output$xy<-xy
+  return(output)
 }
