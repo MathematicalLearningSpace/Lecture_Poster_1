@@ -93,6 +93,8 @@ Table.3<-xtable(setar.forecasts.accuracy.df)
 
 
 #-----------------------------------------Figure--------------------------------------------------------------
+
+#-----------------------------------------Figure Group----------------------------------
 op <- par(mfrow = c(2, 2))
 densityBy(as.data.frame(experimental.data.1.train[1:450]),
           xlab="x", 
@@ -116,9 +118,8 @@ plot.new()
 pred_range <- range(pred_setar_naive.1, 
                     pred_setar_boot.1$pred, 
                     pred_setar_MC.1$pred, na.rm=TRUE)
-Figure.4<-plot(experimental.data.1.test,type="l", 
-     ylab="Pearson V",
-     main="Pearson V Test Data Set")
+
+Figure.4<-plot(experimental.data.1.test,type="l", ylab="Pearson V",main="Pearson V Test Data Set")
 
 Figure.5<-plot(pred_setar_naive.1, lty=2, col=2, main="Comparison of forecasts methods from same SETAR")
 lines(pred_setar_boot.1$pred, lty=3, col=3)
@@ -129,3 +130,25 @@ legLabels <- c("Naive F",
                "Block-Bootstrap F", 
                "MC F")
 legend("topright", leg=legLabels, lty=1:5, col=1:5, cex=0.5)
+
+#-------------Function Library Template For Classroom Design and Presentation for Students-------
+
+f.1<-function(X)
+ {
+  Z<-""
+  a<-1
+  W<-runif(length(X),0,1)
+  for(i in 1:length(X))
+  {  
+	Z<-stringr::str_c(Z,X[i])
+	W[i]<-a*W[i]
+  }
+  output<-list()
+  output$X<-X
+  output$a<-a
+  output$Z<-Z
+  output$W<-W
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
