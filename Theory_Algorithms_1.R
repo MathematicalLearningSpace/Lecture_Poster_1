@@ -14,15 +14,15 @@ f.2 <- function(t, y)
 y0.1 <- as.matrix(c(0,1))
 y0.2 <- as.matrix(c(0, 1, 1))
 t0 <- 0; tf <- 20
-#-------------------------------------------Computation------------------------------------------------------
+#-----Numerical Computation for Differential Equations with Difference Equation Patterns-----------------------------
 solution.1<- ode23(f.1, t0, tf, y0.1, rtol=1e-5, atol=1e-10)
 solution.2<- ode23.mutation(f.2, t0, 0.95, tf,y0.2, rtol=1e-5, atol=1e-10)
 model.solution.df<-data.frame()
 model.solution.df<-cbind(solution.2$step,solution.2$h,solution.2$threshold)
 colnames(model.solution.df)<-c("Step Size","h","Threshold")
-#--------------------------------------------Tables-----------------------------------------------------------
+#----------------Tables-----------------------------------------------------------
 Table.1<-xtable(model.solution.df)
-#--------------------------------------------Figures for Classroom Presentation----------------------------------------------------------
+#--------------------------Figures for Classroom Presentation----------------------------------------------------------
 Figure.1<-matplot(solution.1$t, solution.1$y, type = "l", lty = 1, lwd = c(2, 1),
         col = c("darkred", "darkblue"),
         xlab = "Time [min]", ylab= "",
