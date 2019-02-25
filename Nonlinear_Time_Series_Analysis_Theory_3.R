@@ -18,7 +18,7 @@ z<-runif(n = 475, min = -1, max = 1)
 
 ts.1<-as.data.frame(cbind(v,w,x,y,z))
 
-#------------------Differential Equation Model-----------------------------
+#------------------Differential Equation Model Template-----------------------------
 
 equation.parameter.matrix<-matrix(
   c(0,0,0,0,0,0,
@@ -27,21 +27,30 @@ equation.parameter.matrix<-matrix(
     1,1,1,0,0,0,
     1,1,1,1,0,0,
     1,1,1,1,1,0),6,6)
+
+
 parameters.test <- c(a = -8/3, b = -10, c = 28,d=-1,e=1)
 variables.initial.test <- c(x1 = 1, x2 = 1, x3 = 1,x4=1,x5=1)
 times <- seq(0, 100, by = 0.1)
+
+
 system.equation.model.test<-function(times, variables.intitial.test, parameters.test)
 {
   with(as.list(c(parameters.test, variables.intitial.test)), {
+    #---------------Equation Matrix for the Classroom--------------------	  
     dx.dt.1 <- a*x1 + x2*x3  
     dx.dt.2 <- b * (x2-x3)
     dx.dt.3 <- -x1*x2 + c*x2 - x3 
     dx.dt.4<- -d*x4
     dx.dt.5<- e*x5+x1
+    #---------------Dependent Variable for Ratio of Changes Vector--------	  
     res <- c(dx.dt.1,dx.dt.2,dx.dt.3,dx.dt.4,dx.dt.5)
     list(res)
   })
 }
+
+#---------------------------------Template Model Solution--------------------------------
+
 system.equation.model.test.solution.1 <- ode(y = variables.initial.test , times = times, 
                                              func = system.equation.model.test, 
                                              parms = parameters.test) 
