@@ -1,13 +1,12 @@
-library(NMOF)
-library(xtable)
-library(recommenderlab)
-library(corrplot)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#---------------------------------------------------R API --------------------------------------------------------
+library(NMOF);library(xtable);library(recommenderlab);library(corrplot)
 #------------------------------------Data----------------------------------------------------------------
-
+N.1<-10^0;N.2<-10^1;N.3<-10^2;N.4<-10^3;N.5<-10^4
 #-----------------------------------Curated Data Set for Recommendations-----------------------------------------------------
-v1 <- rnorm(20)
-v2 <- runif(50)
-v3 <- rbinom(100, size = 1, prob = 0.4)
+v1 <- rnorm(N.3)
+v2 <- runif(N.3)
+v3 <- rbinom(N.3, size = 1, prob = 0.4)
 #----------------------------------Correlation matrix----------------------------------------------------
 matrix.correlation <- array(0.5, dim = c(3, 3))
 diag(matrix.correlation ) <- 1
