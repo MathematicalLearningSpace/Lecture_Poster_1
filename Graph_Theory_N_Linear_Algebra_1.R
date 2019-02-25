@@ -1,20 +1,7 @@
-
-library(xtable)
-library(igraph)
-library(Matrix)
-library(qgraph)
-library(qlcMatrix)
-library(rcrossref)
-library(PearsonDS)
-library(catnet)
-
-
-#--------------------------------------------Graph Theory N Linear Algebra----------------------------------------
-
-
-
-#--------------------------------------------Data Generation-----------------------------------------------------
-
+#----------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+library(xtable);library(igraph);library(Matrix);library(qgraph);library(qlcMatrix);library(rcrossref);library(PearsonDS);library(catnet)
+#-------------------------------Graph Theory N Linear Algebra----------------------------------------
+#-----------------------Synthetic Data Generation for Classroom Lectures-----------------------------
 data.N<-100
 set.seed(10)
 x1 <- rnorm(data.N,0,1)
@@ -27,7 +14,7 @@ x7 <- x1 + x5 + rnorm(data.N,0,0.1)
 
 experimental.Data.1 <- cbind(x1,x2,x3,x4,x5,x6,x7)
 
-
+#--------------Examples of Graph Motifs for Topological Metrics-----------------
 graph.name<-c('Barbell','Balaban','Book', 'Centipede', 'Complete BiPartite','Bull',
               'Cage','Cayley','Cocktail Party','Coxeter','Chvatal',
               'Crown','Cubic Symmetric', 'Cycle','Desargues','Doyle',
@@ -52,25 +39,17 @@ graph.name.Petersen.generalized<-graph_from_adjacency_matrix(graph.name.Petersen
 g<-graph.name.Petersen
 
 #------------------------------------------Analysis----------------------------------------------------------------
-
+#----------------------------To Be Completed in Class By Students--------------------------------------------------
 #-----------------------------------------Distance----------------------------------------------------------------
-
 Graph.Topology.Metrics.Distance.df<-data.frame()
-
 graph.mean_distance<-mean_distance(g)
 graph.diameter<-diameter(g)
-
-Graph.Topology.Metrics.Distance.df<-cbind(graph.mean_distance,
-                                          graph.diameter)
-
+Graph.Topology.Metrics.Distance.df<-cbind(graph.mean_distance,graph.diameter)
 Graph.Topology.Metrics.Distance.df.Names<-c('Mean Distance',"Diameter")
 colnames(Graph.Topology.Metrics.Distance.df)<-Graph.Topology.Metrics.Distance.df.Names
 
 #----------------------------------------Connectivity------------------------------------------------------------
-
-
 Graph.Topology.Metrics.Connectivity.df<-data.frame()
-
 graph.eccentricigraph.degree.all<-degree(g, v = V(g), mode = c("all"),loops = TRUE, normalized = FALSE)
 graph.degree.out<-degree(g, v = V(g), mode = c("out"),loops = TRUE, normalized = FALSE)
 graph.degree.in<-degree(g, v = V(g), mode = c("in"),loops = TRUE, normalized = FALSE)
@@ -103,10 +82,7 @@ Graph.Topology.Metrics.Connectivity.df.Names<-c('Eccentricity',
 colnames(Graph.Topology.Metrics.Connectivity.df)<-Graph.Topology.Metrics.Connectivity.df.Names
 
 #---------------------------------------Spectra-----------------------------------------------------------------
-
-
 Graph.Topology.Metrics.Spectra.df<-data.frame()
-
 #graph.alpha<-alpha_centrality(g)
 #graph.power<-power_centrality(g)
 graph.eigen<-eigen_centrality(g)$vector
@@ -125,9 +101,6 @@ Graph.Topology.Metrics.Spectra.df.Names<-c('Eigen Centraility',
                                            "Group Size",
                                            "Graph Components")
 colnames(Graph.Topology.Metrics.Spectra.df)<-Graph.Topology.Metrics.Spectra.df.Names
-
-
-
 #---------------------------------------Miscellaneous-----------------------------------------------------------------
 Graph.Topology.Metrics.Miscellaneous.df<-data.frame()
 Gc.maxParents<-3
@@ -148,8 +121,6 @@ Graph.entropy<-cnEntropy(Gc)
 Graph.Topology.Metrics.Miscellaneous.df<-cbind(graph.complexity,graph.entropy)
 Graph.Topology.names<-c('Complexity','Entropy')
 names(Graph.Topology.Metrics.Miscellaneous.df)<-Graph.Topology.names
-
-
 #------------------------------------------Correlation Analysis--------------------------------------------------
 
 CorMat<-cor_auto(experimental.Data.1)
@@ -172,8 +143,6 @@ clustcoef_auto(BICgraph)
 smallworldness(BICgraph)
 
 #------------------------------------------Tables-----------------------------------------------------------------
-
-
 Table.1<-xtable(Graph.Topology.Metrics.Distance.df)                                        
 Table.2<-xtable(Graph.Topology.Metrics.Connectivity.df) 
 Table.3<-xtable(Graph.Topology.Metrics.Spectra.df) 
