@@ -1,17 +1,10 @@
-library(xtable)
-library(igraph)
-library(Matrix)
-library(readr)
-library(readxl)
-library(stringr)
-library(stringi)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#---------------------------------------------------R API --------------------------------------------------------
+library(xtable);library(igraph);library(Matrix);library(readr);library(readxl);library(stringr);library(stringi)
 #------------------------------------------------Data from Gene Cards and String DB-----------------------------------------------------------
-UBC.Enrichment.Components<-read.delim("UBC/enrichment.Component.tsv", 
-                                      header=FALSE, comment.char="#")
-UBC.Enrichment.KEGG<-read.delim("UBC/enrichment.KEGG.tsv", 
-                                      header=FALSE, comment.char="#")
-UBC.Network.Process <- read.delim("UBC/enrichment.Process.tsv", 
-                                  header=FALSE, comment.char="#")
+UBC.Enrichment.Components<-read.delim("UBC/enrichment.Component.tsv", header=FALSE, comment.char="#")
+UBC.Enrichment.KEGG<-read.delim("UBC/enrichment.KEGG.tsv", header=FALSE, comment.char="#")
+UBC.Network.Process <- read.delim("UBC/enrichment.Process.tsv", header=FALSE, comment.char="#")
 UBC.Network.Process$V2
 UBC.Network.regulation.positive<-UBC.Network.Process$V2[grep("positive regulation",UBC.Network.Process$V2)]
 UBC.Network.regulation.negative<-UBC.Network.Process$V2[grep("negative regulation",UBC.Network.Process$V2)]
@@ -61,8 +54,26 @@ Figure.1.caption<-stri_join(UBC.Network.Process.DNA.Damage[3]," ",UBC.Enrichment
 Figure.2<-plot(UBC.graph.3,layout=lo, vertex.color="Blue",vertex.size=20,
                vertex.label.dist=5,edge.arrow.size=0.5,main='UBC Network',edge.label = E(UBC.graph.3)$weight)
 
-#-----------------------------------------------Function Library-----------------------------------------------
-
+#-----------------------------Function Library for the Classroom-----------------------------------------------
+f.1<-function(X)
+ {
+  Z<-""
+  a<-1
+  W<-runif(length(X),0,1)
+  for(i in 1:length(X))
+  {  
+	Z<-stringr::str_c(Z,X[i])
+	W[i]<-a*W[i]
+  }
+  output<-list()
+  output$X<-X
+  output$a<-a
+  output$Z<-Z
+  output$W<-W
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
 
 
 
