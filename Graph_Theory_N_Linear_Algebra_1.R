@@ -137,9 +137,9 @@ experimental.Data.1.centrality<-centralityPlot(list(BIC = experimental.Data.1.BI
 experimental.Data.1.clustering<-clusteringPlot(list(BIC = experimental.Data.1.BICgraph, EBIC = experimental.Data.1.EBICgraph))
 
 # Compute centrality and clustering:
-experimental.Data.1.centrality.auto<-centrality_auto(BICgraph)
-experimental.Data.1.cluster.coef<-clustcoef_auto(BICgraph)
-experimental.Data.1.smallworldness<-smallworldness(BICgraph)
+experimental.Data.1.centrality.auto<-centrality_auto(experimental.Data.1.BICgraph)
+experimental.Data.1.cluster.coef<-clustcoef_auto(experimental.Data.1.BICgraph)
+experimental.Data.1.smallworldness<-smallworldness(experimental.Data.1.BICgraph)
 
 #------------------------------------------Tables-----------------------------------------------------------------
 Table.1<-xtable(Graph.Topology.Metrics.Distance.df)                                        
