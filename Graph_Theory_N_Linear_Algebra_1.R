@@ -2,7 +2,7 @@
 library(xtable);library(igraph);library(Matrix);library(qgraph);library(qlcMatrix);library(rcrossref);library(PearsonDS);library(catnet)
 #-------------------------------Graph Theory N Linear Algebra----------------------------------------
 #-----------------------Synthetic Data Generation for Classroom Lectures-----------------------------
-data.N<-100
+data.N<-10^2
 set.seed(10)
 x1 <- rnorm(data.N,0,1)
 x2 <- x1 + rnorm(data.N,0,0.2)
