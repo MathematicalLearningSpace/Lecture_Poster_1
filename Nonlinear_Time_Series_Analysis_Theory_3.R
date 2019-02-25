@@ -1,18 +1,9 @@
-library(xtable)
-library(boot)
-library(sampling)
-library(PearsonDS)
-library(RandomFields)
-library(dtwclust)
-library(dtw)
-library(TSMining)
-library(ggplot2)
-library(deSolve)
-library(ReacTran)
-library(rootSolve)
-library(fda)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#---------------------------------------------------R API --------------------------------------------------------
+library(xtable);library(boot);library(sampling);library(PearsonDS);library(RandomFields);library(dtwclust);library(dtw);library(TSMining)
+library(ggplot2);library(deSolve);library(ReacTran);library(rootSolve);library(fda)
 
-#----------------------------------------------------------------------------Data for the 5th Dimension----------------------------------------------------------------------------
+#--------------------Data for the 5th Dimension----------------------------------------------------------------------------
 pearson.N<-512
 pVpars <- list(shape=1, location=0, scale=0.1) 
 error.pearson.5<-rpearsonV(pearson.N,params=pVpars)
@@ -27,7 +18,7 @@ z<-runif(n = 475, min = -1, max = 1)
 
 ts.1<-as.data.frame(cbind(v,w,x,y,z))
 
-#---------------------------------------------------------------------------Differential Equation Model-----------------------------
+#------------------Differential Equation Model-----------------------------
 
 equation.parameter.matrix<-matrix(
   c(0,0,0,0,0,0,
@@ -59,7 +50,7 @@ system.equation.model.test.solution.1.df<-as.data.frame(system.equation.model.te
 summary(system.equation.model.test.solution.1)
 
 
-#-------------------------------------------------------------------------SAX Representations for Motifs-------------------------------
+#-------------SAX Representations for Motifs-------------------------------
 
 sax.w<-Func.SAX(x = ts.1$w, w = 5, a = 5, eps = .01, norm = TRUE)
 sax.x<-Func.SAX(x = ts.1$x, w = 5, a = 5, eps = .01, norm = TRUE)
@@ -91,7 +82,7 @@ data.multi.local <- Func.visual.MultiMotif(data = ts.1,
                                            multi.motifs = res.multi.local, 
                                            index = 1)
 
-#-------------------------------------------------------Hierarchical clustering of time series for Classification--------------------------------
+#--------------Hierarchical clustering of time series for Classification--------------------------------
 ctrl <- new("dtwclustControl", trace = TRUE)
 dtw.cluster.ts.1 <- dtwclust(ts.1, k = 2:4,
                   distance = "L2", centroid = "pam",
@@ -122,8 +113,7 @@ Figure.1<-plot(ts.1$w, type='l', lty=1,col=1,xlab="Observations",ylab="Interval 
 lines(ts.1$x,lty=2,col=2)
 lines(ts.1$y,lty=3,col=3)
 lines(ts.1$z,lty=4,col=4)
-legend("topright", col = 1:4, lty = 1:4, 
-       legend = c("Unif", "Pearson 5",'Normal','Unif'))
+legend("topright", col = 1:4, lty = 1:4, legend = c("Unif", "Pearson 5",'Normal','Unif'))
 
 Figure.2<-ggplot(data = data.vis$data.1) +
   geom_line(aes(x = 1:dim(data.vis$data.1)[1], y = X)) +
@@ -137,5 +127,25 @@ Figure.5<-plot(dtw.cluster.ts.1[[3L]])
 Figure.6<-plot(dtw.cluster.hc.ts.1[[ which.max(sapply(dtw.cluster.hc.ts.1, randIndex, y = colnames(ts.1))) ]])
 Figure.7<-plot(dtw.fuzzy.ts.1, data = ts.1, type = "series")
 Figure.8<-plot(dtw.fuzzy.ts.1, data = ts.1, type = "series")
-#------------------------------------------------------------------------Function Library--------------------------------------------------------------------
-
+         
+         
+#-------------Function Template Library for Classroom Presentation and Modification---------------------
+f.1<-function(X)
+ {
+  Z<-""
+  a<-1
+  W<-runif(length(X),0,1)
+  for(i in 1:length(X))
+  {  
+	Z<-stringr::str_c(Z,X[i])
+	W[i]<-a*W[i]
+  }
+  output<-list()
+  output$X<-X
+  output$a<-a
+  output$Z<-Z
+  output$W<-W
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
