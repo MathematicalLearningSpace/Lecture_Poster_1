@@ -17,7 +17,7 @@ edges.df <- data.frame(from = c(1,1,1,1,1,1,1,2), to = c(2,3,4,5,6,7,8,9),
   length=seq(1:8)
 )
 math.lectures <- visNetwork(nodes.df, edges.df, width = "100%")
-visSave(lectures, file = "math_lectures.html")
+visSave(math.lectures, file = "math_lectures.html")
 visSave(Petersen.graph.translation, file = "Petersen_graph.html")
 #-----------------------------------------Tables-----------------------------------------
 
