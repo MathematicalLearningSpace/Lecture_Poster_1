@@ -1,3 +1,4 @@
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
 #-------------------------------------R API ------------------------------------------------------------------
 library(pracma); library(xtable)
 #--------------------------------------------Data-------------------------------------------------------------
@@ -38,9 +39,7 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
 {
   stopifnot(is.numeric(y0), is.numeric(t0), length(t0) == 1, is.numeric(tfinal), length(tfinal) == 1)
   #-----------------Validation----------------------------------------------------
-  if (is.vector(y0)) {
-    y0 <- as.matrix(y0)
-  }
+  if (is.vector(y0)) {y0 <- as.matrix(y0)}
   else if (is.matrix(y0)) {
     if (ncol(y0) != 1) 
       stop("Argument 'y0' must be a vector or single column matrix.")
@@ -62,14 +61,8 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
   #---------------------Main iteration Loop---------------------------------------
   while (t != tfinal) {
     hmin <- 16 * eps * abs(t)
-    if (abs(h) > hmax) {
-      h <- tdir * hmax
-    }
-    else if (abs(h) < hmin) {
-      h <- tdir * hmin
-    }
-    if (1.1 * abs(h) >= abs(tfinal - t)) 
-      h <- tfinal - t
+    if (abs(h) > hmax) {h <- tdir * hmax} else if (abs(h) < hmin) {h <- tdir * hmin}
+    if (1.1 * abs(h) >= abs(tfinal - t)) h <- tfinal - t
     #---------------------Weight Examples ---------------------------------------------
     s2 <- f(t + h/2, y + h/2 * s1)
     s3 <- f(t + 3 * h/4, y + 3 * h/4 * s2)
@@ -90,10 +83,8 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
     }
     #---------------------------------------------------------------------------
     h <- h * min(5, stepSize * (rtol/err)^(1/3))
-    if (abs(h) <= hmin) {
-      warning("Step size too small.")
-      t <- tfinal
-    }
+    #----------------------------------------------------------------------------
+    if (abs(h) <= hmin) {warning("Step size too small.")t <- tfinal}
   }
   #-------  Basic Return math objects pattern for modification in class--------
   return(list(t = c(tout), 
@@ -102,3 +93,24 @@ ode23.mutation<-function (f, t0, stepSize,tfinal, y0, ..., rtol = 0.001, atol = 
               h=h,
               threshold=threshold))
 }
+#------------------------------Prototyping function library for the classroom----------------------------
+
+f.1<-function(X)
+ {
+  Z<-""
+  a<-1
+  W<-runif(length(X),0,1)
+  for(i in 1:length(X))
+  {  
+	Z<-stringr::str_c(Z,X[i])
+	W[i]<-a*W[i]
+  }
+  output<-list()
+  output$X<-X
+  output$a<-a
+  output$Z<-Z
+  output$W<-W
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
