@@ -41,8 +41,8 @@ similarity.ratio<-Objective.Function.2(x,y)/size
 
 algo.1 <- list(nB = size, nP = 20L, nG = 300L, prob = 0.002, printBar = TRUE)
 GA.sol <- GAopt(OF=Objective.Function.2 , algo = algo.1,y=y)
-GA.sol$xbest
-GA.sol$OFvalue
+GA.sol.best<-GA.sol$xbest
+GA.sol.OF<-GA.sol$OFvalue
 
 cat(as.integer(y), "\n", 
     as.integer(GA.sol$xbest), "\n",
@@ -54,9 +54,9 @@ f.1 <- function(x) x[1L] + x[2L]^5
 levels <- list(a = 1:5, b = 1:5)
 
 GS.sol <- gridSearch(fun = f.1, levels)
-GS.sol$minfun
-GS.sol$minlevels
-GS.sol$values
+GS.sol.min.f<-GS.sol$minfun
+GS,sol.min.levels<-GS.sol$minlevels
+GS.sol.values<-GS.sol$values
 
 Algorithm.optimization.df<-data.frame()
 Algorithm.optimization.df<-rbind(c("DE",algo$nB,algo$nG,algo$nP,algo$F,algo$CR,algo$min[1],algo$max[1], 
