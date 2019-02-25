@@ -1,6 +1,6 @@
-library(xtable)
-library(BNPTSclust)
-library(readr)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#---------------------------------------------------R API --------------------------------------------------------
+library(xtable);library(BNPTSclust);library(readr)
 #--------------------------------------Data--------------------------------------------
 n1<-10^2
 n2<-10^1
@@ -78,7 +78,7 @@ Figure.10<-diagplots(L.3)
 
 Figure.11<-clusterplots(L.4,Z.df)
 Figure.12<-diagplots(L.4)
-
+#------------------------------------Figure Group-------------------------------------
 par(mfcol = c(2, 2))
 Figure.13<-hist(L.1$gnstar)
 Figure.14<-hist(L.2$gnstar)
@@ -86,10 +86,28 @@ Figure.15<-hist(L.3$gnstar)
 Figure.16<-hist(L.4$gnstar)
 
 #--------------------------------------References---------------------------------------
-
-Reference.1<-c("Nieto-Barajas, L.E. & Contreras-Crist´an A. (2014)",
+Reference.1<-c("Nieto-Barajas, L.E. & Contreras-CristÂ´an A. (2014)",
 "A Bayesian Nonparametric Approach for Time Series Clustering.", 
 "Bayesian Analysis, Vol. 9, No. 1 pp. 147-170.")
 
-
 #-------------------------------------Function Library----------------------------------
+#-------------Function Template Library for Classroom Presentation and Modification---------------------
+f.1<-function(X)
+ {
+  Z<-""
+  a<-1
+  W<-runif(length(X),0,1)
+  for(i in 1:length(X))
+  {  
+	Z<-stringr::str_c(Z,X[i])
+	W[i]<-a*W[i]
+  }
+  output<-list()
+  output$X<-X
+  output$a<-a
+  output$Z<-Z
+  output$W<-W
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
