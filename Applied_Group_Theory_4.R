@@ -1,27 +1,13 @@
-library(combinat)
-library(permutations)
-library(permute)
-library(xtable)
-library(igraph)
-library(Matrix)
-library(vegan)
-library(zoo)
-library(adegenet)
-library(ActiveDriver)
-library(VennDiagram)
-library(venneuler)
-library(backShift)
-library(fields)
-library(ggplot2)
-
-library(dnet)
-library(dcGor)
-library(ggm)
-
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#---------------------------------------------------R API --------------------------------------------------------
+library(combinat);library(permutations);library(permute);library(xtable);library(igraph);library(Matrix);library(vegan);library(zoo)
+library(adegenet);library(ActiveDriver);library(VennDiagram);library(venneuler);library(backShift);library(fields);library(ggplot2)
+library(dnet);library(dcGor);library(ggm)
 #------------------------------------------------------Data--------------------------------------------------------------
 
 #----------------------------------------------------Cyclic Causal Graphs----------------------------------------------
-CCG.Description<-c("Estimate connectivity matrix of hidden variables directed graph(cyclic,noncyclic graph) from linear system of observations from different shift interventions.")
+CCG.Description<-c("Estimate connectivity matrix of hidden variables 
+directed graph (cyclic,noncyclic graph) from linear system of observations from different shift interventions.")
 
 CCG.Observations.N.Multiple<-3
 CCG.Observations.N<-10^(CCG.Observations.N.Multiple)
@@ -151,7 +137,7 @@ Figure.5<-plotGraphEdgeAttr(estimate = CCG.simulation.result.backshift.result.Ah
 Figure.6<-plotInterventionVars(CCG.simulation.result.backshift.result$varianceEnv, 
                                CCG.simulation.result$interventionVar)
 
-#Figure.7
+#------------------------------------Figure Group ----------------------------------
 par(mfrow = c(3,3), mar = c(0.5,1,0.5,0.5))
 for(i in 1:CCG.Environments.N){
   plotDiagonalization(estConnectivity = CCG.simulation.result.backshift.result$Ahat, 
@@ -166,7 +152,26 @@ citation("backshift")
 Additional.Reference.1<-c("","","'")
 
 #---------------------------------------------------Function Library---------------------------------------------------
-
+#-------------Function Template Library for Classroom Presentation and Modification---------------------
+f.1<-function(X)
+ {
+  Z<-""
+  a<-1
+  W<-runif(length(X),0,1)
+  for(i in 1:length(X))
+  {  
+	Z<-stringr::str_c(Z,X[i])
+	W[i]<-a*W[i]
+  }
+  output<-list()
+  output$X<-X
+  output$a<-a
+  output$Z<-Z
+  output$W<-W
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
 
 
 
