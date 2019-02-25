@@ -1,7 +1,6 @@
-library(TSA)
-library(PearsonDS)
-library(tsDyn)
-library(DescTools)
+#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#---------------------------------------------------R API --------------------------------------------------------
+library(TSA);library(PearsonDS);library(tsDyn);library(DescTools)
 
 #------------------------------------------------------Data Generation----------------------------------------------------
 pearson.N <- 100
@@ -140,4 +139,23 @@ legend("bottomleft", col = c("black", "red", "green"),
        lty = 1:3, cex=0.75,
        legend = c("TAR 1", "NN 1", "NN 2"))
 
-
+#-------------Function Template Library for Classroom Presentation and Modification---------------------
+f.1<-function(X)
+ {
+  Z<-""
+  a<-1
+  W<-runif(length(X),0,1)
+  for(i in 1:length(X))
+  {  
+	Z<-stringr::str_c(Z,X[i])
+	W[i]<-a*W[i]
+  }
+  output<-list()
+  output$X<-X
+  output$a<-a
+  output$Z<-Z
+  output$W<-W
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
