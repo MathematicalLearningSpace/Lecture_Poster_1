@@ -123,24 +123,23 @@ Graph.Topology.names<-c('Complexity','Entropy')
 names(Graph.Topology.Metrics.Miscellaneous.df)<-Graph.Topology.names
 #------------------------------------------Correlation Analysis--------------------------------------------------
 
-CorMat<-cor_auto(experimental.Data.1)
+experimental.Data.1.CorMat<-cor_auto(experimental.Data.1)
 # Compute graph with tuning = 0 (BIC):
-BICgraph <- qgraph(CorMat, graph = "glasso", sampleSize = nrow(experimental.Data.1),
+experimental.Data.1.BICgraph <- qgraph(CorMat, graph = "glasso", sampleSize = nrow(experimental.Data.1),
                    tuning = 0, layout = "spring", title = "BIC", details = TRUE)
 
 # Compute graph with tuning = 0.5 (EBIC)
-EBICgraph <- qgraph(CorMat, graph = "glasso", sampleSize = nrow(experimental.Data.1),
+experimental.Data.1.EBICgraph <- qgraph(CorMat, graph = "glasso", sampleSize = nrow(experimental.Data.1),
                     tuning = 0.5, layout = "spring", title = "BIC", details = TRUE)
 
 # Compare centrality and clustering:
-centralityPlot(list(BIC = BICgraph, EBIC = EBICgraph))
-clusteringPlot(list(BIC = BICgraph, EBIC = EBICgraph))
+experimental.Data.1.centrality<-centralityPlot(list(BIC = experimental.Data.1.BICgraph, EBIC = experimental.Data.1.EBICgraph))
+experimental.Data.1.clustering<-clusteringPlot(list(BIC = experimental.Data.1.BICgraph, EBIC = experimental.Data.1.EBICgraph))
 
 # Compute centrality and clustering:
-centrality_auto(BICgraph)
-clustcoef_auto(BICgraph)
-
-smallworldness(BICgraph)
+experimental.Data.1.centrality.auto<-centrality_auto(BICgraph)
+experimental.Data.1.cluster.coef<-clustcoef_auto(BICgraph)
+experimental.Data.1.smallworldness<-smallworldness(BICgraph)
 
 #------------------------------------------Tables-----------------------------------------------------------------
 Table.1<-xtable(Graph.Topology.Metrics.Distance.df)                                        
@@ -178,4 +177,12 @@ Figure.3<-qgraph(cor(experimental.Data.1,method="pearson")
 
 
 #----------------------------------------Function Library---------------------------------------------------------
-
+f.1<-function(X)
+ {
+  
+  output<-list()
+  output$X<-X
+  return(output)
+ } 
+test.f.1<-f.1(letters)
+test.f.1
