@@ -39,8 +39,7 @@ x <- runif(size) > 0.5
 
 similarity.ratio<-Objective.Function.2(x,y)/size
 
-algo.1 <- list(nB = size, nP = 20L, nG = 300L, prob = 0.002,
-             printBar = TRUE)
+algo.1 <- list(nB = size, nP = 20L, nG = 300L, prob = 0.002, printBar = TRUE)
 GA.sol <- GAopt(OF=Objective.Function.2 , algo = algo.1,y=y)
 GA.sol$xbest
 GA.sol$OFvalue
@@ -52,7 +51,6 @@ cat(as.integer(y), "\n",
 
 #------------------------------------C: Grid Search----------------------------------------------------
 f.1 <- function(x) x[1L] + x[2L]^5
-
 levels <- list(a = 1:5, b = 1:5)
 
 GS.sol <- gridSearch(fun = f.1, levels)
@@ -77,12 +75,21 @@ Figure.2<-ts.plot(DE.sol$Fmat, xlab = "generations", ylab = "OF")
 Figure.3<-ts.plot(GA.sol$Fmat)
 Figure.4<-ts.plot(GS.sol$values)
 
-#------------------------------------Function Library-----------------------------------------------
+#--------------Function Library To Be Modified in the Classroom-----------------------------------------------
 
 f<-function(x)
 {
   y<-x[2]
   x<-x[1]
   a<-2^0;b<-(2^2+2^0);c<-2^3;d<-2^0;
-  a*sin(b*x) + c*cos(d*y)
+  z<-a*sin(b*x) + c*cos(d*y)
+  output<-list()
+  output$x.1<-x
+  output$x.2<-y
+  output$a<-a
+  output$b<-b
+  output$c<-c
+  output$d<-d
+  output$z<-z
+  return(output)
 }
