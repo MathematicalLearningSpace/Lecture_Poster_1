@@ -1,7 +1,9 @@
 #-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
 #----------------------------------R API -------------------------------------------------------------------
 library(deSolve);library(ReacTran);library(rootSolve);library(fda);library(xtable);library(CHNOSZ);library(changepoint)
-#------Solution of Delayed Differential Equation System for Classroom-------------
+#------Solution of Delayed Differential Equation System for Classroom---------------------------------------
+#------This example shows the solution of a nonlinear delayed differential equation system that can be used-
+#------by the student to develop cancer journal articles.---------------------------------------------------
 y.init<-0.1
 times <- seq(from = 0, to = 100, by = 0.1) 
 solution.1.mg.test<- dede(y = y.init, 
