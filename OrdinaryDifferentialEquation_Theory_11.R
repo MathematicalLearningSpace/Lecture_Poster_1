@@ -4,6 +4,9 @@ library(readr);library(xtable);library(deSolve);library(ReacTran);library(rootSo
 library(xtable);library(tseriesChaos);library(corrplot);library(plot3D);library(scatterplot3d)
 library(tm);library(topicmodels);library(wordcloud);library(rgl);library(mRMRe)
 #----------------------------Data---------------------------------------------------
+#----------------------------On this site many of the .csv files are downloaded from search criteria and developed in the 
+#----------------------------classroom setting and not included in the file list.  However the architectue is reusable and designed
+#----------------------------to be helpful for students to use in their other academic courses.
 article.files <- list.files(patt='publications_*.*csv$')
 article.files
 print(article.files[1])
@@ -12,9 +15,9 @@ z.df<-data.frame()
 z.df<-read_csv(article.files[1])
 View(z.df)
 print(z.df$Title)
-#--------ODE Model Pattern for MYC without Equation and Parameter Specification To be Completed in Classroom-----------------
-#--------An example for Students to design biological specification with a list of genes, proteins and enzymes---------------
-#--------Here individual list of genes, etc. can be student specific with a contribution made in the classroom presentation--
+#--------ODE Model Pattern for MYC without Equation and Parameter Specification To be Completed in Classroom------------------------------
+#--------An example for Students to design mathematical biological specification with a list of genes, proteins and enzymes---------------
+#--------Here individual list of genes, etc. can be student specific with a contribution made in the classroom presentation---------------
 #--------One example----------------
 Gene.ROI<-c('MYc', 'Miz1','p15','CKS1','Skp2','p27','CyclinD1','CDK4','CDK2','RB', 'E2F')
 
