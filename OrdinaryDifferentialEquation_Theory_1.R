@@ -1,4 +1,7 @@
-#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#-----------------------------R Code To Modify in the Classroom Lecture with Students----------------------------------------------
+#-----------------------------These are Differential Equation Code Motifs to be used in the Lecture Posters in the Classroom-------
+#-----------------------------They are designed to be used as examples for student notes that can be modifed for journal articles--
+#----------------------------------------------------------------------------------------------------------------------------------
 #-------------------------------------Ordinary Differential Equations-----------
 library(deSolve);library(ReacTran);library(rootSolve);library(fda);library(phaseR)
 #---------------------------TeX Formatting----------------------------------
