@@ -22,12 +22,15 @@ X.3 <- GBM(M = Pearson.N)
 X.4<- ABM(M = Pearson.N)
 #-------------------------------------------------------Models and Expression-------------------------------------------------------------
 #f(t,w(t)) = int(exp(w(t) - 0.5*t) * dw(s)) with t in [0,1]
-f <- expression( exp(w-0.5*t) )
-mod1 <- st.int(expr=f,
-               type="ito",
-               M=50,
-               lower=0,
-               upper=1)
+#------------------------------Modification By the Student In the Classroom-------------------
+f1 <- expression( exp(w-0.5*t) )
+f2 <- expression( exp(w-0.5*t) )
+f3 <- expression( exp(w-0.5*t) )
+
+mod1 <- st.int(expr=f1,type="ito",M=50,lower=0,upper=1)
+mod2 <- st.int(expr=f2,type="ito",M=50,lower=0,upper=1)
+mod3 <- st.int(expr=f3,type="ito",M=50,lower=0,upper=1)
+
 summary(mod1)
 #---------------------------------------------------------Parameter Values------------------------------------
 a1<-1; a2<-1; a3<-1; d1<-1; d2<-1; d3<-1
