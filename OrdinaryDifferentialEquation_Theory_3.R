@@ -37,13 +37,12 @@ a1<-1; a2<-1; a3<-1; d1<-1; d2<-1; d3<-1
 parameters.1<-c(a1,a2,a3)
 parameters.2<-c(d1,d2,d3)
 #--------------------------------------------------------Drift------------------------------------------------
-#--------------------------Model of the Conditional Mean for the SDE------------
+#------------------------Models of the Conditional Mean for the SDE------------
 fx <- expression(a1*(-d1-x)*y , a2*(d2-y)*x , a3*(d3-z)*y)
 #--------------------------------------------------------Diffusion---------------------------------------------
-#------------------------Model of the Conditional Variance for the SDE------------
+#------------------------Models of the Conditional Variance for the SDE------------
 gx <- rep(expression(0.5),3)
 mod3d.1 <- snssde3d(drift=fx,diffusion=gx,M=500)
-
 #------------------------------------------------------- boundary specification--------------------------------
 beta1<-1;beta2<-1;gamma1<-1
 St.1 <- expression(beta1+beta2*t^gamma1)
@@ -53,11 +52,8 @@ M1<-10^1;M2<-10^2;M3<-10^3
 #--------------------------------------------------------Models------------------------------------------------------
 x0<-c(0,-1,0.5)
 y<-c(0,-2,0.5)
-bridge.model.1<- bridgesde3d(x0=c(0,-1,0.5),
-                    y=c(0,-2,0.5),
-                    drift=fx,
-                    diffusion=gx,
-                    M=M2)
+bridge.model.1<- bridgesde3d(x0=c(0,-1,0.5),y=c(0,-2,0.5),drift=fx,diffusion=gx,M=M2)
+
 #-----------------------------Marginal density of X(t-t0)|X(t0) = 0, X(T) = 0 at time t = 0.75-----------------
 s=0.75
 bridge.denM.1 <- dsde3d(bridge.model.1,pdf="M",at =s)
@@ -72,30 +68,18 @@ Figure.1<-plot(X.1,plot.type="single")
 lines(as.vector(time(X.2)),rowMeans(X.2),col="red")
 lines(as.vector(time(X.3)),rowMeans(X.3),col="green")
 lines(as.vector(time(X.4)),rowMeans(X.4),col="blue")
-legend("topleft",c("Brownian Motion","Brownian Bridge",
-         "Geometric Brownian Motion", paste("Arithmetic"," ","Brownian Motion")),
-       inset = .01,
-       col=c(4,2,5),
-       lwd=2,
-       cex=0.8)
+legend("topleft",c("Brownian Motion","Brownian Bridge","Geometric Brownian Motion", paste("Arithmetic"," ","Brownian Motion")),inset = .01,
+col=c(4,2,5),lwd=2,cex=0.8)
 
 Figure.2<-plot(bridge.model.1)
 lines(time(bridge.model.1),apply(bridge.model.1$X,1,mean),col=2,lwd=2)
 lines(time(bridge.model.1),apply(bridge.model.1$X,1,bconfint,level=0.95)[1,],col=4,lwd=2)
 lines(time(bridge.model.1),apply(bridge.model.1$X,1,bconfint,level=0.95)[2,],col=4,lwd=2)
-legend("topleft",
-       c("mean path",
-         paste("bound of", 95," percent confidence")),
-       inset = .01,col=c(2,4),lwd=2,cex=0.8)
+legend("topleft",c("mean path",paste("bound of", 95," percent confidence")),inset = .01,col=c(2,4),lwd=2,cex=0.8)
 
 Figure.3<-plot3D(mod3d.1,display = "persp",main="No-Boundary")
 Figure.4<-plot3D(bridge.model.1,display = "persp",main="3D Bridge SDE's")
-Figure.5<- plot(ts.union(bridge.model.1$X[,1],
-                         bridge.model.1$Y[,1],
-                         bridge.model.1$Z[,1]),
-                col=1:3,lty=3,
-                plot.type="single",
-                type="l",ylab= "",xlab="time",axes=T)
+Figure.5<- plot(ts.union(bridge.model.1$X[,1],bridge.model.1$Y[,1],bridge.model.1$Z[,1]),col=1:3,lty=3,plot.type="single",type="l",ylab= "",xlab="time",axes=T)
 Figure.6<-plot(bridge.denM.1, main="Marginal Density")
 Figure.7<-plot(bridge.denJ.1,display="rgl")
 #--------------------------------------------Function Library--------------------------------------------------------
