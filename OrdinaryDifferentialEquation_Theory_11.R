@@ -13,8 +13,12 @@ z.df<-read_csv(article.files[1])
 View(z.df)
 print(z.df$Title)
 #--------ODE Model Pattern for MYC without Equation and Parameter Specification To be Completed in Classroom-----------------
+#--------An example for Students to design biological specification with a list of genes, proteins and enzymes---------------
+#--------Here individual list of genes, etc. can be student specific with a contribution made in the classroom presentation--
+#--------One example----------------
 Gene.ROI<-c('MYc', 'Miz1','p15','CKS1','Skp2','p27','CyclinD1','CDK4','CDK2','RB', 'E2F')
 
+#------------------------------Model 1 with a list of 12 proteins----------------
 model.1 <- function(t, x, parms)  {
   with(as.list(c(parms, x)), {
     #---------------------------Group 1-------------------------------------------
@@ -37,6 +41,7 @@ model.1 <- function(t, x, parms)  {
     list(res)
   })
 }
+#----------------------------Model 2 Example--------------------------------------
 model.2 <- function(t, x, parms)  {
   with(as.list(c(x)), {
     #---------------------Group 1 ------------------------------------
@@ -60,7 +65,9 @@ model.2 <- function(t, x, parms)  {
     list(res)
   })
 }
-#------------------------------------- Parameter Values--------------------------
+#--------------------------------------Design of the Parameter Values for Examples-------------------------------------------
+#--------------------------------------Here the student learns the process of parameter selection and variation--------------
+#------------------------------------- Parameter Value Exploration and Solution Paths----------------------------------------
 parms <- c(a11 = 0.01, a12 = -0.1, 
            a21 = 0.0, a22 = -0.1, 
            a31 = -0.1, a32 = 0.1, 
@@ -151,6 +158,7 @@ Figure.5<-plot3d(system.solution.2[,2],
                  pch = 1, cex = 1, xlab = "x1(t)", 
                  ylab = "x2(t)", zlab = "x3(t)")
 #----------------------------LinkOut References------------------------------------------------
+#----------------------------An Example From the Reading List that can be used in the classroom
 References.1<-c("MYC drives overexpression of telomerase RNA (hTR/TERC) in prostate cancer")
 #---------------------------Function Library-------------------------------------------
 
