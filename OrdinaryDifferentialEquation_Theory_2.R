@@ -26,12 +26,17 @@ solution.4.mg.test<- dede(y = y.init,
                           func = function.mg.test, 
                           parms = c(0.2,6,0.1), 
                           tau = 10)
-#----------------------Changepoint Analysis-----------------------------------------
+#----------------------Changepoint Analysis---------------------------------------------------------------------------------
+#----------------------Examples of the First and Second Moment for finding change points in the solution paths of the models.
+#---------------------------------------------------------------------------------------------------------------------------
 y<-c(solution.1.mg.test[,-1],solution.2.mg.test[,-1])
 ansmean=cpt.mean(y)
 ansvar=cpt.var(y)
 ansmeanvar=cpt.meanvar(y)
 #----------------------Tables for Classroom--------------------------------------------------------
+Table.1.df<-data.frame()
+Table.1<-xtable::xtable(Table.1.df)
+
 #----------------------Figures for Classroom------------------------------------------------------
 Figure.1<-plot(solution.1.mg.test, 
                lwd = 2, 
