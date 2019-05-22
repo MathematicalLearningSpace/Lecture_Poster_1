@@ -86,13 +86,10 @@ Figure.7<-plot(bridge.denJ.1,display="rgl")
 #-------------Function Template Library for Classroom Presentation and Modification---------------------
 f.1<-function(X)
  {
-  Z<-""
-  a<-1
-  W<-runif(length(X),0,1)
+  Z<-"";a<-1;W<-runif(length(X),0,1)
   for(i in 1:length(X))
   {  
-	Z<-stringr::str_c(Z,X[i])
-	W[i]<-a*W[i]
+	Z<-stringr::str_c(Z,X[i]);W[i]<-a*W[i]
   }
   output<-list()
   output$X<-X
@@ -101,5 +98,6 @@ f.1<-function(X)
   output$W<-W
   return(output)
  } 
+#-------------Standard Unit Test Design Pattern for User Defined Funtions with LETTERS or Noise------------------------
 test.f.1<-f.1(letters)
 test.f.1
