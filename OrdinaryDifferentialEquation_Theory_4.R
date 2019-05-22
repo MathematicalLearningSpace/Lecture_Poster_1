@@ -19,6 +19,11 @@ times <- seq(0, 10^2, by = 0.1)
 #-------------------------------------in the cellular response to UV radiation PLoS One. 
 #-------------------------------------8(11):e80111. doi: 10.1371/journal.pone.0080111. eCollection 2013.-------------------------------------
 #-------------------------------------https://www.ncbi.nlm.nih.gov/pubmed/24260342-----------------------------------------------------------
+
+#-------------This is a design for Reproducible Research to teach students how to construct equation systems------------------
+#-------------from journal articles for cancer research.  Code is to be modified in class and supplements the-----------------
+#-------------teaching of the "how-to" from the reading list.  This is a basic design pattern for the reading list.-----------
+
 ATR<-0.1;Akt<-0.1;PIP2<-0.1;p21<-0.1;CycE<-0.1;kdmdm2n<-0.1;RE<-0.1;Rb<-0.1
 alpha.1<-4;alpha.2<-2;alpha.3<-7
 variables.initial.test.5 <- c(LD=5,ATRp=0.1,p53=0.1,p53p=0.1,Mdm2c=0.1,Mdm2cp=0.1,Mdm2n=0.1,Aktp=0.1,PIP3=0.1,
