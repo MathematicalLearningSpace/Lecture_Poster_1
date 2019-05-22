@@ -1,4 +1,9 @@
-#-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#-----------------------------R Code To Modify in the Classroom Lecture with Students------------------------------------------------
+#-----------------------------These R Components are to be used by students in note taking with the Lectures-------------------------
+#-----------------------------Each R Code Motif provides methods that can be used by the student to possibly generate----------------
+#-----------------------------a journal article with the student with additional R components on this site.--------------------------
+#------------------------------------------------------------------------------------------------------------------------------------
+
 #----------------------------------R API -------------------------------------------------------------------
 library(combinat);library(permutations);library(permute);library(xtable);library(igraph);library(Matrix);library(vegan);library(zoo)
 library(adegenet);library(ActiveDriver);library(VennDiagram);library(venneuler)
@@ -15,7 +20,6 @@ Probability.Matrix <- as.matrix(data.frame(A=c(0.1, 0.2, 0.4, 0.2, 0.1),
 VE.Probability.Matrix.1<-venneuler(Probability.Matrix)
 VE.Probability.Matrix.2<-venneuler(Probability.Matrix > 0)
 #----------------------------------------------------Combinatorics------------------------------------------------------
-
 Species.population.matrix.Counts<-rmultinomial(Species.Population.Category.n,Species.population.matrix.probability)
 
 #----------------------------------------------------Symmetric Groups, Graphs, and Matrices----------------------------------------------------
