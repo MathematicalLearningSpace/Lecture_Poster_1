@@ -45,7 +45,7 @@ summary(model.estimation.1D.2)
 print(model.estimation.1D.1, digits = max(3, getOption("digits") - 3))
 
 #------------------------------Estimate Model Coefficients-----------------------------------
-Model.Estimation..Coefficients.Caption<-c("The drift coefficients for Model 2 are estimated by linear regression 
+Model.Estimation.Coefficients.Caption<-c("The drift coefficients for Model 2 are estimated by linear regression 
                                           from mean bin from estimation of Model 2",
                                           "The diffusion coefficients for Model 2 are estimated by linear regression 
                                           from mean bin from estimation of Model 2",
@@ -73,7 +73,8 @@ temporal.sequence.4<-timeseries1D(N =N,
 Model.estimation.parameters.df<-data.frame()
 Model.estimation.parameters.df<-rbind(c(model.estimation.1D.2.drift,model.estimation.1D.2.diffusion))
 
-#---------------------------------------Tables-------------------------------------------------------------
+#---------------------------------------Tables-------------------------------------------------------------#
+#---------------------------------------An Example Design Pattern------------------------------------------#
 Table.1.Caption<-c("Table 1 shows values of the estimated coefficients for each of models",
                    "fit a cubic function to the estimated drift coefficient and a quadratic function to diffusion coefficient")
 Table.1<-xtable(Model.estimation.parameters.df)
@@ -88,7 +89,9 @@ Table.3.Caption<-c("Table 3 shows value statistic (the chi - square statistic)",
 Table.3<-xtable(temporal.sequence.1.Property.2.df)
 Table.4.Caption<-c("Table 4 shows the value of the statistic")
 Table.4<-xtable(temporal.sequence.1.Property.3.df)
+#-------------------------------------------------------------------------
 #---------------------------------------Figures for Classroom Presentation------------------------------------------------------------
+#-------------------------------------------------------------------------
 par(mfrow = c(1,2), mar = c(1,1,1,1))
 Figure.Group.1.Caption<-c("The following set of 4 figures show the relationships of",
                           "Figure A shows Temporal Sequence 1",
@@ -121,7 +124,9 @@ legend("topright", legend=c(""), bty = "n",lwd=2, cex=0.75, lty=1:1)
 
 Figure.4<-plot(x, quadratic.diffusion.equation(x,0,0,1), xlab='phi',ylab='psi',main='',col='Green')
 legend("topright", legend=c(""), bty = "n",lwd=2, cex=0.75, lty=1:1)
-#---------------------------------------References-------------------------------
+#-----------------------------------------------------------------------------------------------
+#---------------------------------------References Design Pattern-------------------------------
+#-----------------------------------------------------------------------------------------------
 Reference.1<-c("Kleinhans D (2012).", 
                "Estimation of Drift and Diffusion Functions from Time Series Data: A Maximum Likelihood Framework.",
                "Physical Review E, 85 (2), 026705. doi:10.1103/physreve.85.026705.")
