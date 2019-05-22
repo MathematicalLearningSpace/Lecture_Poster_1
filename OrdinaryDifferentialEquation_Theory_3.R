@@ -34,19 +34,20 @@ a1<-1; a2<-1; a3<-1; d1<-1; d2<-1; d3<-1
 parameters.1<-c(a1,a2,a3)
 parameters.2<-c(d1,d2,d3)
 #--------------------------------------------------------Drift------------------------------------------------
+#--------------------------Model of the Conditional Mean for the SDE------------
+
 fx <- expression(a1*(-d1-x)*y , 
                  a2*(d2-y)*x , 
                  a3*(d3-z)*y)
 #--------------------------------------------------------Diffusion---------------------------------------------
+#------------------------Model of the Conditional Variance for the SDE------------
 gx <- rep(expression(0.5),3)
 mod3d.1 <- snssde3d(drift=fx,
                     diffusion=gx,
                     M=500)
 
 #------------------------------------------------------- boundary specification--------------------------------
-beta1<-1
-beta2<-1
-gamma1<-1
+beta1<-1;beta2<-1;gamma1<-1
 St.1 <- expression(beta1+beta2*t^gamma1)
 mod3d.1.boundary <- fptsde3d(mod3d.1,boundary=St.1)
 
