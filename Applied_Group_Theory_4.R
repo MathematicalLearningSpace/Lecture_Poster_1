@@ -1,4 +1,6 @@
 #-----------------------------R Code To Modify in the Classroom Lecture with Students-----------------------
+#-----------------------------This is the basic igraph Network API to be used in the Notes By the Students--
+#-----------------------------------------------------------------------------------------------------------
 #---------------------------------------------------R API --------------------------------------------------------
 library(combinat);library(permutations);library(permute);library(xtable);library(igraph);library(Matrix);library(vegan);library(zoo)
 library(adegenet);library(ActiveDriver);library(VennDiagram);library(venneuler);library(backShift);library(fields);library(ggplot2)
@@ -39,13 +41,8 @@ CCG.generate.result.A<-CCG.generate.result$A
 cat("A has a cycle of size", CCG.generate.result$sizeCycle, "\n") 
 
 #---------------------------------------------------Simulation of the Cyclic Causal Graph------------------------------
-CCG.simulateObs<-TRUE
-CCG.hidden<-FALSE
-CCG.knownInterventions<-FALSE
-CCG.fracVarInt<-0.5
-CCG.intMult<-1.5
-CCG.noiseMult<-1
-CCG.nonGauss<-FALSE
+CCG.simulateObs<-TRUE;CCG.hidden<-FALSE;CCG.knownInterventions<-FALSE;
+CCG.fracVarInt<-0.5;CCG.intMult<-1.5;CCG.noiseMult<-1;CCG.nonGauss<-FALSE
 
 CCG.simulation.result<- simulateInterventions(CCG.Observations.N, 
                                               CCG.variables.N,
@@ -58,8 +55,6 @@ CCG.simulation.result<- simulateInterventions(CCG.Observations.N,
                                               CCG.knownInterventions, 
                                               CCG.fracVarInt, 
                                               CCG.simulateObs)
-
-
 CCG.simulation.result.X <- CCG.simulation.result$X
 CCG.simulation.result.Environment <- CCG.simulation.result$environment
 CCG.simulation.result.baseInd <- CCG.simulation.result$configs$indexObservationalData
@@ -116,7 +111,7 @@ Table.2<-xtable(metrics.Stability.Selection.df)
 Figure.1<-plot(CCG.simulation.result$environment)
 Figure.2<-plot(CCG.simulation.result$X)
 Figure.3<-plotGraphEdgeAttr(estimate =  CCG.generate.result.A, 
-                            plotStabSelec = FALSE, 
+			    plotStabSelec = FALSE, 
                             labels = colnames(CCG.generate.result.A), 
                             thres.point = 0, 
                             thres.stab = CCG.thres, 
