@@ -1,4 +1,8 @@
-
+#-------------------------These are examples for Numerical Linear Algebra and Applied Group Theory Developed in the Lectures-----------
+#-------------------------for classroom instruction and work with the other R methods on this site.------------------------------------
+#-------------------------This provides students with the opportunity to add diversity in R  methods to the compositions in their notes
+#-------------------------during the lectures.-----------------------------------------------------------------------------------------
+#
 library(backShift); library(BiDag);library(CIEE);library(dagbag);library(dagR);library(GADAG);library(GA);library(HEMDAG)
 library(unifDAG);library(Matrix);library(xtable);library(PearsonDS);library(igraph);library(qgraph)
 #---------------------------------------Data------------------------------------------------------------
